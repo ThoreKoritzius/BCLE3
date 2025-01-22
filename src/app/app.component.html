@@ -8,55 +8,59 @@
     <mat-spinner></mat-spinner>
   </div>
 
-  <!-- Render the form only when data is ready -->
-  <form *ngIf="!loading && responseData.length > 0" [formGroup]="quizForm" class="dashboard-form">
-    <!-- Current Question -->
-    <ng-container [formGroupName]="currentQuestionIndex">
-      <div class="question-section">
-        <mat-card class="dashboard-card">
-          <mat-card-header>
-            <mat-card-title class="question-title">
-              {{ responseData[currentQuestionIndex].question }}
-            </mat-card-title>
-          </mat-card-header>
+  
 
-          <mat-card-content>
-            <!-- Radio Buttons for Yes/No -->
-            <mat-radio-group formControlName="answer" class="radio-group">
-              <mat-radio-button value="yes" class="radio-button">Yes</mat-radio-button>
-              <mat-radio-button value="no" class="radio-button">No</mat-radio-button>
-            </mat-radio-group>
-
-            <!-- Tutoring Section (Visible if "No" is selected) -->
-            <div *ngIf="questions.at(currentQuestionIndex).get('answer')?.value === 'no'" class="tutoring-section">
-              <h3 class="tutoring-heading">Tutoring Questions</h3>
-              <div formArrayName="tutoringAnswers">
-                <div *ngFor="let tutoringControl of getTutoringControls(questions.at(currentQuestionIndex)); let j = index" class="tutoring-question">
-                  <label class="tutoring-label">{{ responseData[currentQuestionIndex].tutoring.tutoringQuestions[j].question }}</label>
+    <form *ngIf="!loading && responseData.length > 0" [formGroup]="quizForm" class="dashboard-form">
+      <div formArrayName="questions">
+        <ng-container [formGroupName]="currentQuestionIndex">
+          <div class="question-section">
+            <mat-card class="dashboard-card">
+              <mat-card-header>
+                <mat-card-title class="question-title">
+                  {{ responseData[currentQuestionIndex].question }}
+                </mat-card-title>
+              </mat-card-header>
+    
+              <mat-card-content>
+                <!-- Radio Buttons for Yes/No -->
+                <mat-radio-group formControlName="answer" class="radio-group">
+                  <mat-radio-button value="yes" class="radio-button">Yes</mat-radio-button>
+                  <mat-radio-button value="no" class="radio-button">No</mat-radio-button>
+                </mat-radio-group>
+    
+                <!-- Tutoring Section (Visible if "No" is selected) -->
+                <div *ngIf="questions.at(currentQuestionIndex).get('answer')?.value === 'no'" class="tutoring-section">
+                  <h3 class="tutoring-heading">Tutoring Questions</h3>
+                  <div formArrayName="tutoringAnswers">
+                    <div *ngFor="let tutoringControl of getTutoringControls(questions.at(currentQuestionIndex)); let j = index" class="tutoring-question">
+                      <label class="tutoring-label">{{ responseData[currentQuestionIndex].tutoring.tutoringQuestions[j].question }}</label>
+                      <mat-form-field appearance="fill" class="tutoring-input">
+                        <textarea matInput [formControl]="tutoringControl" rows="3"></textarea>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+    
+                <!-- User Input Section (Visible if "Yes" is selected) -->
+                <div *ngIf="questions.at(currentQuestionIndex).get('answer')?.value === 'yes'" class="tutoring-section">
+                  <label class="tutoring-label">Your input</label>
                   <mat-form-field appearance="fill" class="tutoring-input">
-                    <textarea matInput [formControl]="tutoringControl" rows="3"></textarea>
+                    <textarea matInput formControlName="userInput" rows="3"></textarea>
                   </mat-form-field>
                 </div>
-              </div>
-            </div>
-
-            <!-- User Input Section (Visible if "Yes" is selected) -->
-            <div *ngIf="questions.at(currentQuestionIndex).get('answer')?.value === 'yes'" class="tutoring-section">
-              <label class="tutoring-label">Your input</label>
-              <mat-form-field appearance="fill" class="tutoring-input">
-                <textarea matInput formControlName="userInput" rows="3"></textarea>
-              </mat-form-field>
-            </div>
-          </mat-card-content>
-        </mat-card>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </ng-container>
       </div>
-    </ng-container>
+    
+      <!-- Dynamic Button -->
+      <button mat-raised-button [color]="hasAnyYesAnswer() ? 'accent' : 'primary'" class="submit-button" (click)="handleButtonClick()" [disabled]="isEvaluating">
+        {{ hasAnyYesAnswer() ? (isEvaluating ? 'Validating...' : 'Validate') : (isEvaluating ? 'Evaluating...' : 'Submit Answers') }}
+      </button>
+    </form>
 
-    <!-- Dynamic Button -->
-    <button mat-raised-button [color]="hasAnyYesAnswer() ? 'accent' : 'primary'" class="submit-button" (click)="handleButtonClick()" [disabled]="isEvaluating">
-      {{ hasAnyYesAnswer() ? (isEvaluating ? 'Validating...' : 'Validate') : (isEvaluating ? 'Evaluating...' : 'Submit Answers') }}
-    </button>
-  </form>
+
 </div>
 
 <!-- Footer Progress Indicator -->
