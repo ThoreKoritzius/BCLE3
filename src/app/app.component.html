@@ -1,0 +1,48 @@
+<div class="dashboard-container">
+  <form [formGroup]="quizForm" class="dashboard-form">
+    <ng-container formArrayName="questions">
+      <div *ngFor="let questionGroup of questions.controls; let i = index" [formGroupName]="i" class="question-section">
+        <mat-card class="dashboard-card">
+          <mat-card-header>
+            <mat-card-title class="question-title">{{ responseData[i].question }}</mat-card-title>
+          </mat-card-header>
+          
+          <mat-card-content>
+            <mat-radio-group formControlName="answer" class="radio-group">
+              <mat-radio-button value="yes" class="radio-button">Yes</mat-radio-button>
+              <mat-radio-button value="no" class="radio-button">No</mat-radio-button>
+            </mat-radio-group>
+
+            <div *ngIf="questionGroup.get('answer')?.value === 'no'" class="tutoring-section">
+              <h3 class="tutoring-heading">Tutoring Questions</h3>
+              <div formArrayName="tutoringAnswers">
+                <div *ngFor="let tutoringControl of getTutoringControls(questionGroup); let j = index" class="tutoring-question">
+                  <!-- Separated Label -->
+                  <label class="tutoring-label">{{ responseData[i].tutoring.tutoringQuestions[j].question }}</label>
+                  <!-- Material Design Text Box -->
+                  <mat-form-field appearance="fill" class="tutoring-input">
+                    <textarea matInput [formControl]="tutoringControl" rows="3"></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="questionGroup.get('answer')?.value === 'yes'" class="tutoring-section">
+              <!-- Separated Label -->
+              <label class="tutoring-label">Your input</label>
+              <!-- Material Design Text Box -->
+              <mat-form-field appearance="fill" class="tutoring-input">
+                <textarea matInput formControlName="userInput" rows="3"></textarea>
+              </mat-form-field>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </ng-container>
+
+    <!-- Dynamic Button -->
+    <button mat-raised-button [color]="hasAnyYesAnswer() ? 'accent' : 'primary'" class="submit-button" (click)="handleButtonClick()" [disabled]="isEvaluating">
+      {{ hasAnyYesAnswer() ? (isEvaluating ? 'Validating...' : 'Validate') : (isEvaluating ? 'Evaluating...' : 'Submit Answers') }}
+    </button>
+  </form>
+</div>
