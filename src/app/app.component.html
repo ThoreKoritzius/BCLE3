@@ -1,25 +1,38 @@
+<mat-toolbar color="primary">
+  <span>BCLE Dashboard</span>
+</mat-toolbar>
+
 <div class="dashboard-container">
-  <form [formGroup]="quizForm" class="dashboard-form">
-    <ng-container formArrayName="questions">
-      <div *ngFor="let questionGroup of questions.controls; let i = index" [formGroupName]="i" class="question-section">
+  <!-- Show loading spinner while data is being fetched -->
+  <div *ngIf="loading" class="loading-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <!-- Render the form only when data is ready -->
+  <form *ngIf="!loading && responseData.length > 0" [formGroup]="quizForm" class="dashboard-form">
+    <!-- Current Question -->
+    <ng-container [formGroupName]="currentQuestionIndex">
+      <div class="question-section">
         <mat-card class="dashboard-card">
           <mat-card-header>
-            <mat-card-title class="question-title">{{ responseData[i].question }}</mat-card-title>
+            <mat-card-title class="question-title">
+              {{ responseData[currentQuestionIndex].question }}
+            </mat-card-title>
           </mat-card-header>
-          
+
           <mat-card-content>
+            <!-- Radio Buttons for Yes/No -->
             <mat-radio-group formControlName="answer" class="radio-group">
               <mat-radio-button value="yes" class="radio-button">Yes</mat-radio-button>
               <mat-radio-button value="no" class="radio-button">No</mat-radio-button>
             </mat-radio-group>
 
-            <div *ngIf="questionGroup.get('answer')?.value === 'no'" class="tutoring-section">
+            <!-- Tutoring Section (Visible if "No" is selected) -->
+            <div *ngIf="questions.at(currentQuestionIndex).get('answer')?.value === 'no'" class="tutoring-section">
               <h3 class="tutoring-heading">Tutoring Questions</h3>
               <div formArrayName="tutoringAnswers">
-                <div *ngFor="let tutoringControl of getTutoringControls(questionGroup); let j = index" class="tutoring-question">
-                  <!-- Separated Label -->
-                  <label class="tutoring-label">{{ responseData[i].tutoring.tutoringQuestions[j].question }}</label>
-                  <!-- Material Design Text Box -->
+                <div *ngFor="let tutoringControl of getTutoringControls(questions.at(currentQuestionIndex)); let j = index" class="tutoring-question">
+                  <label class="tutoring-label">{{ responseData[currentQuestionIndex].tutoring.tutoringQuestions[j].question }}</label>
                   <mat-form-field appearance="fill" class="tutoring-input">
                     <textarea matInput [formControl]="tutoringControl" rows="3"></textarea>
                   </mat-form-field>
@@ -27,10 +40,9 @@
               </div>
             </div>
 
-            <div *ngIf="questionGroup.get('answer')?.value === 'yes'" class="tutoring-section">
-              <!-- Separated Label -->
+            <!-- User Input Section (Visible if "Yes" is selected) -->
+            <div *ngIf="questions.at(currentQuestionIndex).get('answer')?.value === 'yes'" class="tutoring-section">
               <label class="tutoring-label">Your input</label>
-              <!-- Material Design Text Box -->
               <mat-form-field appearance="fill" class="tutoring-input">
                 <textarea matInput formControlName="userInput" rows="3"></textarea>
               </mat-form-field>
@@ -46,3 +58,11 @@
     </button>
   </form>
 </div>
+
+<!-- Footer Progress Indicator -->
+<footer *ngIf="!loading && responseData.length > 0" class="footer">
+  <div class="progress-dots">
+    <div *ngFor="let question of responseData; let i = index" class="dot" [ngClass]="{'active': i === currentQuestionIndex}" (click)="currentQuestionIndex = i">
+    </div>
+  </div>
+</footer>

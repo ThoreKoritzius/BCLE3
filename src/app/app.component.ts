@@ -1,35 +1,45 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
 import { FormBuilder, FormGroup, Validators, FormArray, AbstractControl, FormControl } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CommonModule } from '@angular/common';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    HttpClientModule,
+    CommonModule,
+    HttpClientModule, // Add HttpClientModule here
+    MatProgressSpinnerModule,
     MatRadioModule,
     MatButtonModule,
     MatCardModule,
     MatInputModule,
     ReactiveFormsModule,
-    CommonModule
+    MatToolbarModule,
+    MatStepperModule,
+    MatProgressBarModule
   ],
+  providers: [HttpClient], // Provide HttpClient here
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'dashboard3';
+  title = 'BCLE Dashboard';
   private apiUrl = 'http://localhost:5000/get_config';
   responseData: any[] = [];
   quizForm: FormGroup;
   isEvaluating = false;
+  currentQuestionIndex = 0;
+  loading = true;
 
   constructor(private http: HttpClient, private fb: FormBuilder) {
     this.quizForm = this.fb.group({
@@ -59,62 +69,62 @@ export class AppComponent implements OnInit {
             id: key,
             showTutoring: false
           }));
-        
+
         this.initializeQuizForm();
+        this.loading = false;
       },
       error: (error) => {
         console.error('Error during API call:', error);
+        this.loading = false;
       }
     });
   }
 
   initializeQuizForm(): void {
+    console.log('Initializing quiz form...');
     const questionsArray = this.responseData.map(question => {
+      console.log('Creating form group for question:', question.id);
+  
       const group = this.fb.group({
         answer: ['yes', Validators.required],
-        userInput: [''], // Add userInput for "yes" response
+        userInput: ['', Validators.required],
         tutoringAnswers: this.fb.array(
-          question.tutoring.tutoringQuestions.map(() => 
-            this.fb.control('', Validators.required)
+          question.tutoring.tutoringQuestions.map(() =>
+            this.fb.control({ value: '', disabled: true }, Validators.required)
           )
         )
       });
-
+  
+      console.log('Form group created:', group);
+  
       const answerControl = group.get('answer');
       const userInputControl = group.get('userInput');
       const tutoringAnswers = group.get('tutoringAnswers') as FormArray;
-
+  
       answerControl?.valueChanges.subscribe(answer => {
+        console.log('Answer changed:', answer);
         if (answer === 'no') {
-          // Enable tutoring questions and disable userInput
-          tutoringAnswers.controls.forEach(control => {
-            control.setValidators(Validators.required);
-          });
-          userInputControl?.clearValidators();
+          tutoringAnswers.controls.forEach(control => control.enable());
+          userInputControl?.disable();
         } else {
-          // Enable userInput and disable tutoring questions
-          userInputControl?.setValidators(Validators.required);
-          tutoringAnswers.controls.forEach(control => {
-            control.clearValidators();
-          });
+          userInputControl?.enable();
+          tutoringAnswers.controls.forEach(control => control.disable());
           tutoringAnswers.reset();
         }
-        tutoringAnswers.controls.forEach(control => control.updateValueAndValidity());
-        userInputControl?.updateValueAndValidity();
       });
-
+  
       return group;
     });
-
+  
+    console.log('Questions array:', questionsArray);
     this.quizForm.setControl('questions', this.fb.array(questionsArray));
+    console.log('Quiz form initialized:', this.quizForm);
   }
 
-  // Check if any question has a "yes" answer
   hasAnyYesAnswer(): boolean {
     return this.questions.controls.some(questionGroup => questionGroup.get('answer')?.value === 'yes');
   }
 
-  // Handle button click
   handleButtonClick(): void {
     if (this.hasAnyYesAnswer()) {
       this.validateQuestions();
@@ -123,7 +133,6 @@ export class AppComponent implements OnInit {
     }
   }
 
-  // Validate questions with "yes" answers
   validateQuestions(): void {
     if (this.quizForm.valid) {
       this.isEvaluating = true;
@@ -138,6 +147,7 @@ export class AppComponent implements OnInit {
         next: (response) => {
           console.log('Validation response:', response);
           this.isEvaluating = false;
+          this.moveToNextQuestion();
         },
         error: (error) => {
           console.error('Error during validation:', error);
@@ -147,22 +157,34 @@ export class AppComponent implements OnInit {
     }
   }
 
-  // Submit all questions with "no" answers
   submitQuiz(): void {
     if (this.quizForm.valid) {
       this.isEvaluating = true;
-      const evaluationData = {"user":  this.quizForm.value.questions, "data": this.responseData};
+      const evaluationData = { user: this.quizForm.value.questions, data: this.responseData };
 
       this.http.post('http://localhost:5000/evaluate_answers', evaluationData).subscribe({
         next: (response) => {
           console.log('Evaluation response:', response);
           this.isEvaluating = false;
+          this.moveToNextQuestion();
         },
         error: (error) => {
           console.error('Error during evaluation:', error);
           this.isEvaluating = false;
         }
       });
+    }
+  }
+
+  moveToNextQuestion(): void {
+    if (this.currentQuestionIndex < this.questions.length - 1) {
+      this.currentQuestionIndex++;
+    }
+  }
+
+  moveToPreviousQuestion(): void {
+    if (this.currentQuestionIndex > 0) {
+      this.currentQuestionIndex--;
     }
   }
 }
