@@ -15,6 +15,9 @@
         <ng-container [formGroupName]="currentQuestionIndex">
           <div class="question-section">
             <mat-card class="dashboard-card">
+              <div class="question-number">
+                Question {{ currentQuestionIndex + 1 }} of {{ responseData.length }}
+              </div>
               <mat-card-header>
                 <mat-card-title class="question-title">
                   {{ responseData[currentQuestionIndex].question }}
@@ -65,8 +68,21 @@
 
 <!-- Footer Progress Indicator -->
 <footer *ngIf="!loading && responseData.length > 0" class="footer">
-  <div class="progress-dots">
-    <div *ngFor="let question of responseData; let i = index" class="dot" [ngClass]="{'active': i === currentQuestionIndex}" (click)="currentQuestionIndex = i">
+  <div class="footer-content">
+    <button mat-icon-button (click)="goToPreviousQuestion()" [disabled]="currentQuestionIndex === 0">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    
+    <div class="progress-dots">
+      <div *ngFor="let question of responseData; let i = index" 
+           class="dot" 
+           [ngClass]="{'active': i === currentQuestionIndex}" 
+           (click)="currentQuestionIndex = i">
+      </div>
     </div>
+
+    <button mat-icon-button (click)="goToNextQuestion()" [disabled]="currentQuestionIndex === responseData.length - 1">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
   </div>
 </footer>

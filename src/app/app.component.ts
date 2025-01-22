@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     ReactiveFormsModule,
     MatToolbarModule,
     MatStepperModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatIcon
   ],
   providers: [HttpClient], // Provide HttpClient here
   templateUrl: './app.component.html',
@@ -185,6 +187,18 @@ export class AppComponent implements OnInit {
   moveToPreviousQuestion(): void {
     if (this.currentQuestionIndex > 0) {
       this.currentQuestionIndex--;
+    }
+  }
+
+  goToPreviousQuestion() {
+    if (this.currentQuestionIndex > 0) {
+      this.currentQuestionIndex--;
+    }
+  }
+  
+  goToNextQuestion() {
+    if (this.currentQuestionIndex < this.responseData.length - 1) {
+      this.currentQuestionIndex++;
     }
   }
 }

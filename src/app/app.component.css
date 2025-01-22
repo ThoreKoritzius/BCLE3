@@ -112,3 +112,41 @@ mat-toolbar {
     align-items: center;
     height: 100vh;
   }
+  /* Question Number Styling */
+.question-number {
+    font-size: 14px;
+    color: #666;
+    margin-top: 8px;
+    padding: 10px;
+  }
+  
+  /* Footer Content Layout */
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  /* Navigation Buttons */
+  .mat-icon-button {
+    color: #3f51b5;
+  }
+  
+  .mat-icon-button[disabled] {
+    color: #ccc;
+  }
+  
+  /* Adjust footer padding */
+  .footer {
+    padding: 15px 0;
+  }
+  
+  /* Keep progress dots centered */
+  .progress-dots {
+    flex-grow: 1;
+    justify-content: center;
+    margin: 0 20px;
+  }
