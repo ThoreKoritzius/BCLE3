@@ -1,4 +1,7 @@
 /* Header Styles */
+body{
+    background: #ccc;
+}
 .header {
     margin-bottom: 2rem;
   }
@@ -20,12 +23,24 @@
     justify-content: center;
     padding: 2rem;
   }
-  
   .dashboard-card {
-    margin: 1rem;
+    margin: 1rem auto; /* Center horizontally */
     padding: 2rem;
-  }
-  
+    max-width: 1000px;
+    width: 100%; /* Ensure it takes full width up to max-width */
+    box-sizing: border-box; /* Include padding in width calculation */
+    background-color: white; /* Optional: Add background color */
+    border-radius: 8px; /* Optional: Add rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add subtle shadow */
+}
+
+/* Optional: Add responsive behavior for smaller screens */
+@media (max-width: 1000px) {
+    .dashboard-card {
+        margin: 1rem; /* Remove auto margins on smaller screens */
+        padding: 1.5rem; /* Reduce padding for smaller screens */
+    }
+}
   .question-number {
     font-size: 1.2rem;
     color: #666;
