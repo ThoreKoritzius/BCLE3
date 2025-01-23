@@ -129,7 +129,12 @@ export class AppComponent implements OnInit {
   }
 
   handleButtonClick(): void {
-    if (this.hasAnyYesAnswer()) {
+    const currQuestion = this.responseData[this.currentQuestionIndex]
+    const filteredQuestionGroup = this.questions.controls
+    .find(questionGroup => questionGroup.get('id')?.value === currQuestion.id);
+
+    console.log(filteredQuestionGroup!)
+    if (filteredQuestionGroup!.get('answer')?.value === 'yes') {
       this.validateQuestions();
     } else {
       this.submitQuiz();
@@ -146,7 +151,7 @@ export class AppComponent implements OnInit {
       const inputData = {
         userInput: filteredQuestionGroup!.get('userInput')?.value,
         questionId: this.responseData[this.questions.controls.indexOf(filteredQuestionGroup!)].id,
-        question: currQuestion.question,
+        question: currQuestion.yes,
         evaluationPrompt: currQuestion.evaluationPrompt	
       };
 
@@ -156,7 +161,7 @@ export class AppComponent implements OnInit {
         next: (response) => {
           console.log('Validation response:', response);
           this.isEvaluating = false;
-        //  this.moveToNextQuestion();
+          this.moveToNextQuestion();
         },
         error: (error) => {
           console.error('Error during validation:', error);
