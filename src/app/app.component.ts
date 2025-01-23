@@ -158,43 +158,47 @@ export class AppComponent implements OnInit {
     questionData.tutoringAnswers = tutoringAnswers;
   }
 
-  private validateQuestion(): void {
-    this.isEvaluating = true;
-    const payload = {
-      question: this.currentQuestion,
-      userInput: this.currentQuestion.userInput
-    };
+ // Update the validateQuestion method
+private validateQuestion(): void {
+  this.isEvaluating = true;
+  const payload = {
+    question: this.currentQuestion.question,
+    instruction: this.currentQuestion.evaluationPrompt,
+    userInput: this.currentQuestion.userInput
+  };
 
-    this.http.post('http://localhost:5000/evaluate_bm', payload).subscribe({
-      next: () => {
-        this.isEvaluating = false;
-        this.moveToNextQuestion();
-      },
-      error: (error) => {
-        console.error('Validation error:', error);
-        this.isEvaluating = false;
-      }
-    });
-  }
+  this.http.post('http://localhost:5000/evaluate_bm', payload).subscribe({
+    next: () => {
+      this.isEvaluating = false;
+      this.moveToNextQuestion();
+    },
+    error: (error) => {
+      console.error('Validation error:', error);
+      this.isEvaluating = false;
+    }
+  });
+}
 
-  private submitQuestion(): void {
-    this.isEvaluating = true;
-    const payload = {
-      question: this.currentQuestion,
-      tutoringAnswers: this.currentQuestion.tutoringAnswers
-    };
+// Update the submitQuestion method
+private submitQuestion(): void {
+  this.isEvaluating = true;
+  const payload = this.currentQuestion.tutoring.tutoringQuestions.map((tutoringQuestion, index) => ({
+    question: this.currentQuestion.question,
+    prompt: tutoringQuestion.question,
+    userInput: this.currentQuestion.tutoringAnswers![index]
+  }));
 
-    this.http.post('http://localhost:5000/evaluate_answers', payload).subscribe({
-      next: () => {
-        this.isEvaluating = false;
-        this.moveToNextQuestion();
-      },
-      error: (error) => {
-        console.error('Submission error:', error);
-        this.isEvaluating = false;
-      }
-    });
-  }
+  this.http.post('http://localhost:5000/evaluate_answers', payload).subscribe({
+    next: () => {
+      this.isEvaluating = false;
+      this.moveToNextQuestion();
+    },
+    error: (error) => {
+      console.error('Submission error:', error);
+      this.isEvaluating = false;
+    }
+  });
+}
 
   moveToNextQuestion(): void {
     if (this.currentQuestionIndex < this.questionsData.length - 1) {
