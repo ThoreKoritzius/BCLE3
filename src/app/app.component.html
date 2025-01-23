@@ -1,87 +1,91 @@
-<mat-toolbar color="primary">
-  <span>BCLE Dashboard</span>
-</mat-toolbar>
+<!-- Header Section -->
+<header class="header">
+  <mat-toolbar color="primary">
+    <span>{{ title }}</span>
+    <div class="steps-container">
+      <button mat-button *ngFor="let question of questionsData; let i = index" 
+              (click)="goToQuestion(i)"
+              [class.active-step]="i === currentQuestionIndex">
+        Question {{ i + 1 }}
+      </button>
+    </div>
+  </mat-toolbar>
+</header>
 
-<div class="dashboard-container">
-  <!-- Show loading spinner while data is being fetched -->
+<!-- Main Content -->
+<main>
   <div *ngIf="loading" class="loading-spinner">
-    <mat-spinner></mat-spinner>
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
   </div>
 
-  
-
-    <form *ngIf="!loading && responseData.length > 0" [formGroup]="quizForm" class="dashboard-form">
-      <div formArrayName="questions">
-        <ng-container [formGroupName]="currentQuestionIndex">
-          <div class="question-section">
-            <mat-card class="dashboard-card">
-              <div class="question-number">
-                Question {{ currentQuestionIndex + 1 }} of {{ responseData.length }}
-              </div>
-              <mat-card-header>
-                <mat-card-title class="question-title">
-                  {{ responseData[currentQuestionIndex].question }}
-                </mat-card-title>
-              </mat-card-header>
-    
-              <mat-card-content>
-                <!-- Radio Buttons for Yes/No -->
-                <mat-radio-group formControlName="answer" class="radio-group" (change)="onAnswerChange($event)">
-                  <mat-radio-button value="yes" class="radio-button">Yes</mat-radio-button>
-                  <mat-radio-button value="no" class="radio-button">No</mat-radio-button>
-                </mat-radio-group>
-                <!-- Tutoring Section (Visible if "No" is selected) -->
-                <div *ngIf="questions.at(currentQuestionIndex).get('answer')?.value === 'no'" class="tutoring-section">
-                  <h3 class="tutoring-heading">Tutoring Questions</h3>
-                  <div formArrayName="tutoringAnswers">
-                    <div *ngFor="let tutoringControl of getTutoringControls(questions.at(currentQuestionIndex)); let j = index" class="tutoring-question">
-                      <label class="tutoring-label">{{ responseData[currentQuestionIndex].tutoring.tutoringQuestions[j].question }}</label>
-                      <mat-form-field appearance="fill" class="tutoring-input">
-                        <textarea matInput [formControl]="tutoringControl" rows="3"></textarea>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                </div>
-    
-                <!-- User Input Section (Visible if "Yes" is selected) -->
-                <div *ngIf="questions.at(currentQuestionIndex).get('answer')?.value === 'yes'" class="tutoring-section">
-                  <label class="tutoring-label">Your input</label>
-                  <mat-form-field appearance="fill" class="tutoring-input">
-                    <textarea matInput formControlName="userInput" rows="3"></textarea>
-                  </mat-form-field>
-                </div>
-              </mat-card-content>
-            </mat-card>
-          </div>
-        </ng-container>
+  <form *ngIf="!loading" [formGroup]="getCurrentQuestionFormGroup()">
+    <mat-card class="dashboard-card">
+      <!-- Question Header -->
+      <div class="question-number">
+        Question {{ currentQuestionIndex + 1 }} of {{ questionsData.length }}
       </div>
-    
-      <!-- Dynamic Button -->
-      <button mat-raised-button [color]="'accent'" class="submit-button" (click)="handleButtonClick()" [disabled]="isEvaluating">
-        {{ isEvaluating ? 'Validating...' : 'Validate' }}
-      </button>
-    </form>
 
+      <!-- Question Content -->
+      <mat-card-content>
+        <h2 class="question-text">{{ currentQuestion.question }}</h2>
+        
+        <!-- Answer Selection -->
+        <mat-radio-group formControlName="answer" class="radio-group">
+          <mat-radio-button value="yes" class="radio-button">Yes</mat-radio-button>
+          <mat-radio-button value="no" class="radio-button">No</mat-radio-button>
+        </mat-radio-group>
 
-</div>
+        <!-- Tutoring Section -->
+        <div *ngIf="currentQuestion.answer! === 'no'" class="tutoring-section">
+          <h3 class="tutoring-heading">Follow-up Questions</h3>
+          <div formArrayName="tutoringAnswers">
+            <div *ngFor="let tutoringControl of getTutoringControls(currentQuestionIndex); let j = index" 
+                 class="tutoring-question">
+              <label class="tutoring-label">
+                {{ currentQuestion.tutoring.tutoringQuestions[j].question }}
+              </label>
+              <mat-form-field appearance="fill" class="tutoring-input">
+                <textarea matInput [formControl]="tutoringControl" rows="3"></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
 
-<!-- Footer Progress Indicator -->
-<footer *ngIf="!loading && responseData.length > 0" class="footer">
-  <div class="footer-content">
-    <button mat-icon-button (click)="goToPreviousQuestion()" [disabled]="currentQuestionIndex === 0">
-      <mat-icon>chevron_left</mat-icon>
+        <!-- User Input Section -->
+        <div *ngIf="currentQuestion.answer! === 'yes'" class="user-input-section">
+          <h3 class="tutoring-heading">Your Response</h3>
+          <mat-form-field appearance="fill" class="full-width-input">
+            <textarea matInput formControlName="userInput" rows="5"></textarea>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</main>
+
+<!-- Footer Navigation -->
+<footer class="footer" *ngIf="!loading">
+  <div class="navigation-buttons">
+    <button mat-raised-button 
+            color="primary"
+            (click)="goToPreviousQuestion()"
+            [disabled]="currentQuestionIndex === 0">
+      Previous
     </button>
     
-    <div class="progress-dots">
-      <div *ngFor="let question of responseData; let i = index" 
-           class="dot" 
-           [ngClass]="{'active': i === currentQuestionIndex}" 
-           (click)="currentQuestionIndex = i">
-      </div>
-    </div>
+    <button mat-raised-button 
+            color="primary"
+            (click)="handleButtonClick()"
+            [disabled]="!isCurrentFormValid || isEvaluating">
+      {{ currentQuestion!.answer! === 'yes' ? 'Validate Answer' : 'Submit Answers' }}
+      <mat-spinner *ngIf="isEvaluating" diameter="20"></mat-spinner>
+    </button>
 
-    <button mat-icon-button (click)="goToNextQuestion()" [disabled]="currentQuestionIndex === responseData.length - 1">
-      <mat-icon>chevron_right</mat-icon>
+    <button mat-raised-button 
+            color="primary"
+            (click)="moveToNextQuestion()"
+            [disabled]="currentQuestionIndex === questionsData.length - 1">
+      Next
     </button>
   </div>
 </footer>
