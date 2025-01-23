@@ -88,6 +88,7 @@ export class AppComponent implements OnInit {
       console.log('Creating form group for question:', question.id);
   
       const group = this.fb.group({
+        id: question.id,
         answer: ['yes', Validators.required],
         userInput: ['', Validators.required],
         tutoringAnswers: this.fb.array(
@@ -136,34 +137,54 @@ export class AppComponent implements OnInit {
   }
 
   validateQuestions(): void {
-    if (this.quizForm.valid) {
+    //if (this.quizForm.valid) {
       this.isEvaluating = true;
-      const validationData = this.questions.controls
-        .filter(questionGroup => questionGroup.get('answer')?.value === 'yes')
-        .map(questionGroup => ({
-          userInput: questionGroup.get('userInput')?.value,
-          questionId: this.responseData[this.questions.controls.indexOf(questionGroup)].id
-        }));
+      const currQuestion = this.responseData[this.currentQuestionIndex]
+      const filteredQuestionGroup = this.questions.controls
+        .find(questionGroup => questionGroup.get('id')?.value === currQuestion.id);
+
+      const inputData = {
+        userInput: filteredQuestionGroup!.get('userInput')?.value,
+        questionId: this.responseData[this.questions.controls.indexOf(filteredQuestionGroup!)].id,
+        question: currQuestion.question,
+        evaluationPrompt: currQuestion.evaluationPrompt	
+      };
+
+      const validationData = {"data": currQuestion, "input": inputData}
 
       this.http.post('http://localhost:5000/evaluate_bm', validationData).subscribe({
         next: (response) => {
           console.log('Validation response:', response);
           this.isEvaluating = false;
-          this.moveToNextQuestion();
+        //  this.moveToNextQuestion();
         },
         error: (error) => {
           console.error('Error during validation:', error);
           this.isEvaluating = false;
         }
       });
-    }
+    //}
   }
 
   submitQuiz(): void {
-    if (this.quizForm.valid) {
+    //if (this.quizForm.valid) {
       this.isEvaluating = true;
       const evaluationData = { user: this.quizForm.value.questions, data: this.responseData };
 
+      const currQuestion = this.responseData[this.currentQuestionIndex]
+      const filteredQuestionGroup = this.questions.controls
+        .find(questionGroup => questionGroup.get('id')?.value === currQuestion.id);
+
+      const inputData = {
+        userInput: filteredQuestionGroup!.get('userInput')?.value,
+        questionId: this.responseData[this.questions.controls.indexOf(filteredQuestionGroup!)].id,
+        question: currQuestion.question,
+        evaluationPrompt: currQuestion.evaluationPrompt	
+      };
+
+      const validationData = {"data": currQuestion, "input": inputData}
+
+      
       this.http.post('http://localhost:5000/evaluate_answers', evaluationData).subscribe({
         next: (response) => {
           console.log('Evaluation response:', response);
@@ -175,7 +196,7 @@ export class AppComponent implements OnInit {
           this.isEvaluating = false;
         }
       });
-    }
+    //}
   }
 
   moveToNextQuestion(): void {
