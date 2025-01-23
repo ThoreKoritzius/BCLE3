@@ -124,8 +124,14 @@ export class AppComponent implements OnInit {
     console.log('Quiz form initialized:', this.quizForm);
   }
 
-  hasAnyYesAnswer(): boolean {
-    return this.questions.controls.some(questionGroup => questionGroup.get('answer')?.value === 'yes');
+  onAnswerChange(event: any) {
+    const selectedValue = event.value;
+
+    const currQuestion = this.responseData[this.currentQuestionIndex]
+    console.log(currQuestion)
+    this.questions.controls
+    .find(questionGroup => questionGroup.get('id')?.value === currQuestion.id)?.get('answer')?.value === selectedValue
+    console.log( this.questions.controls)
   }
 
   handleButtonClick(): void {

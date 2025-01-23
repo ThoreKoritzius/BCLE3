@@ -26,11 +26,10 @@
     
               <mat-card-content>
                 <!-- Radio Buttons for Yes/No -->
-                <mat-radio-group formControlName="answer" class="radio-group">
+                <mat-radio-group formControlName="answer" class="radio-group" (change)="onAnswerChange($event)">
                   <mat-radio-button value="yes" class="radio-button">Yes</mat-radio-button>
                   <mat-radio-button value="no" class="radio-button">No</mat-radio-button>
                 </mat-radio-group>
-    
                 <!-- Tutoring Section (Visible if "No" is selected) -->
                 <div *ngIf="questions.at(currentQuestionIndex).get('answer')?.value === 'no'" class="tutoring-section">
                   <h3 class="tutoring-heading">Tutoring Questions</h3>
@@ -58,8 +57,8 @@
       </div>
     
       <!-- Dynamic Button -->
-      <button mat-raised-button [color]="hasAnyYesAnswer() ? 'accent' : 'primary'" class="submit-button" (click)="handleButtonClick()" [disabled]="isEvaluating">
-        {{ hasAnyYesAnswer() ? (isEvaluating ? 'Validating...' : 'Validate') : (isEvaluating ? 'Evaluating...' : 'Submit Answers') }}
+      <button mat-raised-button [color]="'accent'" class="submit-button" (click)="handleButtonClick()" [disabled]="isEvaluating">
+        {{ isEvaluating ? 'Validating...' : 'Validate' }}
       </button>
     </form>
 
