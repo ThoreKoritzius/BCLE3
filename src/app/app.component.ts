@@ -123,17 +123,21 @@ export class AppComponent implements OnInit {
     this.quizForm.setControl('questions', this.fb.array(questionsArray));
     console.log('Quiz form initialized:', this.quizForm);
   }
-
   onAnswerChange(event: any) {
     const selectedValue = event.value;
 
-    const currQuestion = this.responseData[this.currentQuestionIndex]
-    console.log(currQuestion)
-    this.questions.controls
-    .find(questionGroup => questionGroup.get('id')?.value === currQuestion.id)?.get('answer')?.value === selectedValue
-    console.log( this.questions.controls)
-  }
+    const currQuestion = this.responseData[this.currentQuestionIndex];
+    console.log(currQuestion);
 
+    // Find the correct form control
+    const questionControl = this.questions.controls
+        .find(questionGroup => questionGroup.get('id')?.value === currQuestion.id)?.get('answer');
+
+    // Update the value of the form control
+    if (questionControl) {
+        questionControl.setValue(selectedValue);
+    }
+  }
   handleButtonClick(): void {
     const currQuestion = this.responseData[this.currentQuestionIndex]
     const filteredQuestionGroup = this.questions.controls
