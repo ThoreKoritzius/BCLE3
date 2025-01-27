@@ -1,24 +1,25 @@
 <!-- Header Section -->
 <header class="header">
-  <mat-toolbar color="primary">
-    <span>{{ title }}</span>
+  <mat-toolbar color="red" class="toolbar">
+    <span class="title">{{ title }}</span>
     <div class="steps-container">
-      <button mat-button *ngFor="let question of questionsData; let i = index" 
-              (click)="goToQuestion(i)"
-              [class.active-step]="i === currentQuestionIndex">
-        Question {{ i + 1 }}
-      </button>
-      <button mat-button>
-        Database
+      <div class="questions-scroll">
+        <button mat-button 
+                *ngFor="let question of questionsData; let i = index" 
+                (click)="goToQuestion(i)"
+                [class.active-step]="i === currentQuestionIndex"
+                [style.flex]="1">
+          Step {{ i + 1 }}
         </button>
-      <button mat-button>
-        Results
-        </button>
+      </div>
+      <div class="extras">
+        <button mat-button>Database</button>
+        <button mat-button>Results</button>
+      </div>
     </div>
   </mat-toolbar>
 </header>
 
-<!-- Main Content -->
 <main>
   <div *ngIf="loading" class="loading-spinner">
     <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
