@@ -2,9 +2,6 @@
 body{
     background: #ccc;
 }
-.header {
-    margin-bottom: 2rem;
-  }
   
   .steps-container {
     margin-left: auto;
@@ -29,9 +26,9 @@ body{
     max-width: 1000px;
     width: 100%; /* Ensure it takes full width up to max-width */
     box-sizing: border-box; /* Include padding in width calculation */
-    background-color: white; /* Optional: Add background color */
-    border-radius: 8px; /* Optional: Add rounded corners */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add subtle shadow */
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Optional: Add responsive behavior for smaller screens */
@@ -215,4 +212,100 @@ body{
   display: flex;
   gap: 16px;
   margin-left: auto;
+}
+
+
+
+/* Centering the whole welcome screen */
+.welcome-screen {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+/* Card Styles */
+.welcome-card {
+  width: 90%;
+  max-width: 600px;
+  height: 100%;
+  padding: 20px;
+}
+
+
+/* Welcome Title Styles */
+.welcome-title {
+  font-size: 2.5rem;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  color: #424242;
+  text-align: center;
+  margin: 0;
+}
+
+/* Subtitle Styles */
+.welcome-subtitle {
+  font-size: 1.2rem;
+  color: #6c757d;
+  margin-top: 10px;
+}
+
+/* Topic Preview Heading */
+.topics-heading {
+  font-size: 1.5rem;
+  margin: 20px 0;
+  color: #424242;
+  text-align: center;
+}
+
+/* Scrollable List Styles */
+.scrollable-list {
+  flex-grow: 1; /* Makes the list take up available space */
+  overflow-y: auto;
+  margin: 10px 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #ffffff;
+  max-height: 300px
+}
+
+mat-list {
+  padding: 0;
+}
+
+/* List Item Styles */
+mat-list-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  font-size: 1rem;
+  text-align: left;
+}
+
+mat-list-item mat-icon {
+  margin-right: 10px;
+  font-size: 1.5rem;
+}
+
+.topic-title {
+  font-weight: 500;
+  color: #333;
+  text-align: left;
+}
+
+/* Start Button Container */
+.start-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Start Button Styling */
+.start-button {
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 20px; /* Adds space below the button */
 }

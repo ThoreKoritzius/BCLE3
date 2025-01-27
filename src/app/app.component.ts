@@ -11,6 +11,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatList, MatListItem } from '@angular/material/list';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +28,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     ReactiveFormsModule,
     MatToolbarModule,
     MatStepperModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatList,
+    MatListItem,
+    MatIcon
   ],
   providers: [HttpClient],
   templateUrl: './app.component.html',
@@ -38,7 +43,7 @@ export class AppComponent implements OnInit {
   questionsData: Question[] = [];
   quizForm: FormGroup;
   isEvaluating = false;
-  currentQuestionIndex = 0;
+  currentQuestionIndex = -1;
   loading = true;
 
   constructor(private http: HttpClient, private fb: FormBuilder) {
