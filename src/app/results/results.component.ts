@@ -12,12 +12,27 @@ import { CommonModule } from '@angular/common';
 export class ResultsComponent implements OnInit {
   @Input() progress: number = 0;
   @Input() resultPatterns: BusinessPattern[] | undefined;
+  @Input() uvpSuccessful: boolean | undefined;
+  @Input() uvp: string | undefined;
+
+
+  @Input() problemsSuccessful: boolean | undefined;
+  @Input() problems: string | undefined;
+
+  @Input() solutionsSuccessful: boolean | undefined;
+  @Input() solutions: string | undefined;
   constructor(private stateService: StateService) { }
   ngOnInit(): void {
     this.stateService.evaluatePattern()
     this.progress = this.stateService.progress;
     this.resultPatterns = this.stateService.resultPatterns;
-    console.log(this.resultPatterns)
+    this.uvp = this.stateService.uvp;
+    this.uvpSuccessful =this.stateService.uvpSuccessful;
+    this.solutions = this.stateService.solutions;
+    this.solutionsSuccessful =this.stateService.solutionsSuccessful;
+    this.problems = this.stateService.problems;
+    this.problemsSuccessful =this.stateService.problemsSuccessful;
+    console.log(this.uvpSuccessful)
   }
   getCircleColor() {
     return this.stateService.getCircleColor()

@@ -12,7 +12,7 @@ import requests
 import json
 from datetime import datetime
 
-def make_request_openai(instruction, question, userInput, model="gpt-4o-mini", max_tokens=800):
+def make_request_openai(instruction, question, userInput, previousInputs=[]):
         client = OpenAI(
             api_key="",
         )
@@ -27,7 +27,8 @@ def make_request_openai(instruction, question, userInput, model="gpt-4o-mini", m
                         'feedback': {
                             'type': 'string',
                             'description': f"""{instruction}. 
-                                            Given question '{question}', provide a well structured, easy to understand feedback response in markdown format. 
+                                            Given question '{question}', provide a well structured, easy to understand feedback response. 
+                                             You MUST USE A CLEAR STRUCTURED markdown format. 
                                             Also give hints to improve or refine the definition. """
                         },
                         'is_feedback_acceptable': {
@@ -38,9 +39,15 @@ def make_request_openai(instruction, question, userInput, model="gpt-4o-mini", m
                 }
             }
         ]
+        messages = []
+        for item in previousInputs:
+            messages.append({'role': 'user', 'content': f"Question '{item['question']}'. User Input: '{item['userInput']}' "})
+
+        messages.append({'role': 'user', 'content': userInput})
+        print(messages)
         response = client.chat.completions.create(
             model = 'gpt-4o-mini',
-            messages = [{'role': 'user', 'content': userInput}],
+            messages = messages,
             functions = student_custom_functions,
             function_call = 'auto'
         )
@@ -74,10 +81,11 @@ def evaluate_questions():
     config = load_json_file().get(f"Question_{currentQuestionIndex +1}")
     question = config['yes']['followupQuestion']
     instruction= config['yes'].get('evaluationPrompt')
+    previousInputs =  data.get("previousInputs")
     if instruction  is None or question is None:
         return jsonify({"details": "missing info in config"}), 401
     
-    llm_response, satisfactory_outcome = make_request_openai(instruction, question, userInput)
+    llm_response, satisfactory_outcome = make_request_openai(instruction, question, userInput, previousInputs=previousInputs)
    
     return jsonify({"response": llm_response, 
                     "satisfactory_outcome": satisfactory_outcome, 

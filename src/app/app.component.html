@@ -6,7 +6,7 @@
     <span class="title">{{ title }}</span>
     <div class="traffic-light-container">
       <!-- Single Circle with Percentage Text -->
-      <div class="progress-circle" style="background: #777;">
+      <div class="progress-circle" style="background: #555;">
         <div class="percentage-text">
           {{ progress }}% Complete
         </div>
@@ -43,16 +43,16 @@
 
       <!-- Extra Links -->
       <mat-divider></mat-divider>
-      <mat-list-item (click)="goToQuestion(-2)" [class.active-step]="-2 === currentQuestionIndex">
+      <mat-list-item (click)="goToQuestionExtract(-2)" [class.active-step]="-2 === currentQuestionIndex">
         <mat-icon [class.active-step]="-2 === currentQuestionIndex" >storage</mat-icon>
         <span class="nav-label" [class.active-step]="-2 === currentQuestionIndex">Database</span>
       </mat-list-item>
-      <mat-list-item (click)="goToQuestion(-3)" [class.active-step]="-3 === currentQuestionIndex">
+      <mat-list-item (click)="goToQuestionExtract(-3)" [class.active-step]="-3 === currentQuestionIndex">
         <mat-icon [class.active-step]="-3 === currentQuestionIndex">assessment</mat-icon>
         <span class="nav-label" [class.active-step]="-3  === currentQuestionIndex">Results</span>
       </mat-list-item>
       <mat-divider></mat-divider>
-      <mat-list-item (click)="goToQuestion(-4)" [class.active-step]="-4 === currentQuestionIndex">
+      <mat-list-item (click)="goToQuestion(-4);" [class.active-step]="-4 === currentQuestionIndex">
         <mat-icon [class.active-step]="-4 === currentQuestionIndex">info</mat-icon>
         <span class="nav-label" [class.active-step]="-4  === currentQuestionIndex">Imprint</span>
       </mat-list-item>

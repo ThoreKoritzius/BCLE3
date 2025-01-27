@@ -1,12 +1,26 @@
 <div class="dashboard">
     <div class="category-card">
         <h2 class="category-title">Problem</h2>
+        <div class="status-indicator" [ngClass]="{'completed': problemsSuccessful, 'needs-refinement': !problemsSuccessful}">
+            {{ problemsSuccessful ? 'Completed' : 'Needs Refinement' }}
+        </div>
+        <div *ngIf="!problemsSuccessful">You need to complete Step 2 and Step 4 to get a refined Unique Value Proposition.</div>
     </div>
     <div class="category-card">
         <h2 class="category-title">Solution</h2>
+        <div class="status-indicator" [ngClass]="{'completed': solutionsSuccessful, 'needs-refinement': !solutionsSuccessful}">
+            {{ solutionsSuccessful ? 'Completed' : 'Needs Refinement' }}
+        </div>
+        <div *ngIf="!solutionsSuccessful">You need to complete Step 5 to get a refined Unique Value Proposition.</div>
+    
     </div>
     <div class="category-card">
         <h2 class="category-title">UVP</h2>
+        <div class="status-indicator" [ngClass]="{'completed': uvpSuccessful, 'needs-refinement': !uvpSuccessful}">
+            {{ uvpSuccessful ? 'Completed' : 'Needs Refinement' }}
+        </div>
+        <div *ngIf="!uvpSuccessful">You need to complete Step 8 to get a refined Unique Value Proposition.</div>
+    
     </div>
     <div class="category-card">
         <h2 class="category-title"></h2>

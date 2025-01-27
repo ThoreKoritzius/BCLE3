@@ -18,7 +18,12 @@ export class StateService {
   userAnswers: { [key: string]: string } = {};
   resultPatterns = DefinedBusinessPatterns;
   progress: number = 0;
-
+  uvpSuccessful: boolean = false;
+  uvp: string = "";
+  solutionsSuccessful: boolean = false;
+  solutions: string = "";
+  problemsSuccessful: boolean = false;
+  problems: string = "";
   private storageKey = 'bcle-dashboard-state';
 
   saveState(state: any): void {

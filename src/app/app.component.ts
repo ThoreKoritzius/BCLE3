@@ -19,6 +19,7 @@ import { StateService } from './state.service';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDivider } from '@angular/material/divider';
 import { ImprintComponent } from './imprint/imprint.component';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -57,7 +58,9 @@ export class AppComponent implements OnInit {
   currentQuestionIndex = -1;
   loading = true;
   showBMSelection = false;
-  progress: number = 10;
+  progress: number = 0;
+  private formChangesSubscription!: Subscription;
+  isEvaluationFresh = false;
 
   @ViewChild('evaluationDiv') evaluationDiv!: ElementRef;
 
@@ -131,6 +134,15 @@ export class AppComponent implements OnInit {
           });
   
         this.initializeForm();
+
+        if (this.formChangesSubscription) {
+          this.formChangesSubscription.unsubscribe();
+        }
+        this.formChangesSubscription = this.quizForm.valueChanges.subscribe(formValue => {
+          //this.extractBMPattern();
+          this.isEvaluationFresh = false;
+        });
+
         this.loading = false;
       },
       error: (error) => {
@@ -199,13 +211,57 @@ export class AppComponent implements OnInit {
     questionData.tutoringAnswers = tutoringAnswers;
   }
 
+  getProgress() {
+    // Sum the boolean values (true as 1, false as 0) and divide by the total number of questions
+    const successfulCount = this.questionsData.reduce((sum, question) => sum + (question.successful ? 1 : 0), 0);
+    this.progress = (successfulCount / this.questionsData.length) * 100;
+  }
+
+  extractBMPattern(): void {
+    if (this.isEvaluationFresh){
+      return
+    }
+    console.log("extractBMPattern")
+    const userInputs = this.questionsData
+    .map((a: Question) => ({ 
+      id: a.id,
+      question: a.question, 
+      userInput: a.userInput 
+    }));
+    console.log(userInputs);
+    this.http.post('http://localhost:5007/extract_bm', {"userInputs": userInputs}).subscribe({
+      next: (response: any) => {
+        console.log(response)
+        this.isEvaluating = true;
+      },
+      error: (error) => {
+        console.error('Validation error:', error);
+        this.isEvaluating = false;
+        
+      }
+    });
+
+  }
+  
+  
   private validateQuestion(): void {
     this.isEvaluating = true;
-    const payload = {
+    const currentQuestion = {
       currentQuestionIndex: this.currentQuestionIndex,
       userInput: this.currentQuestion.userInput
     };
-
+    const userInputs = this.questionsData
+    .filter((_, index) => index < this.currentQuestionIndex)
+    .map((a: Question) => ({ 
+      id: a.id,
+      question: a.question, 
+      userInput: a.userInput 
+    }));
+    
+    const payload = {"previousInputs": userInputs, 
+      "currentQuestionIndex": this.currentQuestionIndex,
+      "userInput": this.currentQuestion.userInput
+    }
     this.http.post('http://localhost:5007/evaluate_bm', payload).subscribe({
       next: (response: any) => {
         console.log(response)
@@ -226,6 +282,7 @@ export class AppComponent implements OnInit {
           behavior: 'smooth' // Smooth scrolling animation
         });
 
+        this.getProgress()
 
         if (this.evaluationDiv) {
           this.evaluationDiv.nativeElement.scrollIntoView({
@@ -295,6 +352,11 @@ export class AppComponent implements OnInit {
 
   goToQuestion(index: number): void {
     this.currentQuestionIndex = index;
+  }
+  goToQuestionExtract(index: number): void {
+    this.extractBMPattern();
+    this.currentQuestionIndex = index;
+
   }
 }
 
