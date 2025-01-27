@@ -100,6 +100,7 @@ export class AppComponent implements OnInit {
             answer: 'yes',
             userInput: '',
             evaluation: '',
+            evaluationHTML: '',
             successful: false,
             tutoringAnswers: data[key].no.tutoring.questions.map(() => '')
           } as Question)).sort((a, b) => {
@@ -195,11 +196,14 @@ export class AppComponent implements OnInit {
         this.isEvaluating = false;
 
         const evaluation = response.response;
+        const evaluationHTML = response.html;
         const satisfactoryOutcome = response.satisfactory_outcome;
 
         this.questionsData[this.currentQuestionIndex].evaluation = evaluation;
+        this.questionsData[this.currentQuestionIndex].evaluationHTML = evaluationHTML;
         this.questionsData[this.currentQuestionIndex].successful = satisfactoryOutcome;
         this.currentQuestion.evaluation = evaluation;
+        this.currentQuestion.evaluationHTML = evaluationHTML;
 
         window.scrollTo({
           top: document.body.scrollHeight,
@@ -271,6 +275,7 @@ interface Question {
   question: string;
   topic: string;
   evaluation: string;
+  evaluationHTML: string;
   successful: boolean;
   yes: {
     followupQuestion: string;

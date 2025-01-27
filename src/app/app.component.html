@@ -1,17 +1,17 @@
 <header class="header">
-  <mat-toolbar color="red" class="toolbar">
+  <mat-toolbar class="toolbar">
     <span class="title" (click)="moveToQuestion(-1)">{{ title }}</span>
     <div class="steps-container">
       <div class="questions-scroll">
         <button mat-button *ngFor="let question of questionsData; let i = index" (click)="goToQuestion(i)"
-          [class.active-step]="i === currentQuestionIndex" [style.flex]="1">
+          [class.active-step]="i === currentQuestionIndex" [style.flex]="1" style="color: #ccc">
           Step {{ i + 1 }}
         </button>
       </div>
       <div class="extras">
         <button mat-button (click)="goToQuestion(-2)"
-          [class.active-step]="-2 === currentQuestionIndex">Database</button>
-        <button mat-button (click)="goToQuestion(-3)" [class.active-step]="-3 === currentQuestionIndex">Results</button>
+          [class.active-step]="-2 === currentQuestionIndex" style="color: #ccc">Database</button>
+        <button mat-button (click)="goToQuestion(-3)" [class.active-step]="-3 === currentQuestionIndex" style="color: #ccc">Results</button>
       </div>
     </div>
   </mat-toolbar>
@@ -101,7 +101,7 @@
           <div *ngIf="currentQuestion.evaluation.length > 0" #evaluationDiv>
             <div class="category-card ai-result">
                 <h2 class="category-title">AI Evaluation Result</h2>
-                  {{currentQuestion.evaluation}}
+                  <div [innerHTML]="currentQuestion.evaluationHTML"></div>
             </div>
           </div>
           <div style="height: 100px;"></div>

@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS  # Import the CORS module
-
+import markdown
 app = Flask(__name__)
 
 # Enable CORS for the entire app
@@ -24,7 +24,13 @@ def make_request_openai(instruction, question, userInput, model="gpt-4o-mini", m
                     "stream":False
                }
      print(data)
-     return "test"
+     return """
+This is **bold text** and this is *italic text*.
+
+- Item 1
+- Item 2
+
+[Link](https://example.com)"""
      response = requests.post(URL, json=data, stream=False,
                                         headers={"Authorization": f"Bearer {API_KEY}"}, timeout=300)
 
@@ -65,9 +71,9 @@ def evaluate_questions():
         satisfactory_outcome = True
     if "bad" in llm_response.lower():
         satisfactory_outcome = False
-
     return jsonify({"response": llm_response, 
-                    "satisfactory_outcome": satisfactory_outcome})
+                    "satisfactory_outcome": satisfactory_outcome, 
+                    "html": markdown.markdown(llm_response)})
 
 
 @app.route('/evaluate_answers', methods=['POST', 'GET'])
