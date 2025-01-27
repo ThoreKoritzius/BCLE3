@@ -34,7 +34,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 })
 export class AppComponent implements OnInit {
   title = 'BCLE Dashboard';
-  private apiUrl = 'http://localhost:5000/get_config';
+  private apiUrl = 'http://localhost:5007/get_config';
   questionsData: Question[] = [];
   quizForm: FormGroup;
   isEvaluating = false;
@@ -74,14 +74,18 @@ export class AppComponent implements OnInit {
   getData(): void {
     this.http.get<any>(this.apiUrl).subscribe({
       next: (data) => {
+        console.log(data)
         this.questionsData = Object.keys(data)
           .filter(key => key.startsWith('Question_'))
           .map(key => ({
-            ...data[key],
             id: key,
+            question: data[key].question,
+            topic: data[key].topic,
+            yes: data[key].yes,
+            no: data[key].no,
             answer: 'yes',
             userInput: '',
-            tutoringAnswers: data[key].tutoring.tutoringQuestions.map(() => '')
+            tutoringAnswers: data[key].no.tutoring.questions.map(() => '')
           } as Question));
 
         this.initializeForm();
@@ -158,47 +162,45 @@ export class AppComponent implements OnInit {
     questionData.tutoringAnswers = tutoringAnswers;
   }
 
- // Update the validateQuestion method
-private validateQuestion(): void {
-  this.isEvaluating = true;
-  const payload = {
-    question: this.currentQuestion.question,
-    instruction: this.currentQuestion.evaluationPrompt,
-    userInput: this.currentQuestion.userInput
-  };
+  private validateQuestion(): void {
+    this.isEvaluating = true;
+    const payload = {
+      question: this.currentQuestion.question,
+      instruction: this.currentQuestion.yes.evaluationPrompt,
+      userInput: this.currentQuestion.userInput
+    };
 
-  this.http.post('http://localhost:5000/evaluate_bm', payload).subscribe({
-    next: () => {
-      this.isEvaluating = false;
-      this.moveToNextQuestion();
-    },
-    error: (error) => {
-      console.error('Validation error:', error);
-      this.isEvaluating = false;
-    }
-  });
-}
+    this.http.post('http://localhost:5000/evaluate_bm', payload).subscribe({
+      next: () => {
+        this.isEvaluating = false;
+        this.moveToNextQuestion();
+      },
+      error: (error) => {
+        console.error('Validation error:', error);
+        this.isEvaluating = false;
+      }
+    });
+  }
 
-// Update the submitQuestion method
-private submitQuestion(): void {
-  this.isEvaluating = true;
-  const payload = this.currentQuestion.tutoring.tutoringQuestions.map((tutoringQuestion, index) => ({
-    question: this.currentQuestion.question,
-    prompt: tutoringQuestion.question,
-    userInput: this.currentQuestion.tutoringAnswers![index]
-  }));
+  private submitQuestion(): void {
+    this.isEvaluating = true;
+    const payload = this.currentQuestion.no.tutoring.questions.map((tutoringQuestion, index) => ({
+      question: this.currentQuestion.question,
+      prompt: tutoringQuestion.question,
+      userInput: this.currentQuestion.tutoringAnswers![index]
+    }));
 
-  this.http.post('http://localhost:5000/evaluate_answers', payload).subscribe({
-    next: () => {
-      this.isEvaluating = false;
-      this.moveToNextQuestion();
-    },
-    error: (error) => {
-      console.error('Submission error:', error);
-      this.isEvaluating = false;
-    }
-  });
-}
+    this.http.post('http://localhost:5000/evaluate_answers', payload).subscribe({
+      next: () => {
+        this.isEvaluating = false;
+        this.moveToNextQuestion();
+      },
+      error: (error) => {
+        console.error('Submission error:', error);
+        this.isEvaluating = false;
+      }
+    });
+  }
 
   moveToNextQuestion(): void {
     if (this.currentQuestionIndex < this.questionsData.length - 1) {
@@ -222,12 +224,33 @@ private submitQuestion(): void {
 interface Question {
   id: string;
   question: string;
-  yes: string;
-  no: string;
-  tutoring: {
-    tutoringQuestions: Array<{ question: string }>;
+  topic: string;
+  yes: {
+    followupQuestion: string;
+    evaluationPrompt: string;
+    good: { response: string };
+    bad: {
+      response: string;
+      tutoring: {
+        categories: {
+          [key: string]: Array<{
+            question: string;
+            evaluationPrompt: string;
+          }>;
+        };
+        dynamicLoop: string;
+        loopEnd: string;
+      };
+    };
   };
-  evaluationPrompt: string;
+  no: {
+    tutoring: {
+      questions: Array<{
+        question: string;
+        evaluationPrompt: string;
+      }>;
+    };
+  };
   answer?: 'yes' | 'no';
   userInput?: string;
   tutoringAnswers?: string[];

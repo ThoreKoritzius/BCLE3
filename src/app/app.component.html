@@ -8,6 +8,12 @@
               [class.active-step]="i === currentQuestionIndex">
         Question {{ i + 1 }}
       </button>
+      <button mat-button>
+        Database
+        </button>
+      <button mat-button>
+        Results
+        </button>
     </div>
   </mat-toolbar>
 </header>
@@ -22,7 +28,7 @@
     <mat-card class="dashboard-card">
       <!-- Question Header -->
       <div class="question-number">
-        Question {{ currentQuestionIndex + 1 }} of {{ questionsData.length }}
+         Question {{ currentQuestionIndex + 1 }} of {{ questionsData.length }}: {{ currentQuestion.topic }}
       </div>
 
       <!-- Question Content -->
@@ -37,12 +43,12 @@
 
         <!-- Tutoring Section -->
         <div *ngIf="currentQuestion.answer! === 'no'" class="tutoring-section">
-          <h3 class="tutoring-heading">Follow-up Questions</h3>
+          <h3 class="tutoring-heading">Tutoring: Follow-up Questions</h3>
           <div formArrayName="tutoringAnswers">
             <div *ngFor="let tutoringControl of getTutoringControls(currentQuestionIndex); let j = index" 
                  class="tutoring-question">
               <label class="tutoring-label">
-                {{ currentQuestion.tutoring.tutoringQuestions[j].question }}
+                {{ currentQuestion.no.tutoring.questions[j].question }}
               </label>
               <mat-form-field appearance="fill" class="tutoring-input">
                 <textarea matInput [formControl]="tutoringControl" rows="3"></textarea>
@@ -53,7 +59,7 @@
 
         <!-- User Input Section -->
         <div *ngIf="currentQuestion.answer! === 'yes'" class="user-input-section">
-          <h3 class="tutoring-heading">Your Response</h3>
+          <h3 class="tutoring-heading">{{ currentQuestion.yes.followupQuestion }}</h3>
           <mat-form-field appearance="fill" class="full-width-input">
             <textarea matInput formControlName="userInput" rows="5"></textarea>
           </mat-form-field>
