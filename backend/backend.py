@@ -18,7 +18,7 @@ def make_request_openai(instruction, question, userInput, model="gpt-4o-mini", m
                     "model": model,
                     "max_tokens": max_tokens,
                     "messages": [{"role":"system","content": 
-                                  f"The user needs to answer the following question {question}. Instruction: " + instruction},
+                                  f"The user needs to answer the following question: '{question}'. Your Instruction: " + instruction},
                                   {"role":"user", "content":
                                    userInput}],
                     "stream":False
@@ -42,18 +42,22 @@ def load_json_file():
 @app.route('/get_config', methods=['POST', 'GET'])
 def get_config():
     data = load_json_file()
-    print(data, flush=True)
     return jsonify(data)
 
 @app.route('/evaluate_bm', methods=['POST', 'GET'])
 def evaluate_questions():
-    data = request.json.get("input")
-    instruction = data.get("evaluationPrompt")
-    question = data.get("question")
+    data = request.json
+    currentQuestionIndex = data.get("currentQuestionIndex")
     userInput =  data.get("userInput")
+    config = load_json_file().get(f"Question_{currentQuestionIndex +1}")
+    question = config['yes']['followupQuestion']
+    instruction= config['yes']['evaluationPrompt']
+    print(currentQuestionIndex)
+    print(userInput)
+    print(question, instruction)
     llm_response = make_request_openai(instruction, question, userInput)
     # TODO: identify if user input was good or not 
-    return jsonify({"response": llm_response})
+    return jsonify({"response": "llm_response"})
 
 
 @app.route('/evaluate_answers', methods=['POST', 'GET'])

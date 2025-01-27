@@ -86,7 +86,11 @@ export class AppComponent implements OnInit {
             answer: 'yes',
             userInput: '',
             tutoringAnswers: data[key].no.tutoring.questions.map(() => '')
-          } as Question));
+          } as Question)).sort((a, b) => {
+            const numA = parseInt(a.id.replace('Question_', ''), 10);
+            const numB = parseInt(b.id.replace('Question_', ''), 10);
+            return numA - numB;
+          });
 
         this.initializeForm();
         this.loading = false;
@@ -165,12 +169,11 @@ export class AppComponent implements OnInit {
   private validateQuestion(): void {
     this.isEvaluating = true;
     const payload = {
-      question: this.currentQuestion.question,
-      instruction: this.currentQuestion.yes.evaluationPrompt,
+      currentQuestionIndex: this.currentQuestionIndex,
       userInput: this.currentQuestion.userInput
     };
 
-    this.http.post('http://localhost:5000/evaluate_bm', payload).subscribe({
+    this.http.post('http://localhost:5007/evaluate_bm', payload).subscribe({
       next: () => {
         this.isEvaluating = false;
         this.moveToNextQuestion();
@@ -190,7 +193,7 @@ export class AppComponent implements OnInit {
       userInput: this.currentQuestion.tutoringAnswers![index]
     }));
 
-    this.http.post('http://localhost:5000/evaluate_answers', payload).subscribe({
+    this.http.post('http://localhost:5007/evaluate_answers', payload).subscribe({
       next: () => {
         this.isEvaluating = false;
         this.moveToNextQuestion();
