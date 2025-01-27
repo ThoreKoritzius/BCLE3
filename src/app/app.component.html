@@ -1,32 +1,29 @@
-
 <header class="header">
-<mat-toolbar color="red" class="toolbar">
-  <span class="title" (click)="moveToQuestion(-1)">{{ title }}</span>
-  <div class="steps-container">
-    <div class="questions-scroll">
-      <button mat-button 
-              *ngFor="let question of questionsData; let i = index" 
-              (click)="goToQuestion(i)"
-              [class.active-step]="i === currentQuestionIndex"
-              [style.flex]="1">
-        Step {{ i + 1 }}
-      </button>
+  <mat-toolbar color="red" class="toolbar">
+    <span class="title" (click)="moveToQuestion(-1)">{{ title }}</span>
+    <div class="steps-container">
+      <div class="questions-scroll">
+        <button mat-button *ngFor="let question of questionsData; let i = index" (click)="goToQuestion(i)"
+          [class.active-step]="i === currentQuestionIndex" [style.flex]="1">
+          Step {{ i + 1 }}
+        </button>
+      </div>
+      <div class="extras">
+        <button mat-button (click)="goToQuestion(-2)"
+          [class.active-step]="-2 === currentQuestionIndex">Database</button>
+        <button mat-button (click)="goToQuestion(-3)" [class.active-step]="-3 === currentQuestionIndex">Results</button>
+      </div>
     </div>
-    <div class="extras">
-      <button mat-button (click)="goToQuestion(-2)" [class.active-step]="-2 === currentQuestionIndex">Database</button>
-      <button mat-button (click)="goToQuestion(-3)" [class.active-step]="-3 === currentQuestionIndex">Results</button>
-    </div>
-  </div>
-</mat-toolbar>
+  </mat-toolbar>
 </header>
 
 
-<app-bm-selection *ngIf="currentQuestionIndex === -2" >
+<app-bm-selection *ngIf="currentQuestionIndex === -2">
 </app-bm-selection>
 
 
-<app-results *ngIf="currentQuestionIndex === -3" >
-</app-results >
+<app-results *ngIf="currentQuestionIndex === -3">
+</app-results>
 
 <!-- Welcome Screen -->
 <div *ngIf="currentQuestionIndex === -1" class="welcome-screen">
@@ -42,7 +39,7 @@
       <div class="scrollable-list">
         <mat-list>
           <mat-list-item *ngFor="let question of questionsData; let i = index">
-            <mat-icon mat-list-icon color="primary">check_circle</mat-icon>
+            <mat-icon mat-list-icon color="primary">list</mat-icon>
             <span class="topic-title">Step {{ i + 1 }}: {{ question.topic }}</span>
           </mat-list-item>
         </mat-list>
@@ -65,13 +62,13 @@
     <mat-card class="dashboard-card">
       <!-- Question Header -->
       <div class="question-number">
-         Question {{ currentQuestionIndex + 1 }} of {{ questionsData.length }}: {{ currentQuestion.topic }}
+        Question {{ currentQuestionIndex + 1 }} of {{ questionsData.length }}: {{ currentQuestion.topic }}
       </div>
 
       <!-- Question Content -->
       <mat-card-content>
         <h2 class="question-text">{{ currentQuestion.question }}</h2>
-        
+
         <!-- Answer Selection -->
         <mat-radio-group formControlName="answer" class="radio-group">
           <mat-radio-button value="yes" class="radio-button">Yes</mat-radio-button>
@@ -82,8 +79,8 @@
         <div *ngIf="currentQuestion.answer! === 'no'" class="tutoring-section">
           <h3 class="tutoring-heading">Tutoring: Follow-up Questions</h3>
           <div formArrayName="tutoringAnswers">
-            <div *ngFor="let tutoringControl of getTutoringControls(currentQuestionIndex); let j = index" 
-                 class="tutoring-question">
+            <div *ngFor="let tutoringControl of getTutoringControls(currentQuestionIndex); let j = index"
+              class="tutoring-question">
               <label class="tutoring-label">
                 {{ currentQuestion.no.tutoring.questions[j].question }}
               </label>
@@ -101,9 +98,11 @@
             <textarea matInput formControlName="userInput" rows="5"></textarea>
           </mat-form-field>
 
-          <div *ngIf="currentQuestion.evaluation.length > 0">
-            Evaluation
-            {{currentQuestion.evaluation}}
+          <div *ngIf="currentQuestion.evaluation.length > 0" #evaluationDiv>
+            <div class="category-card ai-result">
+                <h2 class="category-title">AI Evaluation Result</h2>
+                  {{currentQuestion.evaluation}}
+            </div>
           </div>
           <div style="height: 100px;"></div>
         </div>
@@ -115,25 +114,18 @@
 <!-- Footer Navigation -->
 <footer class="footer" *ngIf="!loading && currentQuestionIndex > -1">
   <div class="navigation-buttons">
-    <button mat-raised-button 
-            color="primary"
-            (click)="goToPreviousQuestion()"
-            [disabled]="currentQuestionIndex === 0">
+    <button mat-raised-button color="primary" (click)="goToPreviousQuestion()" [disabled]="currentQuestionIndex === 0">
       Previous
     </button>
-    
-    <button mat-raised-button 
-            color="primary"
-            (click)="handleButtonClick()"
-            [disabled]="!isCurrentFormValid || isEvaluating">
+
+    <button mat-raised-button color="primary" (click)="handleButtonClick()"
+      [disabled]="!isCurrentFormValid || isEvaluating">
       {{ currentQuestion!.answer! === 'yes' ? 'Validate Answer' : 'Submit Answers' }}
       <mat-spinner *ngIf="isEvaluating" diameter="20"></mat-spinner>
     </button>
 
-    <button mat-raised-button 
-            color="primary"
-            (click)="moveToNextQuestion()"
-            [disabled]="currentQuestionIndex === questionsData.length - 1">
+    <button mat-raised-button color="primary" (click)="moveToNextQuestion()"
+      [disabled]="currentQuestionIndex === questionsData.length - 1">
       Next
     </button>
   </div>

@@ -1,39 +1,5 @@
-<header class="app-header">
-    <nav class="app-nav">
-      <div
-        class="nav-item"
-        [class.active]="currentView === 'evalQuestions'"
-        (click)="switchView('evalQuestions')"
-      >
-        Questions
-      </div>
-      <div
-        class="nav-item"
-        [class.active]="currentView === 'results'"
-        (click)="switchView('results')"
-      >
-        Results
-      </div>
-    </nav>
-    <div class="traffic-light-container">
-      <!-- Single Circle with Percentage Text -->
-      <div class="progress-circle" [style.backgroundColor]="getCircleColor()">
-        <div class="percentage-text">
-          {{ progress }}% Complete
-        </div>
-      </div>
-  
-      <!-- Progress Bar -->
-      <div class="progress-bar">
-        <div class="progress" [style.width.%]="progress"></div>
-      </div>
-    </div>
-  
-  </header>
-  
-  
-  <div class="">
-    <div *ngIf="currentView === 'evalQuestions'" class="dashboard">
+
+<div class="dashboard">
     
     <div *ngFor="let category of getCategories()" class="category-card">
       <h2 class="category-title">{{ category }}</h2>
@@ -46,7 +12,7 @@
                   type="radio"
                   [name]="question.question"
                   [value]="option"
-                  [checked]="userAnswers[question.question] === option"
+                  [checked]="getBMQuestionState(question.question, option)"
                   (change)="onSelectAnswer(question.question, option)"
                 />
               <span class="option-text">{{ option }}</span>
@@ -56,52 +22,3 @@
       </div>
     </div>
   </div>
-  </div>
-  
-  <main>
-    <!-- Results View -->
-    <div *ngIf="currentView === 'results'" class="dashboard">
-      <div class="category-card">
-        <h2 class="category-title">Results</h2>
-  
-        <div class="patterns-container">
-          <div
-            class="pattern-card"
-            *ngFor="let pattern of resultPatterns"
-            [ngStyle]="{ 'display': getPatternOpacity(pattern) }"
-            (mouseenter)="showReason(pattern)"
-            (mouseleave)="hideReason(pattern)"
-          >
-          <div class="progress-circle2" [style.backgroundColor]="getCircleColor()" title="{{ progress }}% Complete">
-           
-          </div>
-  
-            <h3 style="margin: 0px;">{{ pattern.title }}</h3>
-            <p>Compatibility Score: {{ pattern.score }}</p>
-            <h4 style="margin: 0px; font-size: 12px; color: #aaa;">{{ pattern.baseBM }}, {{ pattern.author }} et al</h4>
-            <p>{{ pattern.description }}</p>
-  
-            <!-- Reason List (Hidden by Default) -->
-            <div *ngIf="pattern.showReason" class="reason-list">
-              <h4 style="margin: 0px; font-size: 14px;">Reasons:</h4>
-              <ul>
-                
-                <ul>
-                  <li *ngFor="let reason of pattern.reason">
-                    <!-- Split the reason by '\n' and render as a hierarchy -->
-                    <div *ngFor="let part of reason.split('\n'); let i = index">
-                      <!-- Indent each part based on its index -->
-                      <div [style.margin-left.px]="i * 20">{{ part }}</div>
-                    </div>
-                    <br>
-                  </li>
-                </ul>
-                
-  
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>

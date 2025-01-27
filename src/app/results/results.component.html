@@ -1,5 +1,50 @@
 <div class="dashboard">
     <div class="category-card">
-        <h2 class="category-title">Results</h2>
+        <h2 class="category-title">Problem</h2>
+    </div>
+    <div class="category-card">
+        <h2 class="category-title">Solution</h2>
+    </div>
+    <div class="category-card">
+        <h2 class="category-title">UVP</h2>
+    </div>
+    <div class="category-card">
+        <h2 class="category-title"></h2>
+    </div>
+    <div class="category-card">
+        <h2 class="category-title">Business Pattern</h2>
+        <div class="patterns-container">
+            <div class="pattern-card" *ngFor="let pattern of resultPatterns"
+                [ngStyle]="{ 'display': getPatternOpacity(pattern) }" (mouseenter)="showReason(pattern)"
+                (mouseleave)="hideReason(pattern)">
+                <div class="progress-circle2" [style.backgroundColor]="getCircleColor()"
+                    title="{{ progress }}% Complete">
+
+                </div>
+
+                <h3 style="margin: 0px;">{{ pattern.title }}</h3>
+                <p>Compatibility Score: {{ pattern.score }}</p>
+                <h4 style="margin: 0px; font-size: 12px; color: #aaa;">{{ pattern.baseBM }}, {{ pattern.author }} et al
+                </h4>
+                <p>{{ pattern.description }}</p>
+
+                <div *ngIf="pattern.showReason" class="reason-list">
+                    <h4 style="margin: 0px; font-size: 14px;">Reasons:</h4>
+                    <ul>
+
+                        <ul>
+                            <li *ngFor="let reason of pattern.reason">
+                                <div *ngFor="let part of reason.split('\n'); let i = index">
+                                    <div [style.margin-left.px]="i * 20">{{ part }}</div>
+                                </div>
+                                <br>
+                            </li>
+                        </ul>
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

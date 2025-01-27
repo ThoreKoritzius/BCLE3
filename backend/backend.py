@@ -51,7 +51,10 @@ def evaluate_questions():
     userInput =  data.get("userInput")
     config = load_json_file().get(f"Question_{currentQuestionIndex +1}")
     question = config['yes']['followupQuestion']
-    instruction= config['yes']['evaluationPrompt']
+    instruction= config['yes'].get('evaluationPrompt')
+    if instruction  is None or question is None:
+        return jsonify({"details": "missing info in config"}), 401
+    
     instruction += " At the end of your response respond with either GOOD or BAD."
     print(currentQuestionIndex)
     print(userInput)

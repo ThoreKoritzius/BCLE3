@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators, FormArray, AbstractControl, FormControl } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -15,6 +15,8 @@ import { MatList, MatListItem } from '@angular/material/list';
 import { MatIcon } from '@angular/material/icon';
 import { BmSelectionComponent } from './bm-selection/bm-selection.component';
 import { ResultsComponent } from './results/results.component';
+import { StateService } from './state.service';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -50,7 +52,10 @@ export class AppComponent implements OnInit {
   loading = true;
   showBMSelection = false;
 
-  constructor(private http: HttpClient, private fb: FormBuilder) {
+  @ViewChild('evaluationDiv') evaluationDiv!: ElementRef;
+
+
+  constructor(private currentState: StateService, private http: HttpClient, private fb: FormBuilder) {
     this.quizForm = this.fb.group({
       questions: this.fb.array([])
     });
@@ -119,7 +124,7 @@ export class AppComponent implements OnInit {
         answer: [question.answer, Validators.required],
         userInput: [question.userInput, Validators.required],
         tutoringAnswers: this.fb.array(
-          question.tutoringAnswers!.map(answer => 
+          question.tutoringAnswers!.map(answer =>
             this.fb.control({ value: answer, disabled: question.answer === 'yes' }, Validators.required)
           )
         )
@@ -137,7 +142,7 @@ export class AppComponent implements OnInit {
 
     answerControl?.valueChanges.subscribe((answer: 'yes' | 'no') => {
       this.questionsData[index].answer = answer;
-      
+
       if (answer === 'no') {
         tutoringAnswers.controls.forEach(control => control.enable());
         userInputControl?.disable();
@@ -171,7 +176,7 @@ export class AppComponent implements OnInit {
   private syncFormToData(formGroup: AbstractControl): void {
     const { answer, userInput, tutoringAnswers } = formGroup.value;
     const questionData = this.questionsData[this.currentQuestionIndex];
-    
+
     questionData.answer = answer;
     questionData.userInput = userInput;
     questionData.tutoringAnswers = tutoringAnswers;
@@ -188,19 +193,34 @@ export class AppComponent implements OnInit {
       next: (response: any) => {
         console.log(response)
         this.isEvaluating = false;
-    
+
         const evaluation = response.response;
         const satisfactoryOutcome = response.satisfactory_outcome;
-    
+
         this.questionsData[this.currentQuestionIndex].evaluation = evaluation;
         this.questionsData[this.currentQuestionIndex].successful = satisfactoryOutcome;
         this.currentQuestion.evaluation = evaluation;
-        console.log(this.questionsData[this.currentQuestionIndex])
+
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: 'smooth' // Smooth scrolling animation
+        });
+
+
+        if (this.evaluationDiv) {
+          this.evaluationDiv.nativeElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+        
+    
         //this.moveToNextQuestion();
       },
       error: (error) => {
         console.error('Validation error:', error);
         this.isEvaluating = false;
+        alert("Error in Response");
       }
     });
   }
@@ -242,8 +262,7 @@ export class AppComponent implements OnInit {
   }
 
   goToQuestion(index: number): void {
-      this.currentQuestionIndex = index;
-    
+    this.currentQuestionIndex = index;
   }
 }
 

@@ -97,444 +97,444 @@ export function getHigherLevelKey(
     return null;
 }
 
-export const database =  [
-        {
-            "pattern": "Add-On",
-            "author": "Gassmann",
-            "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern, 
-                        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
-                        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
-                        BusinessModelDimensions.D4_StrategyForDifferentiation.Combination,
-                        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
-                        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
-                        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
-                        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
-                        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
-                        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
-                        BusinessModelDimensions.D11_PricingStrategy.NonTransparent,
-                        BusinessModelDimensions.D12_DirectProfitEffect.IncreaseRevenue]
-        },
-        {
-            "pattern": "Affiliation",
-            "author": "Gassmann",
-            "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern, 
-                        BusinessModelDimensions.D2_DegreeOfDigitization.PurelyDigital,
-                        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
-                        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
-                        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
-                        BusinessModelDimensions.D6_ValueDeliveryProcess.SalesChannel,
-                        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
-                        BusinessModelDimensions.D8_ThirdPartiesInvolved.MultipleParties,
-                        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
-                        BusinessModelDimensions.D10_RevenueModel.Intermediate,
-                        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
-                        BusinessModelDimensions.D12_DirectProfitEffect.NoDirectProfitImpact]
-        },
-        {
-            "pattern": "Aikido",
-            "author": "Gassmann",
-            "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern, 
-                        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
-                        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
-                        BusinessModelDimensions.D4_StrategyForDifferentiation.Quality,
-                        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
-                        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
-                        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
-                        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
-                        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
-                        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
-                        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
-                        BusinessModelDimensions.D12_DirectProfitEffect.NoDirectProfitImpact]
-        },
-        {
-            "pattern": "Barter",
-            "author": "Gassmann",
-            "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern, 
-                        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
-                        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
-                        BusinessModelDimensions.D4_StrategyForDifferentiation.Price,
-                        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
-                        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
-                        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
-                        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
-                        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
-                        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
-                        BusinessModelDimensions.D11_PricingStrategy.NonTransparent,
-                        BusinessModelDimensions.D12_DirectProfitEffect.IncreaseRevenue]
-        },
-        {
-            "pattern": "Cross Selling",
-            "author": "Gassmann",
-            "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern, 
-                        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
-                        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
-                        BusinessModelDimensions.D4_StrategyForDifferentiation.Combination,
-                        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
-                        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
-                        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
-                        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
-                        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
-                        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
-                        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
-                        BusinessModelDimensions.D12_DirectProfitEffect.IncreaseRevenue]
-        },
-        {
-            "pattern": "Crowdfunding",
-            "author": "Gassmann",
-            "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern, 
-                        BusinessModelDimensions.D2_DegreeOfDigitization.DigitallyEnabled,
-                        BusinessModelDimensions.D3_ProductType.Financial,
-                        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
-                        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
-                        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
-                        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
-                        BusinessModelDimensions.D8_ThirdPartiesInvolved.Customers,
-                        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
-                        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
-                        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
-                        BusinessModelDimensions.D12_DirectProfitEffect.ReduceCost]
-        },
-        {
-            "pattern": "Customer Loyalty",
-            "author": "Gassmann",
-            "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern, 
-                        BusinessModelDimensions.D2_DegreeOfDigitization.DigitallyEnabled,
-                        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
-                        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
-                        BusinessModelDimensions.D5_TargetCustomers.LockInExistingCustomers,
-                        BusinessModelDimensions.D6_ValueDeliveryProcess.CustomerRelationshipManagement,
-                        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
-                        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
-                        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
-                        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
-                        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
-                        BusinessModelDimensions.D12_DirectProfitEffect.ReduceCost]
-        },
-        {
-            "pattern": "Digitization",
-            "author": "Gassmann",
-            "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern, 
-                        BusinessModelDimensions.D2_DegreeOfDigitization.PurelyDigital,
-                        BusinessModelDimensions.D3_ProductType.IntellectualProperty,
-                        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
-                        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
-                        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
-                        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
-                        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
-                        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
-                        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
-                        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
-                        BusinessModelDimensions.D12_DirectProfitEffect.ReduceCost]
-        },
-        {
-            "pattern": "E-Commerce", //E-Shop
-            "author": "Gassmann",
-            "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.PrototypicalPattern, 
-                        BusinessModelDimensions.D2_DegreeOfDigitization.DigitallyEnabled,
-                        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
-                        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
-                        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
-                        BusinessModelDimensions.D6_ValueDeliveryProcess.SalesChannel,
-                        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
-                        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
-                        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
-                        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
-                        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
-                        BusinessModelDimensions.D12_DirectProfitEffect.NoDirectProfitImpact]
-        },
-        {
-            "pattern": "Flat Rate",
-            "author": "Gassmann",
-            "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern, 
-                        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
-                        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
-                        BusinessModelDimensions.D4_StrategyForDifferentiation.Price,
-                        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
-                        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
-                        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
-                        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
-                        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
-                        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
-                        BusinessModelDimensions.D11_PricingStrategy.Cheap,
-                        BusinessModelDimensions.D12_DirectProfitEffect.NoDirectProfitImpact]
-        },
-        {
-            "pattern": "Franchising",
-            "author": "Gassmann",
-            "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.PrototypicalPattern, 
-                        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
-                        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
-                        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
-                        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
-                        BusinessModelDimensions.D6_ValueDeliveryProcess.SalesChannel,
-                        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
-                        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
-                        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
-                        BusinessModelDimensions.D10_RevenueModel.Lend,
-                        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
-                        BusinessModelDimensions.D12_DirectProfitEffect.NoDirectProfitImpact]
-        }
-        ,
-        {
-            "pattern": "Target the Poor",
-            "author": "Gassmann",
-            "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern, 
-                        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
-                        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
-                        BusinessModelDimensions.D4_StrategyForDifferentiation.Price,
-                        BusinessModelDimensions.D5_TargetCustomers.SpecificNewCustomerSegment,
-                        BusinessModelDimensions.D6_ValueDeliveryProcess.SalesChannel,
-                        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
-                        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
-                        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
-                        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
-                        BusinessModelDimensions.D11_PricingStrategy.Cheap,
-                        BusinessModelDimensions.D12_DirectProfitEffect.IncreaseRevenue]
-        }
-        ,
-        {
-            "pattern": "Ultimate Luxury",
-            "author": "Gassmann",
-            "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern, 
-                        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
-                        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
-                        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
-                        BusinessModelDimensions.D5_TargetCustomers.SpecificNewCustomerSegment,
-                        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
-                        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
-                        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
-                        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
-                        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
-                        BusinessModelDimensions.D11_PricingStrategy.Premium,
-                        BusinessModelDimensions.D12_DirectProfitEffect.IncreaseRevenue]
-        },
-        
-        {
-            "pattern": "Shop in Shop",
-            "author": "Gassmann",
-            "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern, 
-                        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
-                        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
-                        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
-                        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
-                        BusinessModelDimensions.D6_ValueDeliveryProcess.SalesChannel,
-                        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
-                        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
-                        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
-                        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
-                        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
-                        BusinessModelDimensions.D12_DirectProfitEffect.MultipleEffects]
-        },
-
-        {
-            "pattern": "Robin Hood",
-            "author": "Gassmann",
-            "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern, 
-                        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
-                        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
-                        BusinessModelDimensions.D4_StrategyForDifferentiation.Price,
-                        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
-                        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
-                        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
-                        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
-                        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
-                        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
-                        BusinessModelDimensions.D11_PricingStrategy.Dynamic,
-                        BusinessModelDimensions.D12_DirectProfitEffect.IncreaseRevenue]
-        },
-        {
-            "pattern": "Self-Service",
-            "author": "Gassmann",
-            "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern, 
-                        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
-                        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
-                        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
-                        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
-                        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
-                        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
-                        BusinessModelDimensions.D8_ThirdPartiesInvolved.Customers,
-                        BusinessModelDimensions.D9_ValueCreationProcess.Production,
-                        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
-                        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
-                        BusinessModelDimensions.D12_DirectProfitEffect.ReduceCost]
-        },
-        {
-            "pattern": "Trash To Cash",
-            "author": "Gassmann",
-            "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern, 
-                        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
-                        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
-                        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
-                        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
-                        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
-                        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
-                        BusinessModelDimensions.D8_ThirdPartiesInvolved.Customers,
-                        BusinessModelDimensions.D9_ValueCreationProcess.MultipleSteps,
-                        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
-                        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
-                        BusinessModelDimensions.D12_DirectProfitEffect.ReduceCost]
-        }
-        ,
-        {
-            "pattern": "User Design",
-            "author": "Gassmann",
-            "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern, 
-                        BusinessModelDimensions.D2_DegreeOfDigitization.DigitallyEnabled,
-                        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
-                        BusinessModelDimensions.D4_StrategyForDifferentiation.Customization,
-                        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
-                        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
-                        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
-                        BusinessModelDimensions.D8_ThirdPartiesInvolved.Customers,
-                        BusinessModelDimensions.D9_ValueCreationProcess.Innovation,
-                        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
-                        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
-                        BusinessModelDimensions.D12_DirectProfitEffect.MultipleEffects]
-        }
-        ,
-        {
-            "pattern": "Reverse Innovation",
-            "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern, 
-                        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
-                        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
-                        BusinessModelDimensions.D4_StrategyForDifferentiation.Price,
-                        BusinessModelDimensions.D5_TargetCustomers.SpecificNewCustomerSegment,
-                        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
-                        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
-                        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
-                        BusinessModelDimensions.D9_ValueCreationProcess.Innovation,
-                        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
-                        BusinessModelDimensions.D11_PricingStrategy.Cheap,
-                        BusinessModelDimensions.D12_DirectProfitEffect.MultipleEffects]
-        }
-        ,
-        {
-            "pattern": "Reverse Engineering",
-            "author": "Gassmann",
-            "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern, 
-                        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
-                        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
-                        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
-                        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
-                        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
-                        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
-                        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
-                        BusinessModelDimensions.D9_ValueCreationProcess.Innovation,
-                        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
-                        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
-                        BusinessModelDimensions.D12_DirectProfitEffect.ReduceCost]
-        }
-        ,
-        {
-            "pattern": "Revenue Sharing",
-            "author": "Gassmann",
-            "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern, 
-                        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
-                        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
-                        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
-                        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
-                        BusinessModelDimensions.D6_ValueDeliveryProcess.SalesChannel,
-                        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
-                        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
-                        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
-                        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
-                        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
-                        BusinessModelDimensions.D12_DirectProfitEffect.IncreaseRevenue]
-        }
-        ,
-        {
-            "pattern": "Peer to Peer",
-            "author": "Gassmann",
-            "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern, 
-                        BusinessModelDimensions.D2_DegreeOfDigitization.PurelyDigital,
-                        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
-                        BusinessModelDimensions.D4_StrategyForDifferentiation.NetworkEffects,
-                        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
-                        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
-                        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
-                        BusinessModelDimensions.D8_ThirdPartiesInvolved.Customers,
-                        BusinessModelDimensions.D9_ValueCreationProcess.Production,
-                        BusinessModelDimensions.D10_RevenueModel.Intermediate,
-                        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
-                        BusinessModelDimensions.D12_DirectProfitEffect.NoDirectProfitImpact]
-        }
-        ,
-        {
-            "pattern": "Lock-in",
-            "author": "Gassmann",
-            "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern, 
-                        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
-                        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
-                        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
-                        BusinessModelDimensions.D5_TargetCustomers.LockInExistingCustomers,
-                        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
-                        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
-                        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
-                        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
-                        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
-                        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
-                        BusinessModelDimensions.D12_DirectProfitEffect.NoDirectProfitImpact]
-        }
-        ,
-        {
-            "pattern": "White Label",
-            "author": "Gassmann",
-            "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.PrototypicalPattern, 
-                        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
-                        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
-                        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
-                        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
-                        BusinessModelDimensions.D6_ValueDeliveryProcess.SalesChannel,
-                        BusinessModelDimensions.D7_Sourcing.Make,
-                        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
-                        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
-                        BusinessModelDimensions.D10_RevenueModel.Sell,
-                        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
-                        BusinessModelDimensions.D12_DirectProfitEffect.NoDirectProfitImpact]
-        }
-    ]
-
-
-export const evalQuestions = 
+export const database = [
     {
-        "General Differentiation Questions":
-            [
-                {
-                    "question": "Hierarchical Impact: Do you want to reach an overall approach for designing a business model or focus on specific elements of the business, such as pricing, delivery, or customer engagement?",
-                    "dimension": BusinessModelDimensions.D1_HierarchicalImpact  
-                },
-                {
-                    "question": "Degree of Digitization: Is the business model purely digital, digitally enabled, or does it operate independently of digital technologies?",
-                    "dimension": BusinessModelDimensions.D2_DegreeOfDigitization
-                }
-            ],
-        "Value Proposition":
-            [
-                {
-                    "question": "Product Type: What is the primary type of product or service offered?",
-                    "dimension": BusinessModelDimensions.D3_ProductType  
-                },
-                {
-                    "question": "Differentiation Strategy: How does the pattern propose to differentiate the offering?",
-                    "dimension": BusinessModelDimensions.D4_StrategyForDifferentiation
-                }
-            ],
-        "Value Delivery":
+        "pattern": "Add-On",
+        "author": "Gassmann",
+        "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern,
+        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
+        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
+        BusinessModelDimensions.D4_StrategyForDifferentiation.Combination,
+        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
+        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
+        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
+        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
+        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
+        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
+        BusinessModelDimensions.D11_PricingStrategy.NonTransparent,
+        BusinessModelDimensions.D12_DirectProfitEffect.IncreaseRevenue]
+    },
+    {
+        "pattern": "Affiliation",
+        "author": "Gassmann",
+        "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern,
+        BusinessModelDimensions.D2_DegreeOfDigitization.PurelyDigital,
+        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
+        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
+        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
+        BusinessModelDimensions.D6_ValueDeliveryProcess.SalesChannel,
+        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
+        BusinessModelDimensions.D8_ThirdPartiesInvolved.MultipleParties,
+        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
+        BusinessModelDimensions.D10_RevenueModel.Intermediate,
+        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
+        BusinessModelDimensions.D12_DirectProfitEffect.NoDirectProfitImpact]
+    },
+    {
+        "pattern": "Aikido",
+        "author": "Gassmann",
+        "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern,
+        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
+        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
+        BusinessModelDimensions.D4_StrategyForDifferentiation.Quality,
+        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
+        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
+        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
+        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
+        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
+        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
+        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
+        BusinessModelDimensions.D12_DirectProfitEffect.NoDirectProfitImpact]
+    },
+    {
+        "pattern": "Barter",
+        "author": "Gassmann",
+        "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern,
+        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
+        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
+        BusinessModelDimensions.D4_StrategyForDifferentiation.Price,
+        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
+        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
+        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
+        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
+        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
+        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
+        BusinessModelDimensions.D11_PricingStrategy.NonTransparent,
+        BusinessModelDimensions.D12_DirectProfitEffect.IncreaseRevenue]
+    },
+    {
+        "pattern": "Cross Selling",
+        "author": "Gassmann",
+        "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern,
+        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
+        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
+        BusinessModelDimensions.D4_StrategyForDifferentiation.Combination,
+        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
+        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
+        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
+        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
+        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
+        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
+        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
+        BusinessModelDimensions.D12_DirectProfitEffect.IncreaseRevenue]
+    },
+    {
+        "pattern": "Crowdfunding",
+        "author": "Gassmann",
+        "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern,
+        BusinessModelDimensions.D2_DegreeOfDigitization.DigitallyEnabled,
+        BusinessModelDimensions.D3_ProductType.Financial,
+        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
+        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
+        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
+        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
+        BusinessModelDimensions.D8_ThirdPartiesInvolved.Customers,
+        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
+        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
+        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
+        BusinessModelDimensions.D12_DirectProfitEffect.ReduceCost]
+    },
+    {
+        "pattern": "Customer Loyalty",
+        "author": "Gassmann",
+        "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern,
+        BusinessModelDimensions.D2_DegreeOfDigitization.DigitallyEnabled,
+        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
+        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
+        BusinessModelDimensions.D5_TargetCustomers.LockInExistingCustomers,
+        BusinessModelDimensions.D6_ValueDeliveryProcess.CustomerRelationshipManagement,
+        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
+        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
+        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
+        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
+        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
+        BusinessModelDimensions.D12_DirectProfitEffect.ReduceCost]
+    },
+    {
+        "pattern": "Digitization",
+        "author": "Gassmann",
+        "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern,
+        BusinessModelDimensions.D2_DegreeOfDigitization.PurelyDigital,
+        BusinessModelDimensions.D3_ProductType.IntellectualProperty,
+        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
+        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
+        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
+        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
+        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
+        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
+        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
+        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
+        BusinessModelDimensions.D12_DirectProfitEffect.ReduceCost]
+    },
+    {
+        "pattern": "E-Commerce", //E-Shop
+        "author": "Gassmann",
+        "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.PrototypicalPattern,
+        BusinessModelDimensions.D2_DegreeOfDigitization.DigitallyEnabled,
+        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
+        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
+        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
+        BusinessModelDimensions.D6_ValueDeliveryProcess.SalesChannel,
+        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
+        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
+        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
+        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
+        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
+        BusinessModelDimensions.D12_DirectProfitEffect.NoDirectProfitImpact]
+    },
+    {
+        "pattern": "Flat Rate",
+        "author": "Gassmann",
+        "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern,
+        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
+        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
+        BusinessModelDimensions.D4_StrategyForDifferentiation.Price,
+        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
+        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
+        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
+        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
+        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
+        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
+        BusinessModelDimensions.D11_PricingStrategy.Cheap,
+        BusinessModelDimensions.D12_DirectProfitEffect.NoDirectProfitImpact]
+    },
+    {
+        "pattern": "Franchising",
+        "author": "Gassmann",
+        "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.PrototypicalPattern,
+        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
+        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
+        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
+        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
+        BusinessModelDimensions.D6_ValueDeliveryProcess.SalesChannel,
+        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
+        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
+        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
+        BusinessModelDimensions.D10_RevenueModel.Lend,
+        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
+        BusinessModelDimensions.D12_DirectProfitEffect.NoDirectProfitImpact]
+    }
+    ,
+    {
+        "pattern": "Target the Poor",
+        "author": "Gassmann",
+        "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern,
+        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
+        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
+        BusinessModelDimensions.D4_StrategyForDifferentiation.Price,
+        BusinessModelDimensions.D5_TargetCustomers.SpecificNewCustomerSegment,
+        BusinessModelDimensions.D6_ValueDeliveryProcess.SalesChannel,
+        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
+        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
+        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
+        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
+        BusinessModelDimensions.D11_PricingStrategy.Cheap,
+        BusinessModelDimensions.D12_DirectProfitEffect.IncreaseRevenue]
+    }
+    ,
+    {
+        "pattern": "Ultimate Luxury",
+        "author": "Gassmann",
+        "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern,
+        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
+        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
+        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
+        BusinessModelDimensions.D5_TargetCustomers.SpecificNewCustomerSegment,
+        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
+        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
+        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
+        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
+        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
+        BusinessModelDimensions.D11_PricingStrategy.Premium,
+        BusinessModelDimensions.D12_DirectProfitEffect.IncreaseRevenue]
+    },
+
+    {
+        "pattern": "Shop in Shop",
+        "author": "Gassmann",
+        "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern,
+        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
+        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
+        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
+        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
+        BusinessModelDimensions.D6_ValueDeliveryProcess.SalesChannel,
+        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
+        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
+        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
+        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
+        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
+        BusinessModelDimensions.D12_DirectProfitEffect.MultipleEffects]
+    },
+
+    {
+        "pattern": "Robin Hood",
+        "author": "Gassmann",
+        "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern,
+        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
+        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
+        BusinessModelDimensions.D4_StrategyForDifferentiation.Price,
+        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
+        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
+        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
+        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
+        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
+        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
+        BusinessModelDimensions.D11_PricingStrategy.Dynamic,
+        BusinessModelDimensions.D12_DirectProfitEffect.IncreaseRevenue]
+    },
+    {
+        "pattern": "Self-Service",
+        "author": "Gassmann",
+        "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern,
+        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
+        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
+        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
+        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
+        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
+        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
+        BusinessModelDimensions.D8_ThirdPartiesInvolved.Customers,
+        BusinessModelDimensions.D9_ValueCreationProcess.Production,
+        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
+        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
+        BusinessModelDimensions.D12_DirectProfitEffect.ReduceCost]
+    },
+    {
+        "pattern": "Trash To Cash",
+        "author": "Gassmann",
+        "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern,
+        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
+        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
+        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
+        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
+        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
+        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
+        BusinessModelDimensions.D8_ThirdPartiesInvolved.Customers,
+        BusinessModelDimensions.D9_ValueCreationProcess.MultipleSteps,
+        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
+        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
+        BusinessModelDimensions.D12_DirectProfitEffect.ReduceCost]
+    }
+    ,
+    {
+        "pattern": "User Design",
+        "author": "Gassmann",
+        "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern,
+        BusinessModelDimensions.D2_DegreeOfDigitization.DigitallyEnabled,
+        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
+        BusinessModelDimensions.D4_StrategyForDifferentiation.Customization,
+        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
+        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
+        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
+        BusinessModelDimensions.D8_ThirdPartiesInvolved.Customers,
+        BusinessModelDimensions.D9_ValueCreationProcess.Innovation,
+        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
+        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
+        BusinessModelDimensions.D12_DirectProfitEffect.MultipleEffects]
+    }
+    ,
+    {
+        "pattern": "Reverse Innovation",
+        "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern,
+        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
+        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
+        BusinessModelDimensions.D4_StrategyForDifferentiation.Price,
+        BusinessModelDimensions.D5_TargetCustomers.SpecificNewCustomerSegment,
+        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
+        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
+        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
+        BusinessModelDimensions.D9_ValueCreationProcess.Innovation,
+        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
+        BusinessModelDimensions.D11_PricingStrategy.Cheap,
+        BusinessModelDimensions.D12_DirectProfitEffect.MultipleEffects]
+    }
+    ,
+    {
+        "pattern": "Reverse Engineering",
+        "author": "Gassmann",
+        "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern,
+        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
+        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
+        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
+        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
+        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
+        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
+        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
+        BusinessModelDimensions.D9_ValueCreationProcess.Innovation,
+        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
+        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
+        BusinessModelDimensions.D12_DirectProfitEffect.ReduceCost]
+    }
+    ,
+    {
+        "pattern": "Revenue Sharing",
+        "author": "Gassmann",
+        "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern,
+        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
+        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
+        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
+        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
+        BusinessModelDimensions.D6_ValueDeliveryProcess.SalesChannel,
+        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
+        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
+        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
+        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
+        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
+        BusinessModelDimensions.D12_DirectProfitEffect.IncreaseRevenue]
+    }
+    ,
+    {
+        "pattern": "Peer to Peer",
+        "author": "Gassmann",
+        "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern,
+        BusinessModelDimensions.D2_DegreeOfDigitization.PurelyDigital,
+        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
+        BusinessModelDimensions.D4_StrategyForDifferentiation.NetworkEffects,
+        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
+        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
+        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
+        BusinessModelDimensions.D8_ThirdPartiesInvolved.Customers,
+        BusinessModelDimensions.D9_ValueCreationProcess.Production,
+        BusinessModelDimensions.D10_RevenueModel.Intermediate,
+        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
+        BusinessModelDimensions.D12_DirectProfitEffect.NoDirectProfitImpact]
+    }
+    ,
+    {
+        "pattern": "Lock-in",
+        "author": "Gassmann",
+        "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.SolutionPattern,
+        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
+        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
+        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
+        BusinessModelDimensions.D5_TargetCustomers.LockInExistingCustomers,
+        BusinessModelDimensions.D6_ValueDeliveryProcess.NoImpactOnDeliveryProcess,
+        BusinessModelDimensions.D7_Sourcing.NoImpactOnSourcing,
+        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
+        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
+        BusinessModelDimensions.D10_RevenueModel.NoImpactOnRevenueModel,
+        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
+        BusinessModelDimensions.D12_DirectProfitEffect.NoDirectProfitImpact]
+    }
+    ,
+    {
+        "pattern": "White Label",
+        "author": "Gassmann",
+        "dimensions": [BusinessModelDimensions.D1_HierarchicalImpact.PrototypicalPattern,
+        BusinessModelDimensions.D2_DegreeOfDigitization.NotNecessarilyDigital,
+        BusinessModelDimensions.D3_ProductType.ProductTypeNotSpecified,
+        BusinessModelDimensions.D4_StrategyForDifferentiation.NoImpactOnDifferentiation,
+        BusinessModelDimensions.D5_TargetCustomers.NoImpactOnTargetCustomers,
+        BusinessModelDimensions.D6_ValueDeliveryProcess.SalesChannel,
+        BusinessModelDimensions.D7_Sourcing.Make,
+        BusinessModelDimensions.D8_ThirdPartiesInvolved.NoImpactOnThirdPartiesInvolved,
+        BusinessModelDimensions.D9_ValueCreationProcess.NoImpactOnCreationProcess,
+        BusinessModelDimensions.D10_RevenueModel.Sell,
+        BusinessModelDimensions.D11_PricingStrategy.NoImpactOnPricingStrategy,
+        BusinessModelDimensions.D12_DirectProfitEffect.NoDirectProfitImpact]
+    }
+]
+
+
+export const evalQuestions =
+{
+    "General Differentiation Questions":
+        [
+            {
+                "question": "Hierarchical Impact: Do you want to reach an overall approach for designing a business model or focus on specific elements of the business, such as pricing, delivery, or customer engagement?",
+                "dimension": BusinessModelDimensions.D1_HierarchicalImpact
+            },
+            {
+                "question": "Degree of Digitization: Is the business model purely digital, digitally enabled, or does it operate independently of digital technologies?",
+                "dimension": BusinessModelDimensions.D2_DegreeOfDigitization
+            }
+        ],
+    "Value Proposition":
+        [
+            {
+                "question": "Product Type: What is the primary type of product or service offered?",
+                "dimension": BusinessModelDimensions.D3_ProductType
+            },
+            {
+                "question": "Differentiation Strategy: How does the pattern propose to differentiate the offering?",
+                "dimension": BusinessModelDimensions.D4_StrategyForDifferentiation
+            }
+        ],
+    "Value Delivery":
         [
             {
                 "question": "Target Customers: Does the pattern target specific new customer segments, lock-in existing customers, other companies (B2B) or no impact on target customers exist? ",
-                "dimension": BusinessModelDimensions.D5_TargetCustomers  
+                "dimension": BusinessModelDimensions.D5_TargetCustomers
             },
             {
                 "question": "Value Delivery Process: How does the pattern affect the delivery process, such as branding + marketing, sales channels, sales models, customer relationship management or no impact on delivery process? ",
                 "dimension": BusinessModelDimensions.D6_ValueDeliveryProcess
             }
         ],
-        "Value Creation":
+    "Value Creation":
         [
             {
                 "question": "Sourcing Strategy: Does the pattern require in-house production (make), external sourcing (buy), or a mix (no impact on sourcing)?",
-                "dimension": BusinessModelDimensions.D7_Sourcing  
+                "dimension": BusinessModelDimensions.D7_Sourcing
             },
             {
                 "question": "Third-Party Involvement: Are suppliers, customers, competitors, or multiple parties involved in the business process or there is no impact on third parties involved?",
@@ -545,23 +545,23 @@ export const evalQuestions =
                 "dimension": BusinessModelDimensions.D9_ValueCreationProcess
             }
         ],
-        "Value Capture": [
-            {
-                "question": "Revenue Model: What revenue generation strategy?",
-                "dimension": BusinessModelDimensions.D10_RevenueModel
-            },
-            {
-                "question": "Pricing Strategy: What is the pricing strategy? ",
-                "dimension": BusinessModelDimensions.D11_PricingStrategy
-            },
-            {
-                "question": "Profit Effects: Does the pattern primarily aim to increase revenue, reduce costs, have multiple effects or no direct profit impact? ",
-                "dimension": BusinessModelDimensions.D12_DirectProfitEffect
-            }
-        ]
-    }
+    "Value Capture": [
+        {
+            "question": "Revenue Model: What revenue generation strategy?",
+            "dimension": BusinessModelDimensions.D10_RevenueModel
+        },
+        {
+            "question": "Pricing Strategy: What is the pricing strategy? ",
+            "dimension": BusinessModelDimensions.D11_PricingStrategy
+        },
+        {
+            "question": "Profit Effects: Does the pattern primarily aim to increase revenue, reduce costs, have multiple effects or no direct profit impact? ",
+            "dimension": BusinessModelDimensions.D12_DirectProfitEffect
+        }
+    ]
+}
 
-    
+
 
 
 export interface BusinessPattern {
