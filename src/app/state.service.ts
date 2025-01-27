@@ -43,12 +43,12 @@ export class StateService {
 
 
   showReason(pattern: BusinessPattern) {
-    pattern.showReason = true;
+    //pattern.showReason = true;
   }
 
   // Hide reason when not hovering
   hideReason(pattern: BusinessPattern) {
-    pattern.showReason = false;
+   // pattern.showReason = false;
   }
 
   getCircleColor(): string {

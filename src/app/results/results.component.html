@@ -1,32 +1,42 @@
 <div class="dashboard">
     <div class="category-card">
         <h2 class="category-title">Problem</h2>
-        <div class="status-indicator" [ngClass]="{'completed': problemsSuccessful, 'needs-refinement': !problemsSuccessful}">
+        <div class="status-indicator"
+            [ngClass]="{'completed': problemsSuccessful, 'needs-refinement': !problemsSuccessful}">
             {{ problemsSuccessful ? 'Completed' : 'Needs Refinement' }}
         </div>
-        <div *ngIf="!problemsSuccessful">You need to complete Step 2 and Step 4 to get a refined Unique Value Proposition.</div>
+        <div *ngIf="!problemsSuccessful" class="refinementHint">You need to complete Step 2 and Step 4 to get a refined Unique Value
+            Proposition.</div>
+        <div [innerHTML]="problems"></div>
     </div>
     <div class="category-card">
         <h2 class="category-title">Solution</h2>
-        <div class="status-indicator" [ngClass]="{'completed': solutionsSuccessful, 'needs-refinement': !solutionsSuccessful}">
+        <div class="status-indicator"
+            [ngClass]="{'completed': solutionsSuccessful, 'needs-refinement': !solutionsSuccessful}">
             {{ solutionsSuccessful ? 'Completed' : 'Needs Refinement' }}
         </div>
-        <div *ngIf="!solutionsSuccessful">You need to complete Step 5 to get a refined Unique Value Proposition.</div>
-    
+        <div *ngIf="!solutionsSuccessful" class="refinementHint">You need to complete Step 5 to get a refined Unique Value Proposition.</div>
+        <div [innerHTML]="solutions"></div>
     </div>
     <div class="category-card">
         <h2 class="category-title">UVP</h2>
         <div class="status-indicator" [ngClass]="{'completed': uvpSuccessful, 'needs-refinement': !uvpSuccessful}">
             {{ uvpSuccessful ? 'Completed' : 'Needs Refinement' }}
         </div>
-        <div *ngIf="!uvpSuccessful">You need to complete Step 8 to get a refined Unique Value Proposition.</div>
-    
+        <div *ngIf="!uvpSuccessful" class="refinementHint">You need to complete Step 8 to get a refined Unique Value Proposition.</div>
+        <div [innerHTML]="uvp"></div>
     </div>
     <div class="category-card">
         <h2 class="category-title"></h2>
     </div>
     <div class="category-card">
-        <h2 class="category-title">Business Pattern</h2>
+        <h2 class="category-title">Business Pattern Evaluation</h2>
+        <div class="status-indicator"
+            [ngClass]="{'completed': bmExtractionSuccessful, 'needs-refinement': !bmExtractionSuccessful}">
+            {{ bmExtractionSuccessful ? 'Completed' : 'Needs Refinement' }}
+        </div>
+        <div *ngIf="!bmExtractionSuccessful" class="refinementHint">The AI could not conclude the full Business Model. Manually refine the
+            questions under BM Extraction.</div>
         <div class="patterns-container">
             <div class="pattern-card" *ngFor="let pattern of resultPatterns"
                 [ngStyle]="{ 'display': getPatternOpacity(pattern) }" (mouseenter)="showReason(pattern)"
@@ -62,3 +72,4 @@
         </div>
     </div>
 </div>
+<div style="height: 100px;"></div>

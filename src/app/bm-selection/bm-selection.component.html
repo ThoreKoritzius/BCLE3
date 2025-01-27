@@ -1,23 +1,20 @@
-
 <div class="dashboard">
-    <div *ngFor="let category of getCategories()" class="category-card">
-      <h2 class="category-title">{{ category }}</h2>
-      <div *ngFor="let question of getQuestions(category)" class="question-card">
-        <p class="question-text">{{ question.question }}</p>
-        <div *ngIf="getOptions(question.dimension).length > 0" class="options-container">
-          <div *ngFor="let option of getOptions(question.dimension)" class="option">
-            <label class="option-label">
-              <input
-                  type="radio"
-                  [name]="question.question"
-                  [value]="option"
-                  [checked]="getBMQuestionState(question.question, option)"
-                  (change)="onSelectAnswer(question.question, option)"
-                />
-              <span class="option-text">{{ option }}</span>
-            </label>
-          </div>
+  <div *ngFor="let category of getCategories()" class="category-card">
+    <h2 class="category-title">{{ category }}</h2>
+    <div *ngFor="let question of getQuestions(category)" class="question-card">
+      <p class="question-text">{{ question.question }}</p>
+      <div *ngIf="getOptions(question.dimension).length > 0" class="options-container">
+        <div *ngFor="let option of getOptions(question.dimension)" class="option">
+          <label class="option-label">
+            <input type="radio" [name]="question.question" [value]="option"
+              [checked]="getBMQuestionState(question.question, option)"
+              (change)="onSelectAnswer(question.question, option)" />
+            <span class="option-text">{{ option }}</span>
+          </label>
         </div>
       </div>
     </div>
   </div>
+
+</div>
+<div style="height: 200px;"></div>

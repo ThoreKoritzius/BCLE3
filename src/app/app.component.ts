@@ -132,7 +132,7 @@ export class AppComponent implements OnInit {
             const numB = parseInt(b.id.replace('Question_', ''), 10);
             return numA - numB;
           });
-  
+
         this.initializeForm();
 
         if (this.formChangesSubscription) {
@@ -173,7 +173,7 @@ export class AppComponent implements OnInit {
     const answerControl = questionGroup.get('answer');
     const userInputControl = questionGroup.get('userInput');
     const tutoringAnswers = questionGroup.get('tutoringAnswers') as FormArray;
-  
+
     answerControl?.valueChanges.subscribe((answer: 'yes' | 'no') => {
       this.questionsData[index].answer = answer;
       if (answer === 'no') {
@@ -218,32 +218,39 @@ export class AppComponent implements OnInit {
   }
 
   extractBMPattern(): void {
-    if (this.isEvaluationFresh){
+    if (this.isEvaluationFresh) {
+      return
+    }
+
+    console.log(this.questionsData)
+    const userInputs = this.questionsData
+      //.filter(a => a.userInput!= null && a.userInput?.length > 0)
+      .map((a: Question) => ({
+        id: a.id,
+        question: a.question,
+        userInput: a.userInput
+      }));
+    if (userInputs.length == 0){
       return
     }
     console.log("extractBMPattern")
-    const userInputs = this.questionsData
-    .map((a: Question) => ({ 
-      id: a.id,
-      question: a.question, 
-      userInput: a.userInput 
-    }));
     console.log(userInputs);
-    this.http.post('http://localhost:5007/extract_bm', {"userInputs": userInputs}).subscribe({
+    this.http.post('http://localhost:5007/extract_bm', { "userInputs": userInputs }).subscribe({
       next: (response: any) => {
         console.log(response)
         this.isEvaluating = true;
+        //TODO
       },
       error: (error) => {
         console.error('Validation error:', error);
         this.isEvaluating = false;
-        
+
       }
     });
 
   }
-  
-  
+
+
   private validateQuestion(): void {
     this.isEvaluating = true;
     const currentQuestion = {
@@ -251,14 +258,15 @@ export class AppComponent implements OnInit {
       userInput: this.currentQuestion.userInput
     };
     const userInputs = this.questionsData
-    .filter((_, index) => index < this.currentQuestionIndex)
-    .map((a: Question) => ({ 
-      id: a.id,
-      question: a.question, 
-      userInput: a.userInput 
-    }));
-    
-    const payload = {"previousInputs": userInputs, 
+      .filter((_, index) => index < this.currentQuestionIndex)
+      .map((a: Question) => ({
+        id: a.id,
+        question: a.question,
+        userInput: a.userInput
+      }));
+
+    const payload = {
+      "previousInputs": userInputs,
       "currentQuestionIndex": this.currentQuestionIndex,
       "userInput": this.currentQuestion.userInput
     }
@@ -283,15 +291,22 @@ export class AppComponent implements OnInit {
         });
 
         this.getProgress()
-
+        //TODO
         if (this.evaluationDiv) {
           this.evaluationDiv.nativeElement.scrollIntoView({
             behavior: 'smooth',
             block: 'start'
           });
         }
-        
-    
+        if (this.currentQuestionIndex === 7){
+          this.stateService.uvp = evaluationHTML;
+          this.stateService.uvpSuccessful = satisfactoryOutcome;
+        }if (this.currentQuestionIndex ===4){
+          this.stateService.solutions = evaluationHTML;
+          this.stateService.solutionsSuccessful = satisfactoryOutcome;
+        }
+        //TODO: for others
+
         //this.moveToNextQuestion();
       },
       error: (error) => {
@@ -310,12 +325,12 @@ export class AppComponent implements OnInit {
     }));
 
 
-    const payload= {"userInput": userInput, "currentQuestionIndex": this.currentQuestionIndex}
+    const payload = { "userInput": userInput, "currentQuestionIndex": this.currentQuestionIndex }
     this.http.post('http://localhost:5007/evaluate_answers', payload).subscribe({
       next: (response: any) => {
         this.isEvaluating = false;
         var index = 0;
-        for(var item of response.feedback){
+        for (var item of response.feedback) {
           console.log(item)
           this.currentQuestion.no.tutoring.questions[index].feedback = item.response
           this.currentQuestion.no.tutoring.questions[index].feedbackHTML = item.html
@@ -324,7 +339,7 @@ export class AppComponent implements OnInit {
           this.questionsData[this.currentQuestionIndex].no.tutoring.questions[index].feedback = item.response
           this.questionsData[this.currentQuestionIndex].no.tutoring.questions[index].feedbackHTML = item.html
           this.questionsData[this.currentQuestionIndex].no.tutoring.questions[index].successful = item.satisfactory_outcome
-          index +=1;
+          index += 1;
         }
       },
       error: (error) => {
@@ -354,8 +369,8 @@ export class AppComponent implements OnInit {
     this.currentQuestionIndex = index;
   }
   goToQuestionExtract(index: number): void {
-    this.extractBMPattern();
     this.currentQuestionIndex = index;
+    this.extractBMPattern();
 
   }
 }

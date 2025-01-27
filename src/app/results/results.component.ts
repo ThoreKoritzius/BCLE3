@@ -21,6 +21,8 @@ export class ResultsComponent implements OnInit {
 
   @Input() solutionsSuccessful: boolean | undefined;
   @Input() solutions: string | undefined;
+  
+  @Input() bmExtractionSuccessful: boolean | undefined;
   constructor(private stateService: StateService) { }
   ngOnInit(): void {
     this.stateService.evaluatePattern()
@@ -32,6 +34,7 @@ export class ResultsComponent implements OnInit {
     this.solutionsSuccessful =this.stateService.solutionsSuccessful;
     this.problems = this.stateService.problems;
     this.problemsSuccessful =this.stateService.problemsSuccessful;
+    this.bmExtractionSuccessful = this.stateService.progress == 100;
     console.log(this.uvpSuccessful)
   }
   getCircleColor() {
