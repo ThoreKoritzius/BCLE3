@@ -1,7 +1,9 @@
-/* Header Styles */
+
 body {
   background: #ccc;
 }
+
+
 
 .steps-container {
   margin-left: auto;
@@ -10,7 +12,7 @@ body {
 }
 
 .active-step {
-  background-color: #3d3d3d;
+  background-color: #093a68;;
   color: white;
   border-radius: 4px;
 }
@@ -132,36 +134,6 @@ mat-spinner {
   }
 }
 
-/* General toolbar styles */
-.header .toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 16px;
-  overflow: hidden;
-  color: white;
-
-  background-color: #3d3d3d;
-}
-
-/* Title styling */
-.header .title {
-  font-size: 1.25rem;
-  font-weight: bold;
-  white-space: nowrap;
-  flex-shrink: 0;
-  margin-right: 16px;
-  cursor: pointer;
-}
-
-
-/* Extra buttons (Database, Results) */
-.header .extras {
-  display: flex;
-  gap: 16px;
-  margin-left: auto;
-}
-
 
 
 /* Centering the whole welcome screen */
@@ -217,7 +189,6 @@ mat-spinner {
   border-radius: 8px;
   padding: 10px;
   background-color: #ffffff;
-  max-height: 300px
 }
 
 
@@ -307,7 +278,7 @@ mat-spinner {
 .content {
   padding: 24px;
   background-color: #fafafa;
-  min-height: calc(100% - 64px);
+  padding-top: 80px;
 }
 
 
@@ -333,11 +304,6 @@ mat-spinner {
   }
 }
 
-/* Existing styles modified */
-.header .toolbar {
-  z-index: 2;
-}
-
 .dashboard-card {
   margin: 16px auto;
   max-width: 900px;
@@ -351,11 +317,43 @@ mat-spinner {
 }
 
 
+/* Fix the header to the top */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: #093a68;;
+}
+
+/* Toolbar styles */
+.header .toolbar {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding: 0 16px;
+  overflow: hidden;
+  color: white;
+  position: relative; /* Needed for the fixed position of the header */
+  z-index: 1000;
+}
+
+/* Title styling */
+.header .title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-right: 16px;
+  cursor: pointer;
+}
+
+/* Traffic Light Container */
 .traffic-light-container {
   gap: 10px;
-  margin-right: 20px;
   padding-left: 20px;
-  float: right;
+  margin-left: auto;  /* Aligns the traffic light container to the right */
 }
 
 /* Traffic Light (Vertical) */
@@ -410,6 +408,7 @@ mat-spinner {
   transition: width 0.3s ease;
 }
 
+
 .progress-circle2 {
   width: 20px;
   height: 20px;
@@ -424,11 +423,13 @@ mat-spinner {
 /* Add to your existing CSS */
 .sidenav-container {
   min-height: 100vh;
+
 }
 
 mat-sidenav-content {
   margin-left: 240px; /* Match sidenav width */
   padding-bottom: 80px; /* Space for fixed footer */
+  padding-top: 80px;
 }
 
 .footer {

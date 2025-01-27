@@ -235,14 +235,14 @@
     "topic": "Problem Validation",
     "question": "Have you conducted at least 10 problem validation interviews with customers to confirm the severity of the identified problems?",
     "yes": {
-      "followupQuestion": "Please list the top features or functionalities of your proposed solution that address each problem.",
-      "evaluationPrompt": "Evaluate the user's response. ONLY RESPOND WITH 'GOOD' OR 'BAD' and provide an explanation why.",
+      "followupQuestion": "Please provide summaries or key insights from the interviews and your interpretation of the results.",
+      "evaluationPrompt": "Evaluate the user's response.",
       "good": {
         "question": "Does the customer agree with the problem identified in the earlier stages?",
         "yes": "Proceed to Solution Ideation.",
         "no": {
           "question": "What new insights did the customer provide about the problem?",
-          "evaluationPrompt": "Evaluate the relevance of the new insights. ONLY RESPOND WITH 'VALID' OR 'INVALID' and provide justification.",
+          "evaluationPrompt": "Evaluate the relevance of the new insights.",
           "valid": {
             "question": "Restart Problem Identification with the new insights. Have the problem and market segment been updated?",
             "yes": "Repeat the Problem Identification and Validation process.",
@@ -252,17 +252,17 @@
         }
       },
       "bad": {
-        "question": "What was the primary reason for the poor response? [AI evaluates customer feedback for gaps]",
+        "question": "What was the primary reason for the poor response?",
         "tutoring": {
           "intro": "It seems like the features or functionalities provided do not adequately address the identified problem. Let's work through this step-by-step.",
           "questions": [
             {
               "question": "Are the listed features aligned with the key pain points of your customers? If not, which features need to be adjusted or added?",
-              "evaluationPrompt": "Evaluate the alignment between the features and the customer pain points. ONLY RESPOND WITH 'GOOD ALIGNMENT' OR 'NEEDS REFINEMENT' and provide specific guidance."
+              "evaluationPrompt": "Evaluate the alignment between the features and the customer pain points."
             },
             {
               "question": "Have you validated these features with real customer feedback during interviews? If not, what methods can you use to gather this feedback?",
-              "evaluationPrompt": "Assess whether customer feedback has been integrated into the proposed solution. ONLY RESPOND WITH 'VALIDATED' OR 'NOT VALIDATED' and provide a next step."
+              "evaluationPrompt": "Assess whether customer feedback has been integrated into the proposed solution."
             },
             {
               "question": "Can you identify specific examples of how your solution solves the key problems for your market segment? If not, how could you test these examples?",
@@ -298,7 +298,7 @@
     "question": "Have you started brainstorming potential solutions that address the identified problems?",
     "yes": {
       "followupQuestion": "Please list the top features or functionalities of your proposed solution that address each problem.",
-      "evaluationPrompt": "AI evaluates alignment between the proposed solution, validated problems, and customer segment. ONLY RESPOND WITH EXPLANATIONS: If GOOD, explain why the solution aligns well. If BAD, explain the mismatch and where further refinement is needed.",
+      "evaluationPrompt": "Evaluate the alignment between the proposed solution, validated problems, and customer segment. ONLY RESPOND WITH EXPLANATIONS: If GOOD, explain why the solution aligns well. If BAD, explain the mismatch and where further refinement is needed.",
       "good": "Green light for Solution Ideation on the dashboard; proceed to Solution Validation.",
       "bad": {
         "tutoring": {
@@ -362,14 +362,14 @@
     "topic": "Customer Solution Questionnaire",
     "question": "Have you prepared a solution questionnaire to validate your solutions with the customer?",
     "yes": {
-      "followupQuestion": "Please provide the questionnaire for evaluation."
+      "followupQuestion": "Please provide the questionnaire for evaluation.",
+      "evaluationPrompt": "Evaluate the quality of the questionnaire."
     },
     "no": {
       "tutoring": {
         "questions": []
       }
     },
-    "evaluationPrompt": "AI evaluates the quality of the questionnaire.",
     "goodResponse": "Move to Solution Validation stage.",
     "badResponse": {
       "loopMessage": "Your questionnaire is incomplete or poorly structured. Let's refine it.",
@@ -405,7 +405,8 @@
     "topic": "Solution Validation",
     "question": "Have you tested your proposed solution features with customers through solution interviews or MVP trials?",
     "yes": {
-      "followupQuestion": "Please provide summaries or key insights from customer feedback on your proposed solution."
+      "followupQuestion": "Please provide summaries or key insights from customer feedback on your proposed solution.",
+      "evaluationPrompt": "Evaluate customer feedback for alignment between proposed solution and validated problems."
     },
     "no": {
       "todo": "Loop back to Customer Solution Questionnaire to refine or conduct testing.",
@@ -413,7 +414,6 @@
         "questions": []
       }
     },
-    "evaluationPrompt": "AI evaluates customer feedback for alignment between proposed solution and validated problems.",
     "goodResponse": "Move to Unique Value Proposition (UVP) evaluation stage.",
     "badResponse": {
       "loopMessage": "Your feedback suggests a misalignment or lack of sufficient testing. Let's refine your approach.",
@@ -449,7 +449,8 @@
     "topic": "UVP",
     "question": "Do you know your Unique Value Proposition (UVP)?",
     "yes": {
-      "followupQuestion": "Please articulate the Unique Value Proposition (UVP) of your solution."
+      "followupQuestion": "Please articulate the Unique Value Proposition (UVP) of your solution.",
+      "evaluationPrompt": "Evaluate the UVP for alignment with the customer's validated problem, segment, and solution."
     },
     "no": {
       "tutoring": {
@@ -469,7 +470,6 @@
           }
         ]
       }
-    },
-    "evaluationPrompt": "Evaluate the UVP for alignment with the customer's validated problem, segment, and solution."
+    }
   }
 }

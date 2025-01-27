@@ -1,13 +1,12 @@
-<!-- Modified Header -->
-<!-- Add hamburger menu button in header -->
 <header class="header">
-  <mat-toolbar class="toolbar" color="primary">
+  <mat-toolbar class="toolbar" style="background: #093a68;">
     <button mat-icon-button class="menu-button" (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-    <div class="traffic-light-container" style="display: none;">
+    <span class="title">{{ title }}</span>
+    <div class="traffic-light-container">
       <!-- Single Circle with Percentage Text -->
-      <div class="progress-circle" style="background: #000;">
+      <div class="progress-circle" style="background: #777;">
         <div class="percentage-text">
           {{ progress }}% Complete
         </div>
@@ -18,13 +17,12 @@
         <div class="progress" [style.width.%]="progress"></div>
       </div>
     </div>
-    <span class="title">{{ title }}</span>
   </mat-toolbar>
 </header>
 
 <!-- Update sidenav configuration -->
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #sidenav mode="side" opened="true" class="sidenav" [fixedInViewport]="false" [fixedTopGap]="64">
+  <mat-sidenav #sidenav mode="side" opened="true" class="sidenav" [fixedInViewport]="false" [fixedTopGap]="64" style="padding-top: 80px;">
     <mat-nav-list>
       <!-- Welcome Link -->
       <mat-list-item (click)="moveToQuestion(-1)" [class.active-step]="-1 === currentQuestionIndex">
@@ -84,7 +82,6 @@
           <!-- Question Content -->
           <mat-card-content>
             <h2 class="question-text">{{ currentQuestion.question }}</h2>
-
             <!-- Answer Selection -->
             <mat-radio-group formControlName="answer" class="radio-group">
               <mat-radio-button value="yes" class="radio-button">Yes</mat-radio-button>
@@ -136,7 +133,7 @@
                   <div [innerHTML]="currentQuestion.evaluationHTML"></div>
                 </div>
               </div>
-              <div style="height: 100px;"></div>
+              <div style="height: 130px;"></div>
             </div>
           </mat-card-content>
         </mat-card>
@@ -154,7 +151,6 @@
           <div class="scrollable-list">
             <mat-list>
               <mat-list-item *ngFor="let question of questionsData; let i = index">
-                <mat-icon mat-list-icon color="primary">list</mat-icon>
                 <span class="topic-title">Step {{ i + 1 }}: {{ question.topic }}</span>
               </mat-list-item>
             </mat-list>

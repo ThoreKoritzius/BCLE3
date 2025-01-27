@@ -161,19 +161,15 @@ export class AppComponent implements OnInit {
     const answerControl = questionGroup.get('answer');
     const userInputControl = questionGroup.get('userInput');
     const tutoringAnswers = questionGroup.get('tutoringAnswers') as FormArray;
-
+  
     answerControl?.valueChanges.subscribe((answer: 'yes' | 'no') => {
       this.questionsData[index].answer = answer;
       if (answer === 'no') {
         tutoringAnswers.controls.forEach(control => control.enable());
-        userInputControl?.disable();
+        userInputControl?.disable(); // Keep userInput value
       } else {
         userInputControl?.enable();
-        tutoringAnswers.controls.forEach(control => {
-          control.disable();
-          control.reset();
-        });
-        this.questionsData[index].tutoringAnswers = tutoringAnswers.controls.map(() => '');
+        tutoringAnswers.controls.forEach(control => control.disable()); // No reset
       }
     });
   }

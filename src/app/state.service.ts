@@ -19,6 +19,21 @@ export class StateService {
   resultPatterns = DefinedBusinessPatterns;
   progress: number = 0;
 
+  private storageKey = 'bcle-dashboard-state';
+
+  saveState(state: any): void {
+    localStorage.setItem(this.storageKey, JSON.stringify(state));
+  }
+
+  loadState(): any {
+    const state = localStorage.getItem(this.storageKey);
+    return state ? JSON.parse(state) : null;
+  }
+
+  clearState(): void {
+    localStorage.removeItem(this.storageKey);
+  }
+
   constructor() { }
 
 

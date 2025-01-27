@@ -27,7 +27,7 @@ def make_request_openai(instruction, question, userInput, model="gpt-4o-mini", m
                         'feedback': {
                             'type': 'string',
                             'description': f"""{instruction}. 
-                                            Provide a well structured, easy to understand feedback response in markdown format. 
+                                            Given question '{question}', provide a well structured, easy to understand feedback response in markdown format. 
                                             Also give hints to improve or refine the definition. """
                         },
                         'is_feedback_acceptable': {
