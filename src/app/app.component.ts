@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators, FormArray, AbstractControl, FormControl } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -17,6 +17,8 @@ import { BmSelectionComponent } from './bm-selection/bm-selection.component';
 import { ResultsComponent } from './results/results.component';
 import { StateService } from './state.service';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDivider } from '@angular/material/divider';
+import { ImprintComponent } from './imprint/imprint.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -39,7 +41,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     ResultsComponent,
     MatSidenavModule,
     MatNavList,
-    MatList
+    MatDivider,
+    ImprintComponent
   ],
   providers: [HttpClient],
   templateUrl: './app.component.html',
@@ -54,11 +57,12 @@ export class AppComponent implements OnInit {
   currentQuestionIndex = -1;
   loading = true;
   showBMSelection = false;
+  progress: number = 10;
 
   @ViewChild('evaluationDiv') evaluationDiv!: ElementRef;
 
 
-  constructor(private currentState: StateService, private http: HttpClient, private fb: FormBuilder) {
+  constructor(private stateService: StateService, private http: HttpClient, private fb: FormBuilder) {
     this.quizForm = this.fb.group({
       questions: this.fb.array([])
     });
@@ -86,6 +90,10 @@ export class AppComponent implements OnInit {
 
   get isCurrentFormValid(): boolean {
     return this.getCurrentQuestionFormGroup().valid;
+  }
+
+  getCircleColor() {
+    return this.stateService.getCircleColor()
   }
 
   getData(): void {

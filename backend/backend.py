@@ -18,7 +18,7 @@ def make_request_openai(instruction, question, userInput, model="gpt-4o-mini", m
         )
 
         student_custom_functions = [
-            {
+            {   
                 'name': 'generate-business-evaluation',
                 'description': question,
                 'parameters': {

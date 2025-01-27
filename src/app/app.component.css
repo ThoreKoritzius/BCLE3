@@ -10,7 +10,8 @@ body {
 }
 
 .active-step {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: #3d3d3d;
+  color: white;
   border-radius: 4px;
 }
 
@@ -27,7 +28,6 @@ body {
   padding: 2rem;
   max-width: 900px;
   width: 100%;
-  /* Ensure it takes full width up to max-width */
   box-sizing: border-box;
   /* Include padding in width calculation */
   background-color: white;
@@ -103,27 +103,6 @@ body {
   width: 100%;
 }
 
-/* Footer Navigation */
-.footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: white;
-  padding: 1rem;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.navigation-buttons {
-  display: flex;
-  justify-content: space-between;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-button[mat-raised-button] {
-  min-width: 120px;
-}
-
 mat-spinner {
   display: inline-block;
   margin-left: 8px;
@@ -160,8 +139,9 @@ mat-spinner {
   align-items: center;
   padding: 0 16px;
   overflow: hidden;
-  background:  	#011f4b;
   color: white;
+
+  background-color: #3d3d3d;
 }
 
 /* Title styling */
@@ -174,55 +154,6 @@ mat-spinner {
   cursor: pointer;
 }
 
-/* Steps container */
-.header .steps-container {
-  display: flex;
-  align-items: center;
-  flex: 1;
-  gap: 16px;
-  overflow: hidden;
-}
-
-/* Scrollable question buttons */
-.header .questions-scroll {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  padding: 4px 0;
-  flex: 1;
-}
-
-.header .questions-scroll::-webkit-scrollbar {
-  display: none;
-  /* Hide scrollbars */
-}
-
-.header .questions-scroll {
-  -ms-overflow-style: none;
-  /* Hide scrollbar for IE/Edge */
-  scrollbar-width: none;
-  /* Hide scrollbar for Firefox */
-}
-
-/* Button styling */
-.header button.mat-button {
-  width: 200px;
-  color: white;
-}
-
-.header button.mat-button:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-  color: white;
-  /* Subtle hover effect */
-}
-
-.header button.active-step {
-  color: white;
-  background-color: rgba(0, 123, 255, 0.8);
-  /* Highlight active button */
-  border-radius: 4px;
-}
 
 /* Extra buttons (Database, Results) */
 .header .extras {
@@ -244,7 +175,7 @@ mat-spinner {
 /* Card Styles */
 .welcome-card {
   width: 90%;
-  max-width: 600px;
+  max-width: 800px;
   height: 100%;
   padding: 20px;
 }
@@ -289,23 +220,6 @@ mat-spinner {
   max-height: 300px
 }
 
-mat-list {
-  padding: 0;
-}
-
-/* List Item Styles */
-mat-list-item {
-  display: flex;
-  align-items: center;
-  padding: 10px 0;
-  font-size: 1rem;
-  text-align: left;
-}
-
-mat-list-item mat-icon {
-  margin-right: 10px;
-  font-size: 1.5rem;
-}
 
 .topic-title {
   font-weight: 500;
@@ -378,3 +292,198 @@ mat-list-item mat-icon {
 
 
 
+/* New CSS */
+.sidenav-container {
+  height: calc(100vh - 64px);
+}
+
+.sidenav {
+  margin-left: 10px;
+  width: 280px;
+  border-right: 1px solid #eee;
+  box-shadow: 3px 0 6px rgba(0,0,0,0.05);
+}
+
+.content {
+  padding: 24px;
+  background-color: #fafafa;
+  min-height: calc(100% - 64px);
+}
+
+
+.nav-label {
+  margin-left: 16px;
+  font-size: 0.9rem;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .sidenav {
+    width: 240px;
+    position: fixed;
+  }
+  
+  .content {
+    margin-left: 0;
+    padding: 16px;
+  }
+  
+  .mat-sidenav {
+    display: none;
+  }
+}
+
+/* Existing styles modified */
+.header .toolbar {
+  z-index: 2;
+}
+
+.dashboard-card {
+  margin: 16px auto;
+  max-width: 900px;
+}
+
+/* Add truncate pipe CSS */
+.nav-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.traffic-light-container {
+  gap: 10px;
+  margin-right: 20px;
+  padding-left: 20px;
+  float: right;
+}
+
+/* Traffic Light (Vertical) */
+.traffic-light {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.light {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  opacity: 0.3;
+}
+
+.light.active {
+  opacity: 1;
+}
+
+.light.red {
+  background-color: red;
+}
+
+.light.yellow {
+  background-color: yellow;
+}
+
+.light.green {
+  background-color: green;
+}
+
+/* Percentage Text */
+.percentage-text {
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  padding: 10px;
+}
+
+/* Progress Bar */
+.progress-bar {
+  width: 300px;
+  height: 10px;
+  background-color: #e0e0e0;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background-color: #4caf50;
+  transition: width 0.3s ease;
+}
+
+.progress-circle2 {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e0e0e0; /* Default color */
+  transition: background-color 0.3s ease;
+  float: right;
+}
+/* Add to your existing CSS */
+.sidenav-container {
+  min-height: 100vh;
+}
+
+mat-sidenav-content {
+  margin-left: 240px; /* Match sidenav width */
+  padding-bottom: 80px; /* Space for fixed footer */
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 240px; /* Match sidenav width */
+  right: 0;
+  background-color: white;
+  padding: 1rem;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 800px;
+  gap: 1rem;
+}
+
+/* Button positioning */
+.navigation-buttons button:first-child {
+  margin-right: auto;
+}
+
+.navigation-buttons button:last-child {
+  margin-left: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 960px) {
+  mat-sidenav-content {
+    margin-left: 0;
+  }
+  
+  .footer {
+    left: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .navigation-buttons {
+    flex-direction: column;
+  }
+  
+  button[mat-raised-button] {
+    width: 100%;
+    max-width: none;
+  }
+  
+  .navigation-buttons button:first-child,
+  .navigation-buttons button:last-child {
+    margin: 0;
+  }
+}
