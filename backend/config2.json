@@ -1,0 +1,34 @@
+
+
+
+
+  {
+    "name": "Problem identification",
+    "Question_1": {
+        "question": "Do you know who your customer is, and do you know how to find that out?",
+        "yes": "Please list who has a problem that you seek to find a solution for?",
+        "evaluationPrompt": "the user provided this [USERPROMPT]. ONLY RESPOND WITH 'GOOD' OR 'BAD'",
+        "tutoring": {
+            "instructionMaterial": "Some information the users sees directly as information material",
+            "tutoringQuestions":  
+                [{"question": "My first Question 1", 
+                "evaluationPrompt": "Evalute the users response to the question. ONLY RESPOND WITH 'GOOD' OR 'BAD'"},
+                {"question": "My second Question 2", 
+                "evaluationPrompt": "Evalute the users response to the question. ONLY RESPOND WITH 'GOOD' OR 'BAD'"}]
+        }
+    },
+    "Question_2": {
+        "question": "ADo you know who your customer is, and do you know how to find that out?",
+        "yes": "APlease list who has a problem that you seek to find a solution for?",
+        "evaluationPrompt": "Athe user provided this [USERPROMPT]. ONLY RESPOND WITH 'GOOD' OR 'BAD'",
+        "tutoring": {
+            "instructionMaterial": "Some information the users sees directly as information material",
+            "tutoringQuestions":  
+                [{"question": "ABMy first Question 1", 
+                "evaluationPrompt": "Evalute the users response to the question. ONLY RESPOND WITH 'GOOD' OR 'BAD'"},
+                {"question": "ABMy second Question 2", 
+                "evaluationPrompt": "Evalute the users response to the question. ONLY RESPOND WITH 'GOOD' OR 'BAD'"}]
+        }
+    }
+
+}
