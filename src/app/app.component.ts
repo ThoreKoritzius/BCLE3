@@ -221,15 +221,15 @@ export class AppComponent implements OnInit {
     if (this.isEvaluationFresh) {
       return
     }
+    
 
-    console.log(this.questionsData)
     const userInputs = this.questionsData
-      //.filter(a => a.userInput!= null && a.userInput?.length > 0)
       .map((a: Question) => ({
         id: a.id,
         question: a.question,
         userInput: a.userInput
       }));
+
     if (userInputs.length == 0){
       return
     }
@@ -237,9 +237,17 @@ export class AppComponent implements OnInit {
     console.log(userInputs);
     this.http.post('http://localhost:5007/extract_bm', { "userInputs": userInputs }).subscribe({
       next: (response: any) => {
+        const data = response.data;
         console.log(response)
         this.isEvaluating = true;
         //TODO
+        for (const key in data) {
+          if (data.hasOwnProperty(key)) {
+              const value = data[key];
+              this.stateService.onSelectAnswerDimension(key, value);
+          }
+      }
+
       },
       error: (error) => {
         console.error('Validation error:', error);
@@ -301,9 +309,14 @@ export class AppComponent implements OnInit {
         if (this.currentQuestionIndex === 7){
           this.stateService.uvp = evaluationHTML;
           this.stateService.uvpSuccessful = satisfactoryOutcome;
-        }if (this.currentQuestionIndex ===4){
+        }
+        if (this.currentQuestionIndex === 4){
           this.stateService.solutions = evaluationHTML;
           this.stateService.solutionsSuccessful = satisfactoryOutcome;
+        }
+        if (this.currentQuestionIndex === 2){
+          this.stateService.problems = evaluationHTML;
+          this.stateService.problemsSuccessful = satisfactoryOutcome;
         }
         //TODO: for others
 

@@ -48,7 +48,7 @@ export class StateService {
 
   // Hide reason when not hovering
   hideReason(pattern: BusinessPattern) {
-   // pattern.showReason = false;
+    // pattern.showReason = false;
   }
 
   getCircleColor(): string {
@@ -137,6 +137,21 @@ export class StateService {
   onSelectAnswer(question: string, answer: string): void {
     this.userAnswers[question] = answer;
     this.updateProgress();
+  }
+
+  getQuestionByDimension(targetDimension: string): string | null {
+    for (const category of Object.values(evalQuestions)) {
+      const foundQuestion = category.find(q => q.dimensionString === targetDimension);
+      if (foundQuestion) return foundQuestion.question;
+    }
+    return null;
+  }
+
+  onSelectAnswerDimension(question: string, answer: string): void {
+    const key = this.getQuestionByDimension(question)!;
+    this.userAnswers[key] = answer;
+    this.updateProgress();
+    console.log(this.userAnswers)
   }
 
   getBMQuestionState(question: string, answer: string): boolean {

@@ -495,68 +495,81 @@ export const database = [
 ]
 
 
-export const evalQuestions =
-{
-    "General Differentiation Questions":
-        [
-            {
-                "question": "Degree of Digitization: Is the business model purely digital, digitally enabled, or does it operate independently of digital technologies?",
-                "dimension": BusinessModelDimensions.D2_DegreeOfDigitization
-            }
-        ],
-    "Value Proposition":
-        [
-            {
-                "question": "Product Type: What is the primary type of product or service offered?",
-                "dimension": BusinessModelDimensions.D3_ProductType
-            },
-            {
-                "question": "Differentiation Strategy: How does the pattern propose to differentiate the offering?",
-                "dimension": BusinessModelDimensions.D4_StrategyForDifferentiation
-            }
-        ],
-    "Value Delivery":
-        [
-            {
-                "question": "Target Customers: Does the pattern target specific new customer segments, lock-in existing customers, other companies (B2B) or no impact on target customers exist? ",
-                "dimension": BusinessModelDimensions.D5_TargetCustomers
-            },
-            {
-                "question": "Value Delivery Process: How does the pattern affect the delivery process, such as branding + marketing, sales channels, sales models, customer relationship management or no impact on delivery process? ",
-                "dimension": BusinessModelDimensions.D6_ValueDeliveryProcess
-            }
-        ],
-    "Value Creation":
-        [
-            {
-                "question": "Sourcing Strategy: Does the pattern require in-house production (make), external sourcing (buy), or a mix (no impact on sourcing)?",
-                "dimension": BusinessModelDimensions.D7_Sourcing
-            },
-            {
-                "question": "Third-Party Involvement: Are suppliers, customers, competitors, or multiple parties involved in the business process or there is no impact on third parties involved?",
-                "dimension": BusinessModelDimensions.D8_ThirdPartiesInvolved
-            },
-            {
-                "question": "Creation Process: How does the pattern innovate or optimize the creation process through innovation, supply, production, multiple steps or no impact on creation process?",
-                "dimension": BusinessModelDimensions.D9_ValueCreationProcess
-            }
-        ],
+export const evalQuestions = {
+    "General Differentiation Questions": [
+        {
+            "question": "Degree of Digitization: Is the business model purely digital, digitally enabled, or does it operate independently of digital technologies?",
+            "dimension": BusinessModelDimensions.D2_DegreeOfDigitization,
+            "dimensionString": "D2_DegreeOfDigitization"
+        }
+    ],
+    "Value Proposition": [
+        {
+            "question": "Product Type: What is the primary type of product or service offered?",
+            "dimension": BusinessModelDimensions.D3_ProductType,
+            "dimensionString": "D3_ProductType"
+        },
+        {
+            "question": "Differentiation Strategy: How does the pattern propose to differentiate the offering?",
+            "dimension": BusinessModelDimensions.D4_StrategyForDifferentiation,
+            "dimensionString": "D4_StrategyForDifferentiation"
+        }
+    ],
+    "Value Delivery": [
+        {
+            "question": "Target Customers: Does the pattern target specific new customer segments, lock-in existing customers, other companies (B2B) or no impact on target customers exist? ",
+            "dimension": BusinessModelDimensions.D5_TargetCustomers,
+            "dimensionString": "D5_TargetCustomers"
+        },
+        {
+            "question": "Value Delivery Process: How does the pattern affect the delivery process, such as branding + marketing, sales channels, sales models, customer relationship management or no impact on delivery process? ",
+            "dimension": BusinessModelDimensions.D6_ValueDeliveryProcess,
+            "dimensionString": "D6_ValueDeliveryProcess"
+        }
+    ],
+    "Value Creation": [
+        {
+            "question": "Sourcing Strategy: Does the pattern require in-house production (make), external sourcing (buy), or a mix (no impact on sourcing)?",
+            "dimension": BusinessModelDimensions.D7_Sourcing,
+            "dimensionString": "D7_Sourcing"
+        },
+        {
+            "question": "Third-Party Involvement: Are suppliers, customers, competitors, or multiple parties involved in the business process or there is no impact on third parties involved?",
+            "dimension": BusinessModelDimensions.D8_ThirdPartiesInvolved,
+            "dimensionString": "D8_ThirdPartiesInvolved"
+        },
+        {
+            "question": "Creation Process: How does the pattern innovate or optimize the creation process through innovation, supply, production, multiple steps or no impact on creation process?",
+            "dimension": BusinessModelDimensions.D9_ValueCreationProcess,
+            "dimensionString": "D9_ValueCreationProcess"
+        }
+    ],
     "Value Capture": [
         {
             "question": "Revenue Model: What revenue generation strategy?",
-            "dimension": BusinessModelDimensions.D10_RevenueModel
+            "dimension": BusinessModelDimensions.D10_RevenueModel,
+            "dimensionString": "D10_RevenueModel"
         },
         {
             "question": "Pricing Strategy: What is the pricing strategy? ",
-            "dimension": BusinessModelDimensions.D11_PricingStrategy
+            "dimension": BusinessModelDimensions.D11_PricingStrategy,
+            "dimensionString": "D11_PricingStrategy"
         },
         {
             "question": "Profit Effects: Does the pattern primarily aim to increase revenue, reduce costs, have multiple effects or no direct profit impact? ",
-            "dimension": BusinessModelDimensions.D12_DirectProfitEffect
+            "dimension": BusinessModelDimensions.D12_DirectProfitEffect,
+            "dimensionString": "D12_DirectProfitEffect"
         }
     ]
-}
+};
 
+function getQuestionByDimension(targetDimension: string): string | null {
+    for (const category of Object.values(evalQuestions)) {
+        const foundQuestion = category.find(q => q.dimensionString === targetDimension);
+        if (foundQuestion) return foundQuestion.question;
+    }
+    return null;
+}
 
 
 
