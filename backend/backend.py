@@ -52,12 +52,19 @@ def evaluate_questions():
     config = load_json_file().get(f"Question_{currentQuestionIndex +1}")
     question = config['yes']['followupQuestion']
     instruction= config['yes']['evaluationPrompt']
+    instruction += " At the end of your response respond with either GOOD or BAD."
     print(currentQuestionIndex)
     print(userInput)
     print(question, instruction)
     llm_response = make_request_openai(instruction, question, userInput)
-    # TODO: identify if user input was good or not 
-    return jsonify({"response": "llm_response"})
+    satisfactory_outcome = False
+    if "good" in llm_response.lower():
+        satisfactory_outcome = True
+    if "bad" in llm_response.lower():
+        satisfactory_outcome = False
+
+    return jsonify({"response": llm_response, 
+                    "satisfactory_outcome": satisfactory_outcome})
 
 
 @app.route('/evaluate_answers', methods=['POST', 'GET'])

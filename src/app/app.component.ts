@@ -85,6 +85,8 @@ export class AppComponent implements OnInit {
             no: data[key].no,
             answer: 'yes',
             userInput: '',
+            evaluation: '',
+            successful: false,
             tutoringAnswers: data[key].no.tutoring.questions.map(() => '')
           } as Question)).sort((a, b) => {
             const numA = parseInt(a.id.replace('Question_', ''), 10);
@@ -174,9 +176,18 @@ export class AppComponent implements OnInit {
     };
 
     this.http.post('http://localhost:5007/evaluate_bm', payload).subscribe({
-      next: () => {
+      next: (response: any) => {
+        console.log(response)
         this.isEvaluating = false;
-        this.moveToNextQuestion();
+    
+        const evaluation = response.response;
+        const satisfactoryOutcome = response.satisfactory_outcome;
+    
+        this.questionsData[this.currentQuestionIndex].evaluation = evaluation;
+        this.questionsData[this.currentQuestionIndex].successful = satisfactoryOutcome;
+        this.currentQuestion.evaluation = evaluation;
+        console.log(this.questionsData[this.currentQuestionIndex])
+        //this.moveToNextQuestion();
       },
       error: (error) => {
         console.error('Validation error:', error);
@@ -228,6 +239,8 @@ interface Question {
   id: string;
   question: string;
   topic: string;
+  evaluation: string;
+  successful: boolean;
   yes: {
     followupQuestion: string;
     evaluationPrompt: string;
