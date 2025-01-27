@@ -1,354 +1,511 @@
 {
-    "name": "hello",
-    "Question_1": {
-      "topic": "Problem Identification",
-      "question": "Do you understand these customers' pain points, and could you name the top 3 problems that they face?",
-      "yes": {
-        "followupQuestion": "Please list the top 3 problems that you think the customer faces.",
-        "evaluationPrompt": "Evaluate the quality of the response: Are the problems specific, relevant, and aligned with the customer segment defined earlier?",
-        "good": {
-          "response": "The problems are well-defined and align with the customer segment."
-        },
-        "bad": {
-          "response": "The problems are not clearly defined or relevant to the customer segment.",
-          "tutoring": {
-            "instruction": "Help the user refine their understanding of the customer's pain points by addressing gaps in specificity, relevance, or problem alignment.",
-            "categories": {
-              "specificity": [
-                {
-                  "question": "Can you describe a specific scenario where the customer faces a challenge related to your solution?",
-                  "evaluationPrompt": "Does the response identify a concrete problem scenario?"
-                },
-                {
-                  "question": "What is the primary difficulty your customers experience in their daily activities?",
-                  "evaluationPrompt": "Does the response pinpoint a specific difficulty?"
-                }
-              ],
-              "relevance": [
-                {
-                  "question": "Do these problems directly relate to the product or service you aim to offer?",
-                  "evaluationPrompt": "Does the response show a direct connection between the problem and the offering?"
-                },
-                {
-                  "question": "Why do you believe this problem is significant to the customer?",
-                  "evaluationPrompt": "Does the response justify the importance of the problem?"
-                }
-              ],
-              "problemAlignment": [
-                {
-                  "question": "How urgent or impactful is this problem for your target customer?",
-                  "evaluationPrompt": "Does the response explain the urgency or impact of the problem?"
-                },
-                {
-                  "question": "How is this problem currently being addressed by your target customer?",
-                  "evaluationPrompt": "Does the response describe the customer's current approach or workaround?"
-                }
-              ]
-            },
-            "dynamicLoop": "Ask a question from the most relevant category based on the user's last response. If the issue persists, ask another question within the same category or escalate to broader guidance.",
-            "loopEnd": "Stop looping and escalate if no progress is made after 3 iterations. Suggest examples or additional resources."
+  "name": "hello",
+  "Question_1": {
+    "topic": "Problem Identification",
+    "question": "Do you understand these customers' pain points, and could you name the top 3 problems that they face?",
+    "yes": {
+      "followupQuestion": "Please list the top 3 problems that you think the customer faces.",
+      "evaluationPrompt": "Evaluate the quality of the response: Are the problems specific, relevant, and aligned with the customer segment defined earlier?",
+      "good": {
+        "response": "The problems are well-defined and align with the customer segment."
+      },
+      "bad": {
+        "response": "The problems are not clearly defined or relevant to the customer segment.",
+        "tutoring": {
+          "instruction": "Help the user refine their understanding of the customer's pain points by addressing gaps in specificity, relevance, or problem alignment.",
+          "categories": {
+            "specificity": [
+              {
+                "question": "Can you describe a specific scenario where the customer faces a challenge related to your solution?",
+                "evaluationPrompt": "Does the response identify a concrete problem scenario?"
+              },
+              {
+                "question": "What is the primary difficulty your customers experience in their daily activities?",
+                "evaluationPrompt": "Does the response pinpoint a specific difficulty?"
+              }
+            ],
+            "relevance": [
+              {
+                "question": "Do these problems directly relate to the product or service you aim to offer?",
+                "evaluationPrompt": "Does the response show a direct connection between the problem and the offering?"
+              },
+              {
+                "question": "Why do you believe this problem is significant to the customer?",
+                "evaluationPrompt": "Does the response justify the importance of the problem?"
+              }
+            ],
+            "problemAlignment": [
+              {
+                "question": "How urgent or impactful is this problem for your target customer?",
+                "evaluationPrompt": "Does the response explain the urgency or impact of the problem?"
+              },
+              {
+                "question": "How is this problem currently being addressed by your target customer?",
+                "evaluationPrompt": "Does the response describe the customer's current approach or workaround?"
+              }
+            ]
+          },
+          "dynamicLoop": "Ask a question from the most relevant category based on the user's last response. If the issue persists, ask another question within the same category or escalate to broader guidance.",
+          "loopEnd": "Stop looping and escalate if no progress is made after 3 iterations. Suggest examples or additional resources."
+        }
+      }
+    },
+    "no": {
+      "tutoring": {
+        "questions": [
+          {
+            "question": "What challenges or difficulties do you think your customers face daily?",
+            "evaluationPrompt": "Does the response provide specific and actionable insights into potential challenges?"
+          },
+          {
+            "question": "Are there common complaints or frustrations that your target customers express?",
+            "evaluationPrompt": "Does the response highlight common frustrations or unmet needs?"
+          },
+          {
+            "question": "How does your product or service address these challenges?",
+            "evaluationPrompt": "Does the response show how the product aligns with the identified challenges?"
           }
+        ]
+      }
+    }
+  },
+  "Question_2": {
+    "topic": "Customer Questionnaire Creation",
+    "question": "Have you prepared an interview questionnaire to test the problems you identified with customers?",
+    "yes": {
+      "followupQuestion": "Please provide the questionnaire for evaluation.",
+      "evaluationPrompt": "Evaluate the quality of the questionnaire: Does it address the identified problems and enable effective validation through customer interviews?",
+      "good": {
+        "response": "The questionnaire is well-constructed and suitable for testing customer problems.",
+        "action": "Proceed to the next step: Problem Validation."
+      },
+      "bad": {
+        "response": "The questionnaire is not well-constructed or does not address the identified problems effectively.",
+        "action": "Start a tutoring loop to refine the questionnaire.",
+        "tutoring": {
+          "instruction": "Guide the user to refine their questionnaire. Provide feedback on gaps or unclear questions. Examples: 'Consider adding open-ended questions to uncover customer motivations' or 'Include questions about the frequency and impact of the problem.'",
+          "categories": {
+            "specificity": [
+              {
+                "question": "Does the questionnaire ask specific questions related to the identified problems?",
+                "evaluationPrompt": "Evaluate if the questions focus on the specific problems rather than generic topics."
+              },
+              {
+                "question": "Are there questions about the customer's daily experiences that highlight the severity of the problem?",
+                "evaluationPrompt": "Evaluate if the questions uncover detailed insights into customer pain points."
+              }
+            ],
+            "clarity": [
+              {
+                "question": "Are the questions in the questionnaire clear and easy for customers to understand?",
+                "evaluationPrompt": "Evaluate if the language used in the questionnaire is straightforward and unambiguous."
+              },
+              {
+                "question": "Are the questions structured in a way that avoids leading or biased responses?",
+                "evaluationPrompt": "Evaluate if the questionnaire avoids assumptions or loaded questions."
+              }
+            ],
+            "relevance": [
+              {
+                "question": "Do the questions directly relate to the identified problems from the previous step?",
+                "evaluationPrompt": "Evaluate if the questionnaire is relevant to the problem context."
+              },
+              {
+                "question": "Does the questionnaire include questions about potential solutions or improvements?",
+                "evaluationPrompt": "Evaluate if the questionnaire captures insights into customer expectations or preferences."
+              },
+              {
+                "question": "Did you ask how the problem is currently solved?",
+                "evaluationPrompt": "Evaluate if the questionnaire includes questions that explore existing solutions customers are using to address the problem."
+              }
+            ]
+          },
+          "dynamicLoop": "Ask a question from the most relevant category based on the user’s last response. If the issue persists, suggest additional examples or guidance.",
+          "loopEnd": "Stop looping and escalate if no progress is made after 3 iterations. Suggest example questionnaires or templates for inspiration."
+        }
+      }
+    },
+    "no": {
+      "response": "User has not prepared a questionnaire.",
+      "action": "Provide guidance on how to create a customer interview questionnaire.",
+      "tutoring": {
+        "questions": [
+          {
+            "question": "What are the key problems you aim to validate with the customers?",
+            "evaluationPrompt": "Does the response clearly define the problems to be addressed in the questionnaire?"
+          },
+          {
+            "question": "What types of questions would help you understand the severity of these problems?",
+            "evaluationPrompt": "Does the response suggest questions that explore the impact or frequency of the problems?"
+          },
+          {
+            "question": "Have you considered including open-ended questions to encourage detailed responses?",
+            "evaluationPrompt": "Does the response acknowledge the value of open-ended questions in uncovering insights?"
+          },
+          {
+            "question": "What follow-up questions could you include to clarify vague or incomplete answers from customers?",
+            "evaluationPrompt": "Does the response include thoughtful follow-ups to probe deeper into customer pain points?"
+          },
+          {
+            "question": "Did you ask how the problem is currently solved?",
+            "evaluationPrompt": "Does the response show that the user understands the importance of learning about current solutions to identify gaps or opportunities?"
+          }
+        ],
+        "loop": "Repeat tutoring steps until the user provides a clear and actionable questionnaire outline."
+      }
+    }
+  },
+  "Question_3": {
+    "topic": "Problem Validation",
+    "question": "Have you conducted at least 10 problem validation interviews with customers to confirm the severity of the identified problems?",
+    "yes": {
+      "followupQuestion": "Please list the top features or functionalities of your proposed solution that address each problem.",
+      "evaluationPrompt": "Evaluate the user's response. ONLY RESPOND WITH 'GOOD' OR 'BAD' and provide an explanation why.",
+      "good": {
+        "question": "Does the customer agree with the problem identified in the earlier stages?",
+        "yes": "Proceed to Solution Ideation.",
+        "no": {
+          "question": "What new insights did the customer provide about the problem?",
+          "evaluationPrompt": "Evaluate the relevance of the new insights. ONLY RESPOND WITH 'VALID' OR 'INVALID' and provide justification.",
+          "valid": {
+            "question": "Restart Problem Identification with the new insights. Have the problem and market segment been updated?",
+            "yes": "Repeat the Problem Identification and Validation process.",
+            "no": "Revisit Market Segmentation to ensure alignment with the new problem."
+          },
+          "invalid": "Proceed with the original problem to Solution Ideation."
         }
       },
-      "no": {
+      "bad": {
+        "question": "What was the primary reason for the poor response? [AI evaluates customer feedback for gaps]",
+        "tutoring": {
+          "intro": "It seems like the features or functionalities provided do not adequately address the identified problem. Let's work through this step-by-step.",
+          "questions": [
+            {
+              "question": "Are the listed features aligned with the key pain points of your customers? If not, which features need to be adjusted or added?",
+              "evaluationPrompt": "Evaluate the alignment between the features and the customer pain points. ONLY RESPOND WITH 'GOOD ALIGNMENT' OR 'NEEDS REFINEMENT' and provide specific guidance."
+            },
+            {
+              "question": "Have you validated these features with real customer feedback during interviews? If not, what methods can you use to gather this feedback?",
+              "evaluationPrompt": "Assess whether customer feedback has been integrated into the proposed solution. ONLY RESPOND WITH 'VALIDATED' OR 'NOT VALIDATED' and provide a next step."
+            },
+            {
+              "question": "Can you identify specific examples of how your solution solves the key problems for your market segment? If not, how could you test these examples?",
+              "evaluationPrompt": "Evaluate the specificity of the examples provided. ONLY RESPOND WITH 'CONCRETE EXAMPLES' OR 'TOO VAGUE' and provide actionable advice."
+            },
+            {
+              "question": "Are there additional features that could enhance the value of your solution based on customer feedback? If yes, list them.",
+              "evaluationPrompt": "Assess whether the proposed additional features align with the validated customer needs. ONLY RESPOND WITH 'RELEVANT' OR 'NOT RELEVANT' and offer suggestions."
+            },
+            {
+              "question": "Have you prioritized the features based on customer needs and feasibility? If not, what criteria could you use to prioritize them?",
+              "evaluationPrompt": "Evaluate the prioritization of features. ONLY RESPOND WITH 'WELL PRIORITIZED' OR 'NEEDS PRIORITIZATION' and guide the user on how to prioritize effectively."
+            }
+          ],
+          "loop": "Repeat Problem Validation process until a satisfactory result is achieved."
+        }
+      }
+    },
+    "no": {
+      "response": "Have you prepared the interview questionnaire to validate the identified problems? Then Conduct the interviews and restart Problem Validation.",
+      "tutoring": {
+        "questions": [
+          {
+            "question": "It looks like the interview questionnaire is not ready yet. Let’s revisit the existing questionnaire creation process to refine it.",
+            "evaluationPrompt": "Loop back to the Questionnaire Creation Process."
+          }
+        ]
+      }
+    }
+  },
+  "Question_4": {
+    "topic": "Solution Ideation",
+    "question": "Have you started brainstorming potential solutions that address the identified problems?",
+    "yes": {
+      "followupQuestion": "Please list the top features or functionalities of your proposed solution that address each problem.",
+      "evaluationPrompt": "AI evaluates alignment between the proposed solution, validated problems, and customer segment. ONLY RESPOND WITH EXPLANATIONS: If GOOD, explain why the solution aligns well. If BAD, explain the mismatch and where further refinement is needed.",
+      "good": "Green light for Solution Ideation on the dashboard; proceed to Solution Validation.",
+      "bad": {
+        "tutoring": {
+          "intro": "Your proposed solution features need better alignment with the validated problems and/or customer segment. Let's refine them.",
+          "tutoringQuestions": [
+            {
+              "question": "Do the features address the validated problems identified in Problem Validation? If not, why?",
+              "evaluationPrompt": "Evaluate if the features match the problems' scope and severity."
+            },
+            {
+              "question": "Are the proposed features tailored to the specific needs of your customer segment?",
+              "evaluationPrompt": "Evaluate if the features are relevant for the defined customer segment."
+            },
+            {
+              "question": "Can you clearly map each feature to a specific problem identified in the Problem Identification stage?",
+              "evaluationPrompt": "Evaluate the direct connection between features and problems."
+            },
+            {
+              "question": "Have you ensured the features solve the most critical pain points as validated in the Problem Validation stage?",
+              "evaluationPrompt": "Evaluate if the features prioritize the most pressing issues."
+            },
+            {
+              "question": "Do the features offer unique value to the customer segment compared to existing solutions?",
+              "evaluationPrompt": "Evaluate if the features contribute a strong unique value proposition."
+            }
+          ]
+        },
+        "loopBack": "Once the features are revised, retest and resubmit for AI evaluation, ensuring alignment with the validated problems and customer segment."
+      }
+    },
+    "no": {
+      "tutoring": {
+        "intro": "Brainstorming solutions is essential. Let's work on developing solutions tailored to the validated problems and customer segment.",
+        "questions": [
+          {
+            "question": "Have you reviewed the validated problems from Problem Validation to brainstorm potential solutions?",
+            "evaluationPrompt": "Evaluate if the entrepreneur has considered all validated problems."
+          },
+          {
+            "question": "Have you taken the specific customer segment’s needs and characteristics into account?",
+            "evaluationPrompt": "Evaluate if the customer segment's needs are influencing the solution brainstorming."
+          },
+          {
+            "question": "What examples or benchmarks exist of solutions for similar problems in the market?",
+            "evaluationPrompt": "Evaluate if external references have been used effectively."
+          },
+          {
+            "question": "Can you outline initial ideas that target the core issues validated in the Problem Validation stage?",
+            "evaluationPrompt": "Evaluate if initial ideas tackle the core validated issues."
+          },
+          {
+            "question": "Have you considered resources or partnerships that could support the proposed solution?",
+            "evaluationPrompt": "Evaluate if resources and partnerships are being leveraged effectively."
+          }
+        ]
+      },
+      "loopBack": "Once brainstorming is complete, resubmit the solution features for AI evaluation, ensuring alignment with the validated problems and customer segment."
+    }
+  },
+  "Question_5": {
+    "topic": "Customer Solution Questionnaire",
+    "question": "Have you prepared a solution questionnaire to validate your solutions with the customer?",
+    "yes": {
+      "followupQuestion": "Please provide the questionnaire for evaluation."
+    },
+    "no": {
+      "tutoring": {
+        "questions": []
+      }
+    },
+    "evaluationPrompt": "AI evaluates the quality of the questionnaire.",
+    "goodResponse": "Move to Solution Validation stage.",
+    "badResponse": {
+      "loopMessage": "Your questionnaire is incomplete or poorly structured. Let's refine it.",
+      "tutoring": {
+        "introduction": "Let's improve your questionnaire. Start with these:",
+        "questions": [
+          {
+            "question": "Did you clearly articulate how the proposed solution addresses validated problems?",
+            "evaluationPrompt": "Evaluate clarity and specificity of problem-solution alignment."
+          },
+          {
+            "question": "Did you ask about the feasibility of implementing the solution within the customer segment?",
+            "evaluationPrompt": "Evaluate inclusion of feasibility-oriented questions."
+          },
+          {
+            "question": "Did you include metrics to measure the success of the solution for the customer?",
+            "evaluationPrompt": "Evaluate if success metrics are clear and measurable."
+          },
+          {
+            "question": "Did you ask how the problem is currently solved?",
+            "evaluationPrompt": "Evaluate depth of exploration into existing alternatives."
+          },
+          {
+            "question": "Does the questionnaire consider feedback loops for further refinement?",
+            "evaluationPrompt": "Assess if the questionnaire allows iterative improvements."
+          }
+        ],
+        "loopBack": "If the questionnaire remains inadequate after tutoring, loop back to Solution Ideation."
+      }
+    }
+  },
+  "Question_7": {
+    "topic": "Solution Validation",
+    "question": "Have you tested your proposed solution features with customers through solution interviews or MVP trials?",
+    "yes": {
+      "followupQuestion": "Please provide summaries or key insights from customer feedback on your proposed solution."
+    },
+    "no": {
+      "todo": "Loop back to Customer Solution Questionnaire to refine or conduct testing.",
+      "tutoring": {
+        "questions": []
+      }
+    },
+    "evaluationPrompt": "AI evaluates customer feedback for alignment between proposed solution and validated problems.",
+    "goodResponse": "Move to Unique Value Proposition (UVP) evaluation stage.",
+    "badResponse": {
+      "loopMessage": "Your feedback suggests a misalignment or lack of sufficient testing. Let's refine your approach.",
+      "tutoring": {
+        "introduction": "Let's refine your MVP testing or solution interview techniques. Here are some guiding questions:",
+        "questions": [
+          {
+            "question": "Did you ask customers how well the solution addresses their specific pain points?",
+            "evaluationPrompt": "Assess if customer pain points are directly addressed by the solution."
+          },
+          {
+            "question": "Did you collect quantitative and qualitative data on how the solution improves their situation?",
+            "evaluationPrompt": "Evaluate the inclusion of measurable improvements in feedback."
+          },
+          {
+            "question": "Did you explore if the solution can be implemented within the customer's current workflow or environment?",
+            "evaluationPrompt": "Evaluate feasibility of implementation from customer perspective."
+          },
+          {
+            "question": "Did you identify any unmet needs or additional features requested by customers?",
+            "evaluationPrompt": "Analyze feedback for potential feature gaps or improvements."
+          },
+          {
+            "question": "Did you ask customers to compare your solution to existing alternatives, and why they would or wouldn’t switch?",
+            "evaluationPrompt": "Evaluate competitive analysis and differentiation insights."
+          }
+        ],
+        "loopBack": "If the feedback remains insufficient after tutoring, loop back to Customer Solution Questionnaire or Solution Ideation for reevaluation."
+      }
+    }
+  },
+  "Question_8": {
+    "topic": "UVP",
+    "question": "Do you no your Unique Value Proposition (UVP)?",
+    "yes": {
+      "followupQuestion": "Please articulate the Unique Value Proposition (UVP) of your solution."
+    },
+    "no": {
+      "tutoring": {
+        "introduction": "The Unique Value Proposition (UVP) must clearly differentiate your solution from existing alternatives.",
+        "questions": [
+          {
+            "question": "What specific customer need or pain point does your solution address better than competitors?",
+            "evaluationPrompt": "Assess if the response specifies a clear differentiation."
+          },
+          {
+            "question": "How does your solution deliver value uniquely compared to existing alternatives?",
+            "evaluationPrompt": "Assess if the response specifies unique methods or approaches."
+          },
+          {
+            "question": "What elements make your offering hard to replicate or replace?",
+            "evaluationPrompt": "Assess if the response identifies strong barriers to imitation."
+          }
+        ]
+      }
+    },
+    "evaluationPrompt": "Evaluate the UVP for alignment with the customer's validated problem, segment, and solution."
+  },
+  "Question_9": {
+    "topic": "BM extraction",
+    "yes": {
+      "followupQuestion": "Please articulate the Unique Value Proposition (UVP) of your solution.",
+      "bad": {
         "tutoring": {
           "questions": [
             {
-              "question": "What challenges or difficulties do you think your customers face daily?",
-              "evaluationPrompt": "Does the response provide specific and actionable insights into potential challenges?"
+              "category": "General Differentiation",
+              "questions": [
+                {
+                  "question": "Do you want to reach an overall approach for designing a business model or focus on specific elements such as pricing, delivery, or customer engagement?",
+                  "evaluationPrompt": "Check if response matches 'Prototypical' or 'Solution' pattern."
+                },
+                {
+                  "question": "Is the business model purely digital, digitally enabled, or does it operate independently of digital technologies?",
+                  "evaluationPrompt": "Ensure clarity on digitization level."
+                }
+              ]
             },
             {
-              "question": "Are there common complaints or frustrations that your target customers express?",
-              "evaluationPrompt": "Does the response highlight common frustrations or unmet needs?"
+              "category": "Value Proposition",
+              "questions": [
+                {
+                  "question": "What is the primary type of product or service offered?",
+                  "evaluationPrompt": "Spot keywords like 'Physical', 'Financial', 'Hybrid', etc."
+                },
+                {
+                  "question": "How does the pattern propose to differentiate the offering?",
+                  "evaluationPrompt": "Identify differentiation strategies (e.g., quality, customization)."
+                }
+              ]
             },
             {
-              "question": "How does your product or service address these challenges?",
-              "evaluationPrompt": "Does the response show how the product aligns with the identified challenges?"
+              "category": "Value Delivery",
+              "questions": [
+                {
+                  "question": "Does the pattern target specific new customer segments, lock-in existing customers, or other companies?",
+                  "evaluationPrompt": "Clarify customer target specifics."
+                },
+                {
+                  "question": "How does the pattern affect the delivery process (e.g., branding, channels)?",
+                  "evaluationPrompt": "Ensure delivery processes are well-defined."
+                }
+              ]
+            },
+            {
+              "category": "Value Creation",
+              "questions": [
+                {
+                  "question": "Does the pattern require in-house production, external sourcing, or both?",
+                  "evaluationPrompt": "Validate clarity on sourcing strategy."
+                },
+                {
+                  "question": "Are suppliers, customers, or competitors involved in the business process?",
+                  "evaluationPrompt": "Identify external dependencies clearly."
+                }
+              ]
+            },
+            {
+              "category": "Value Capture",
+              "questions": [
+                {
+                  "question": "What revenue generation strategy does the pattern use (e.g., Sell, Advertising)?",
+                  "evaluationPrompt": "Validate clarity on revenue model."
+                },
+                {
+                  "question": "What is the pricing strategy (e.g., Premium, Cheap, Dynamic)?",
+                  "evaluationPrompt": "Ensure pricing details are covered."
+                }
+              ]
             }
           ]
-       }
+        }
       }
     },
-    "Question_2": {
-        
-
-            "topic": "Customer Questionnaire Creation",
-
-              "question": "Have you prepared an interview questionnaire to test the problems you identified with customers?",
-              "yes": {
-                "followupQuestion": "Please provide the questionnaire for evaluation.",
-                "evaluationPrompt": "Evaluate the quality of the questionnaire: Does it address the identified problems and enable effective validation through customer interviews?",
-                "good": {
-                  "response": "The questionnaire is well-constructed and suitable for testing customer problems.",
-                  "action": "Proceed to the next step: Problem Validation."
-                },
-                "bad": {
-                  "response": "The questionnaire is not well-constructed or does not address the identified problems effectively.",
-                  "action": "Start a tutoring loop to refine the questionnaire.",
-                  "tutoring": {
-                    "instruction": "Guide the user to refine their questionnaire. Provide feedback on gaps or unclear questions. Examples: 'Consider adding open-ended questions to uncover customer motivations' or 'Include questions about the frequency and impact of the problem.'",
-                    "categories": {
-                      "specificity": [
-                        {
-                          "question": "Does the questionnaire ask specific questions related to the identified problems?",
-                          "evaluationPrompt": "Evaluate if the questions focus on the specific problems rather than generic topics."
-                        },
-                        {
-                          "question": "Are there questions about the customer's daily experiences that highlight the severity of the problem?",
-                          "evaluationPrompt": "Evaluate if the questions uncover detailed insights into customer pain points."
-                        }
-                      ],
-                      "clarity": [
-                        {
-                          "question": "Are the questions in the questionnaire clear and easy for customers to understand?",
-                          "evaluationPrompt": "Evaluate if the language used in the questionnaire is straightforward and unambiguous."
-                        },
-                        {
-                          "question": "Are the questions structured in a way that avoids leading or biased responses?",
-                          "evaluationPrompt": "Evaluate if the questionnaire avoids assumptions or loaded questions."
-                        }
-                      ],
-                      "relevance": [
-                        {
-                          "question": "Do the questions directly relate to the identified problems from the previous step?",
-                          "evaluationPrompt": "Evaluate if the questionnaire is relevant to the problem context."
-                        },
-                        {
-                          "question": "Does the questionnaire include questions about potential solutions or improvements?",
-                          "evaluationPrompt": "Evaluate if the questionnaire captures insights into customer expectations or preferences."
-                        },
-                        {
-                          "question": "Did you ask how the problem is currently solved?",
-                          "evaluationPrompt": "Evaluate if the questionnaire includes questions that explore existing solutions customers are using to address the problem."
-                        }
-                      ]
-                    },
-                    "dynamicLoop": "Ask a question from the most relevant category based on the user’s last response. If the issue persists, suggest additional examples or guidance.",
-                    "loopEnd": "Stop looping and escalate if no progress is made after 3 iterations. Suggest example questionnaires or templates for inspiration."
-                  }
-                }
-              },
-              "no": {
-                "response": "User has not prepared a questionnaire.",
-                "action": "Provide guidance on how to create a customer interview questionnaire.",
-                "tutoring": {
-                  "questions": [
-                    {
-                      "question": "What are the key problems you aim to validate with the customers?",
-                      "evaluationPrompt": "Does the response clearly define the problems to be addressed in the questionnaire?"
-                    },
-                    {
-                      "question": "What types of questions would help you understand the severity of these problems?",
-                      "evaluationPrompt": "Does the response suggest questions that explore the impact or frequency of the problems?"
-                    },
-                    {
-                      "question": "Have you considered including open-ended questions to encourage detailed responses?",
-                      "evaluationPrompt": "Does the response acknowledge the value of open-ended questions in uncovering insights?"
-                    },
-                    {
-                      "question": "What follow-up questions could you include to clarify vague or incomplete answers from customers?",
-                      "evaluationPrompt": "Does the response include thoughtful follow-ups to probe deeper into customer pain points?"
-                    },
-                    {
-                      "question": "Did you ask how the problem is currently solved?",
-                      "evaluationPrompt": "Does the response show that the user understands the importance of learning about current solutions to identify gaps or opportunities?"
-                    }
-                  ],
-                  "loop": "Repeat tutoring steps until the user provides a clear and actionable questionnaire outline."
-                }
-              }
-            
-
-
+    "no": {
+      "tutoring":{
+        "questions": []
+      }
+    },
+    "question": "Spot and extract existing answers for BM development from the UVP and solution description.",
+    "evaluationPrompt": "Spot the following BM parameters in the description: Digitization, Value Proposition, Delivery, Creation, and Capture.",
+    "outcome": {
+      "good": "Proceed if all BM parameters are covered.",
+      "bad": "Identify gaps and proceed to follow-up questions."
+    },
+    "followUp": {
+      "introduction": "Some required BM parameters are missing from your description. Please answer the following:"
+    }
+  },
+  "Question_10": {
+    "topic": "BM extraction",
+    "question": "Do all UVP and BM parameters align with the validated customer segment, problem, and solution?",
+    "evaluationPrompt": "Ensure alignment across all processes (Customer Segment, Problem Validation, Solution Ideation).",
+    "outcome": {
+      "good": "Proceed to finalize and upload data to the database.",
+      "bad": "Loop back to respective stages to refine alignment."
+    },
+    "databaseIntegration": {
+      "action": "Upload validated UVP and BM parameters to the database for pattern development.",
+      "format": "Ensure all fields are mapped to the required database schema."
+    },
+    "yes": {
 
     },
-
-    "Question_3": {
-        "topic": "Problem Validation",
-            "question": "Have you conducted at least 10 problem validation interviews with customers to confirm the severity of the identified problems?",
-            "yes": {
-            "followupQuestion": "Please list the top features or functionalities of your proposed solution that address each problem.",
-            "evaluationPrompt": "Evaluate the user's response. ONLY RESPOND WITH 'GOOD' OR 'BAD' and provide an explanation why.",
-            "good": {
-                "question": "Does the customer agree with the problem identified in the earlier stages?",
-                "yes": "Proceed to Solution Ideation.",
-                "no": {
-                "question": "What new insights did the customer provide about the problem?",
-                "evaluationPrompt": "Evaluate the relevance of the new insights. ONLY RESPOND WITH 'VALID' OR 'INVALID' and provide justification.",
-                "valid": {
-                    "question": "Restart Problem Identification with the new insights. Have the problem and market segment been updated?",
-                    "yes": "Repeat the Problem Identification and Validation process.",
-                    "no": "Revisit Market Segmentation to ensure alignment with the new problem."
-                },
-                "invalid": "Proceed with the original problem to Solution Ideation."
-                }
-            },
-            "bad": {
-                "question": "What was the primary reason for the poor response? [AI evaluates customer feedback for gaps]",
-                "tutoring": {
-                "intro": "It seems like the features or functionalities provided do not adequately address the identified problem. Let's work through this step-by-step.",
-                "questions": [
-                    {
-                    "question": "Are the listed features aligned with the key pain points of your customers? If not, which features need to be adjusted or added?",
-                    "evaluationPrompt": "Evaluate the alignment between the features and the customer pain points. ONLY RESPOND WITH 'GOOD ALIGNMENT' OR 'NEEDS REFINEMENT' and provide specific guidance."
-                    },
-                    {
-                    "question": "Have you validated these features with real customer feedback during interviews? If not, what methods can you use to gather this feedback?",
-                    "evaluationPrompt": "Assess whether customer feedback has been integrated into the proposed solution. ONLY RESPOND WITH 'VALIDATED' OR 'NOT VALIDATED' and provide a next step."
-                    },
-                    {
-                    "question": "Can you identify specific examples of how your solution solves the key problems for your market segment? If not, how could you test these examples?",
-                    "evaluationPrompt": "Evaluate the specificity of the examples provided. ONLY RESPOND WITH 'CONCRETE EXAMPLES' OR 'TOO VAGUE' and provide actionable advice."
-                    },
-                    {
-                    "question": "Are there additional features that could enhance the value of your solution based on customer feedback? If yes, list them.",
-                    "evaluationPrompt": "Assess whether the proposed additional features align with the validated customer needs. ONLY RESPOND WITH 'RELEVANT' OR 'NOT RELEVANT' and offer suggestions."
-                    },
-                    {
-                    "question": "Have you prioritized the features based on customer needs and feasibility? If not, what criteria could you use to prioritize them?",
-                    "evaluationPrompt": "Evaluate the prioritization of features. ONLY RESPOND WITH 'WELL PRIORITIZED' OR 'NEEDS PRIORITIZATION' and guide the user on how to prioritize effectively."
-                    }
-                ],
-                "loop": "Repeat Problem Validation process until a satisfactory result is achieved."
-                }
-            }
-            },
-            "no": {
-            "response": "Have you prepared the interview questionnaire to validate the identified problems? Then Conduct the interviews and restart Problem Validation.",
-            "tutoring": {
-                "questions": [
-                {"question": "It looks like the interview questionnaire is not ready yet. Let’s revisit the existing questionnaire creation process to refine it.",
-                "evaluationPrompt": "Loop back to the Questionnaire Creation Process."}
-                
-                ]
-            }
-            }
-        },
-
-
-
-        "Question_4": {
-
-
-                "topic": "Solution Ideation",
-               
-                  "question": "Have you started brainstorming potential solutions that address the identified problems?",
-                  "yes": {
-                    "followupQuestion": "Please list the top features or functionalities of your proposed solution that address each problem.",
-                    "evaluationPrompt": "AI evaluates alignment between the proposed solution, validated problems, and customer segment. ONLY RESPOND WITH EXPLANATIONS: If GOOD, explain why the solution aligns well. If BAD, explain the mismatch and where further refinement is needed.",
-                    "good": "Green light for Solution Ideation on the dashboard; proceed to Solution Validation.",
-                    "bad": {
-                      "tutoring": {
-                        "intro": "Your proposed solution features need better alignment with the validated problems and/or customer segment. Let's refine them.",
-                        "tutoringQuestions": [
-                          {
-                            "question": "Do the features address the validated problems identified in Problem Validation? If not, why?",
-                            "evaluationPrompt": "Evaluate if the features match the problems' scope and severity."
-                          },
-                          {
-                            "question": "Are the proposed features tailored to the specific needs of your customer segment?",
-                            "evaluationPrompt": "Evaluate if the features are relevant for the defined customer segment."
-                          },
-                          {
-                            "question": "Can you clearly map each feature to a specific problem identified in the Problem Identification stage?",
-                            "evaluationPrompt": "Evaluate the direct connection between features and problems."
-                          },
-                          {
-                            "question": "Have you ensured the features solve the most critical pain points as validated in the Problem Validation stage?",
-                            "evaluationPrompt": "Evaluate if the features prioritize the most pressing issues."
-                          },
-                          {
-                            "question": "Do the features offer unique value to the customer segment compared to existing solutions?",
-                            "evaluationPrompt": "Evaluate if the features contribute a strong unique value proposition."
-                          }
-                        ]
-                      },
-                      "loopBack": "Once the features are revised, retest and resubmit for AI evaluation, ensuring alignment with the validated problems and customer segment."
-                    }
-                  },
-                  
-                  "no": {
-                    "tutoring": {
-                      "intro": "Brainstorming solutions is essential. Let's work on developing solutions tailored to the validated problems and customer segment.",
-                      "questions": [
-                        {
-                          "question": "Have you reviewed the validated problems from Problem Validation to brainstorm potential solutions?",
-                          "evaluationPrompt": "Evaluate if the entrepreneur has considered all validated problems."
-                        },
-                        {
-                          "question": "Have you taken the specific customer segment’s needs and characteristics into account?",
-                          "evaluationPrompt": "Evaluate if the customer segment's needs are influencing the solution brainstorming."
-                        },
-                        {
-                          "question": "What examples or benchmarks exist of solutions for similar problems in the market?",
-                          "evaluationPrompt": "Evaluate if external references have been used effectively."
-                        },
-                        {
-                          "question": "Can you outline initial ideas that target the core issues validated in the Problem Validation stage?",
-                          "evaluationPrompt": "Evaluate if initial ideas tackle the core validated issues."
-                        },
-                        {
-                          "question": "Have you considered resources or partnerships that could support the proposed solution?",
-                          "evaluationPrompt": "Evaluate if resources and partnerships are being leveraged effectively."
-                        }
-                      ]
-                    },
-                    "loopBack": "Once brainstorming is complete, resubmit the solution features for AI evaluation, ensuring alignment with the validated problems and customer segment."
-                  }
-                
-            
-        },
-
-
-        "Question_5":{
-
-
-
-            
-                "topic": "Customer Solution Questionnaire",
-               
-                    "question": "Have you prepared a solution questionnaire to validate your solutions with the customer?",
-                    "yes": "Please provide the questionnaire for evaluation.",
-                    "no": "Loop back to Solution Ideation to refine or create the questionnaire.",
-                    "evaluationPrompt": "AI evaluates the quality of the questionnaire.",
-                    "goodResponse": "Move to Solution Validation stage.",
-                    "badResponse": {
-                        "loopMessage": "Your questionnaire is incomplete or poorly structured. Let's refine it.",
-                        "tutoring": {
-                            "introduction": "Let's improve your questionnaire. Start with these:",
-                            "questions": [
-                                {
-                                    "question": "Did you clearly articulate how the proposed solution addresses validated problems?",
-                                    "evaluationPrompt": "Evaluate clarity and specificity of problem-solution alignment."
-                                },
-                                {
-                                    "question": "Did you ask about the feasibility of implementing the solution within the customer segment?",
-                                    "evaluationPrompt": "Evaluate inclusion of feasibility-oriented questions."
-                                },
-                                {
-                                    "question": "Did you include metrics to measure the success of the solution for the customer?",
-                                    "evaluationPrompt": "Evaluate if success metrics are clear and measurable."
-                                },
-                                {
-                                    "question": "Did you ask how the problem is currently solved?",
-                                    "evaluationPrompt": "Evaluate depth of exploration into existing alternatives."
-                                },
-                                {
-                                    "question": "Does the questionnaire consider feedback loops for further refinement?",
-                                    "evaluationPrompt": "Assess if the questionnaire allows iterative improvements."
-                                }
-                            ],
-                            "loopBack": "If the questionnaire remains inadequate after tutoring, loop back to Solution Ideation."
-                        }
-                    }
-                
-            
-
-
-
-        }
-    
-
-
-    
+    "no": {
+      "tutoring": {
+        "questions": []
+      }
+    }
   }
+}
