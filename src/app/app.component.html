@@ -1,3 +1,4 @@
+
 <header class="header">
 <mat-toolbar color="red" class="toolbar">
   <span class="title" (click)="moveToQuestion(-1)">{{ title }}</span>
@@ -12,16 +13,25 @@
       </button>
     </div>
     <div class="extras">
-      <button mat-button>Database</button>
-      <button mat-button>Results</button>
+      <button mat-button (click)="goToQuestion(-2)" [class.active-step]="-2 === currentQuestionIndex">Database</button>
+      <button mat-button (click)="goToQuestion(-3)" [class.active-step]="-3 === currentQuestionIndex">Results</button>
     </div>
   </div>
 </mat-toolbar>
 </header>
 
-<!-- Welcome Screen -->
+
+<app-bm-selection *ngIf="currentQuestionIndex === -2" >
+</app-bm-selection>
+
+
+<app-results *ngIf="currentQuestionIndex === -3" >
+</app-results >
+
 <!-- Welcome Screen -->
 <div *ngIf="currentQuestionIndex === -1" class="welcome-screen">
+
+
   <mat-card class="welcome-card">
     <mat-card-header class="welcome-header">
       <mat-card-title class="welcome-title">Welcome to BCLE</mat-card-title>

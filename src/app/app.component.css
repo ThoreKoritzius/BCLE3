@@ -23,7 +23,7 @@ body{
   .dashboard-card {
     margin: 1rem auto; /* Center horizontally */
     padding: 2rem;
-    max-width: 1000px;
+    max-width: 900px;
     width: 100%; /* Ensure it takes full width up to max-width */
     box-sizing: border-box; /* Include padding in width calculation */
     background-color: white;

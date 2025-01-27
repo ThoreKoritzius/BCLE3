@@ -13,12 +13,14 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatList, MatListItem } from '@angular/material/list';
 import { MatIcon } from '@angular/material/icon';
-
+import { BmSelectionComponent } from './bm-selection/bm-selection.component';
+import { ResultsComponent } from './results/results.component';
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     CommonModule,
+    BmSelectionComponent,
     HttpClientModule,
     MatProgressSpinnerModule,
     MatRadioModule,
@@ -31,7 +33,8 @@ import { MatIcon } from '@angular/material/icon';
     MatProgressBarModule,
     MatList,
     MatListItem,
-    MatIcon
+    MatIcon,
+    ResultsComponent
   ],
   providers: [HttpClient],
   templateUrl: './app.component.html',
@@ -45,6 +48,7 @@ export class AppComponent implements OnInit {
   isEvaluating = false;
   currentQuestionIndex = -1;
   loading = true;
+  showBMSelection = false;
 
   constructor(private http: HttpClient, private fb: FormBuilder) {
     this.quizForm = this.fb.group({
@@ -238,9 +242,8 @@ export class AppComponent implements OnInit {
   }
 
   goToQuestion(index: number): void {
-    if (index >= 0 && index < this.questionsData.length) {
       this.currentQuestionIndex = index;
-    }
+    
   }
 }
 
