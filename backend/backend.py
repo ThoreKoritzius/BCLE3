@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS  # Import the CORS module
 import markdown
+from openai import OpenAI
+
 app = Flask(__name__)
 
 # Enable CORS for the entire app
@@ -11,30 +13,44 @@ import json
 from datetime import datetime
 
 def make_request_openai(instruction, question, userInput, model="gpt-4o-mini", max_tokens=800):
-     API_KEY =""
-     URL ="https://api.openai.com/v1/chat/completions"
-     
-     data = {
-                    "model": model,
-                    "max_tokens": max_tokens,
-                    "messages": [{"role":"system","content": 
-                                  f"The user needs to answer the following question: '{question}'. Your Instruction: " + instruction},
-                                  {"role":"user", "content":
-                                   userInput}],
-                    "stream":False
-               }
-     print(data)
-     return """
-This is **bold text** and this is *italic text*.
+        client = OpenAI(
+            api_key="",
+        )
 
-- Item 1
-- Item 2
+        student_custom_functions = [
+            {
+                'name': 'generate-business-evaluation',
+                'description': question,
+                'parameters': {
+                    'type': 'object',
+                    'properties': {
+                        'feedback': {
+                            'type': 'string',
+                            'description': f"""{instruction}. 
+                                            Provide a well structured, easy to understand feedback response in markdown format. 
+                                            Also give hints to improve or refine the definition. """
+                        },
+                        'is_feedback_acceptable': {
+                            'type': 'boolean',
+                            'description': 'Is the user provided answer acceptable given the question and instruction?'
+                        },
+                    }
+                }
+            }
+        ]
+        response = client.chat.completions.create(
+            model = 'gpt-4o-mini',
+            messages = [{'role': 'user', 'content': userInput}],
+            functions = student_custom_functions,
+            function_call = 'auto'
+        )
+        
+        json_response = json.loads(response.choices[0].message.function_call.arguments)
+        print(json_response)
+        llm_response = json_response.get("feedback")
+        is_feedback_acceptable = json_response.get("is_feedback_acceptable")
 
-[Link](https://example.com)"""
-     response = requests.post(URL, json=data, stream=False,
-                                        headers={"Authorization": f"Bearer {API_KEY}"}, timeout=300)
-
-     return response.json()["choices"][0]["message"]["content"]
+        return llm_response, is_feedback_acceptable
 
 def load_json_file():
     try:
@@ -61,16 +77,8 @@ def evaluate_questions():
     if instruction  is None or question is None:
         return jsonify({"details": "missing info in config"}), 401
     
-    instruction += " At the end of your response respond with either GOOD or BAD."
-    print(currentQuestionIndex)
-    print(userInput)
-    print(question, instruction)
-    llm_response = make_request_openai(instruction, question, userInput)
-    satisfactory_outcome = False
-    if "good" in llm_response.lower():
-        satisfactory_outcome = True
-    if "bad" in llm_response.lower():
-        satisfactory_outcome = False
+    llm_response, satisfactory_outcome = make_request_openai(instruction, question, userInput)
+   
     return jsonify({"response": llm_response, 
                     "satisfactory_outcome": satisfactory_outcome, 
                     "html": markdown.markdown(llm_response)})
@@ -78,8 +86,27 @@ def evaluate_questions():
 
 @app.route('/evaluate_answers', methods=['POST', 'GET'])
 def evaluate_answer():
+    data = request.json
+    currentQuestionIndex = data.get("currentQuestionIndex")
+    userInput =  data.get("userInput")
+    config = load_json_file().get(f"Question_{currentQuestionIndex +1}")
+
+    questions = config['no']['tutoring']['questions']
+    feedback = []
+    for index, item in enumerate(userInput):
+        userInput = item.get("userInput")
+        instruction = questions[index]['evaluationPrompt']
+        question = questions[index]['question']
+        
+        llm_response, satisfactory_outcome = make_request_openai(instruction, question, userInput)
+        feedback.append({"response": llm_response, 
+                         "html": markdown.markdown(llm_response), 
+                         "satisfactory_outcome": satisfactory_outcome})
+    if userInput is None or question is None:
+        return jsonify({"details": "missing info in config"}), 401
     
-    return jsonify({"finished": True})
+
+    return jsonify({"feedback": feedback})
 
 @app.route('/')
 def hello_world():

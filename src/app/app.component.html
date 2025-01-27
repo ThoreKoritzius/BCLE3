@@ -17,18 +17,14 @@
   </mat-toolbar>
 </header>
 
-
 <app-bm-selection *ngIf="currentQuestionIndex === -2">
 </app-bm-selection>
-
 
 <app-results *ngIf="currentQuestionIndex === -3">
 </app-results>
 
 <!-- Welcome Screen -->
 <div *ngIf="currentQuestionIndex === -1" class="welcome-screen">
-
-
   <mat-card class="welcome-card">
     <mat-card-header class="welcome-header">
       <mat-card-title class="welcome-title">Welcome to BCLE</mat-card-title>
@@ -87,6 +83,17 @@
               <mat-form-field appearance="fill" class="tutoring-input">
                 <textarea matInput [formControl]="tutoringControl" rows="3"></textarea>
               </mat-form-field>
+
+              <div *ngIf="currentQuestion.no.tutoring.questions[j].feedback.length > 0" #evaluationDiv>
+                <div class="category-card ai-result">
+                  <div class="status-indicator" [ngClass]="{'completed': currentQuestion.no.tutoring.questions[j].successful, 'needs-refinement': !currentQuestion.no.tutoring.questions[j].successful}">
+                    {{ currentQuestion.no.tutoring.questions[j].successful ? 'Completed' : 'Needs Refinement' }}
+                  </div>
+                  <h2 class="category-title">AI Feedback</h2>
+                  <div [innerHTML]="currentQuestion.no.tutoring.questions[j].feedbackHTML"></div>
+                </div>
+              </div>
+              
             </div>
           </div>
         </div>
@@ -100,6 +107,9 @@
 
           <div *ngIf="currentQuestion.evaluation.length > 0" #evaluationDiv>
             <div class="category-card ai-result">
+              <div class="status-indicator" [ngClass]="{'completed': currentQuestion.successful, 'needs-refinement': !currentQuestion.successful}">
+                {{ currentQuestion.successful ? 'Completed' : 'Needs Refinement' }}
+              </div>
                 <h2 class="category-title">AI Evaluation Result</h2>
                   <div [innerHTML]="currentQuestion.evaluationHTML"></div>
             </div>

@@ -1,6 +1,82 @@
 {
   "name": "hello",
   "Question_1": {
+    "topic": "Market Segmentation",
+    "question": "Do you know who your customer is, and do you know how to find that out?",
+    "yes": {
+      "followupQuestion": "Please define your market segment. Who has a problem that you seek to solve?",
+      "evaluationPrompt": "Evaluate the quality of the response: Is the market segment specific, actionable, and clearly defined?",
+      "good": {
+        "response": "The customer segment is clearly defined.",
+        "action": "Mark 'Market Segmentation' as complete. Transition to 'Problem Identification'.",
+        "end": true
+      },
+      "bad": {
+        "response": "The market segment is not clearly defined.",
+        "action": "Start a tutoring loop to clarify the market segment.",
+        "tutoring": {
+          "instruction": "Help the user refine their market segment by addressing gaps in specificity, demographics, and problem alignment.",
+          "categories": {
+            "specificity": [
+              {
+                "question": "Can you provide an example of a specific customer group that would use your product?",
+                "evaluationPrompt": "Does the response identify a concrete customer group?"
+              },
+              {
+                "question": "What kind of activities or interests define your target customers?",
+                "evaluationPrompt": "Does the response link specific interests or activities to the group?"
+              }
+            ],
+            "demographics": [
+              {
+                "question": "What is the age range, profession, or location of your target customers?",
+                "evaluationPrompt": "Does the response include key demographic details?"
+              },
+              {
+                "question": "Are there any cultural or regional factors influencing this group?",
+                "evaluationPrompt": "Does the response consider cultural or regional relevance?"
+              }
+            ],
+            "problemAlignment": [
+              {
+                "question": "What need or challenge do these customers face that your solution addresses?",
+                "evaluationPrompt": "Does the response highlight a clear problem or need?"
+              },
+              {
+                "question": "Can you describe a situation where your solution would solve a problem for this group?",
+                "evaluationPrompt": "Does the response provide a concrete scenario?"
+              }
+            ]
+          },
+          "dynamicLoop": "Ask a question from the most relevant category based on the user's last response. If the issue persists, ask another question within the same category or escalate to broader guidance.",
+          "loopEnd": "Stop looping and escalate if no progress is made after 3 iterations. Suggest examples or additional resources."
+        }
+      }
+    },
+    "no": {
+      "response": "User does not know their customer segment.",
+      "action": "Provide introductory tutoring and brainstorming guidance.",
+      "tutoring": {
+        "instruction": "Start by helping the user brainstorm potential market segments. Examples: 'Parents with young children interested in educational tools' or 'Remote workers seeking productivity software.'",
+        "questions": [
+          {
+            "question": "Who do you think would benefit most from your product or service?",
+            "evaluationPrompt": "Does the user articulate a specific group of people or businesses?"
+          },
+          {
+            "question": "What common characteristics do these potential customers share?",
+            "evaluationPrompt": "Is the response specific and actionable?"
+          },
+          {
+            "question": "What specific problem or need do they have that your solution addresses?",
+            "evaluationPrompt": "Does the response highlight a clear problem or need?"
+          }
+        ],
+        "loop": "Repeat introductory tutoring questions until the user provides a clear and actionable market segment."
+      }
+    }
+  },
+  "Question_2": {
     "topic": "Problem Identification",
     "question": "Do you understand these customers' pain points, and could you name the top 3 problems that they face?",
     "yes": {
@@ -69,7 +145,7 @@
       }
     }
   },
-  "Question_2": {
+  "Question_3": {
     "topic": "Customer Questionnaire Creation",
     "question": "Have you prepared an interview questionnaire to test the problems you identified with customers?",
     "yes": {
@@ -155,7 +231,7 @@
       }
     }
   },
-  "Question_3": {
+  "Question_4": {
     "topic": "Problem Validation",
     "question": "Have you conducted at least 10 problem validation interviews with customers to confirm the severity of the identified problems?",
     "yes": {
@@ -217,7 +293,7 @@
       }
     }
   },
-  "Question_4": {
+  "Question_5": {
     "topic": "Solution Ideation",
     "question": "Have you started brainstorming potential solutions that address the identified problems?",
     "yes": {
@@ -282,7 +358,7 @@
       "loopBack": "Once brainstorming is complete, resubmit the solution features for AI evaluation, ensuring alignment with the validated problems and customer segment."
     }
   },
-  "Question_5": {
+  "Question_6": {
     "topic": "Customer Solution Questionnaire",
     "question": "Have you prepared a solution questionnaire to validate your solutions with the customer?",
     "yes": {
@@ -371,7 +447,7 @@
   },
   "Question_8": {
     "topic": "UVP",
-    "question": "Do you no your Unique Value Proposition (UVP)?",
+    "question": "Do you know your Unique Value Proposition (UVP)?",
     "yes": {
       "followupQuestion": "Please articulate the Unique Value Proposition (UVP) of your solution."
     },
@@ -395,117 +471,5 @@
       }
     },
     "evaluationPrompt": "Evaluate the UVP for alignment with the customer's validated problem, segment, and solution."
-  },
-  "Question_9": {
-    "topic": "BM extraction",
-    "yes": {
-      "followupQuestion": "Please articulate the Unique Value Proposition (UVP) of your solution.",
-      "bad": {
-        "tutoring": {
-          "questions": [
-            {
-              "category": "General Differentiation",
-              "questions": [
-                {
-                  "question": "Do you want to reach an overall approach for designing a business model or focus on specific elements such as pricing, delivery, or customer engagement?",
-                  "evaluationPrompt": "Check if response matches 'Prototypical' or 'Solution' pattern."
-                },
-                {
-                  "question": "Is the business model purely digital, digitally enabled, or does it operate independently of digital technologies?",
-                  "evaluationPrompt": "Ensure clarity on digitization level."
-                }
-              ]
-            },
-            {
-              "category": "Value Proposition",
-              "questions": [
-                {
-                  "question": "What is the primary type of product or service offered?",
-                  "evaluationPrompt": "Spot keywords like 'Physical', 'Financial', 'Hybrid', etc."
-                },
-                {
-                  "question": "How does the pattern propose to differentiate the offering?",
-                  "evaluationPrompt": "Identify differentiation strategies (e.g., quality, customization)."
-                }
-              ]
-            },
-            {
-              "category": "Value Delivery",
-              "questions": [
-                {
-                  "question": "Does the pattern target specific new customer segments, lock-in existing customers, or other companies?",
-                  "evaluationPrompt": "Clarify customer target specifics."
-                },
-                {
-                  "question": "How does the pattern affect the delivery process (e.g., branding, channels)?",
-                  "evaluationPrompt": "Ensure delivery processes are well-defined."
-                }
-              ]
-            },
-            {
-              "category": "Value Creation",
-              "questions": [
-                {
-                  "question": "Does the pattern require in-house production, external sourcing, or both?",
-                  "evaluationPrompt": "Validate clarity on sourcing strategy."
-                },
-                {
-                  "question": "Are suppliers, customers, or competitors involved in the business process?",
-                  "evaluationPrompt": "Identify external dependencies clearly."
-                }
-              ]
-            },
-            {
-              "category": "Value Capture",
-              "questions": [
-                {
-                  "question": "What revenue generation strategy does the pattern use (e.g., Sell, Advertising)?",
-                  "evaluationPrompt": "Validate clarity on revenue model."
-                },
-                {
-                  "question": "What is the pricing strategy (e.g., Premium, Cheap, Dynamic)?",
-                  "evaluationPrompt": "Ensure pricing details are covered."
-                }
-              ]
-            }
-          ]
-        }
-      }
-    },
-    "no": {
-      "tutoring":{
-        "questions": []
-      }
-    },
-    "question": "Spot and extract existing answers for BM development from the UVP and solution description.",
-    "evaluationPrompt": "Spot the following BM parameters in the description: Digitization, Value Proposition, Delivery, Creation, and Capture.",
-    "outcome": {
-      "good": "Proceed if all BM parameters are covered.",
-      "bad": "Identify gaps and proceed to follow-up questions."
-    },
-    "followUp": {
-      "introduction": "Some required BM parameters are missing from your description. Please answer the following:"
-    }
-  },
-  "Question_10": {
-    "topic": "BM extraction",
-    "question": "Do all UVP and BM parameters align with the validated customer segment, problem, and solution?",
-    "evaluationPrompt": "Ensure alignment across all processes (Customer Segment, Problem Validation, Solution Ideation).",
-    "outcome": {
-      "good": "Proceed to finalize and upload data to the database.",
-      "bad": "Loop back to respective stages to refine alignment."
-    },
-    "databaseIntegration": {
-      "action": "Upload validated UVP and BM parameters to the database for pattern development.",
-      "format": "Ensure all fields are mapped to the required database schema."
-    },
-    "yes": {
-
-    },
-    "no": {
-      "tutoring": {
-        "questions": []
-      }
-    }
   }
 }

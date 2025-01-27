@@ -500,10 +500,6 @@ export const evalQuestions =
     "General Differentiation Questions":
         [
             {
-                "question": "Hierarchical Impact: Do you want to reach an overall approach for designing a business model or focus on specific elements of the business, such as pricing, delivery, or customer engagement?",
-                "dimension": BusinessModelDimensions.D1_HierarchicalImpact
-            },
-            {
                 "question": "Degree of Digitization: Is the business model purely digital, digitally enabled, or does it operate independently of digital technologies?",
                 "dimension": BusinessModelDimensions.D2_DegreeOfDigitization
             }

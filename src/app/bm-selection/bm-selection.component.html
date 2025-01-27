@@ -1,6 +1,5 @@
 
 <div class="dashboard">
-    
     <div *ngFor="let category of getCategories()" class="category-card">
       <h2 class="category-title">{{ category }}</h2>
       <div *ngFor="let question of getQuestions(category)" class="question-card">

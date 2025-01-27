@@ -11,12 +11,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatList, MatListItem } from '@angular/material/list';
+import { MatList, MatListItem, MatNavList } from '@angular/material/list';
 import { MatIcon } from '@angular/material/icon';
 import { BmSelectionComponent } from './bm-selection/bm-selection.component';
 import { ResultsComponent } from './results/results.component';
 import { StateService } from './state.service';
-
+import { MatSidenavModule } from '@angular/material/sidenav';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -36,7 +36,10 @@ import { StateService } from './state.service';
     MatList,
     MatListItem,
     MatIcon,
-    ResultsComponent
+    ResultsComponent,
+    MatSidenavModule,
+    MatNavList,
+    MatList
   ],
   providers: [HttpClient],
   templateUrl: './app.component.html',
@@ -88,7 +91,7 @@ export class AppComponent implements OnInit {
   getData(): void {
     this.http.get<any>(this.apiUrl).subscribe({
       next: (data) => {
-        console.log(data)
+        console.log(data);
         this.questionsData = Object.keys(data)
           .filter(key => key.startsWith('Question_'))
           .map(key => ({
@@ -96,7 +99,17 @@ export class AppComponent implements OnInit {
             question: data[key].question,
             topic: data[key].topic,
             yes: data[key].yes,
-            no: data[key].no,
+            no: {
+              tutoring: {
+                questions: data[key].no.tutoring.questions.map((question: any) => ({
+                  question: question.question,
+                  evaluationPrompt: question.evaluationPrompt,
+                  feedback: '',
+                  feedbackHTML: '',
+                  successful: false
+                }))
+              }
+            },
             answer: 'yes',
             userInput: '',
             evaluation: '',
@@ -108,7 +121,7 @@ export class AppComponent implements OnInit {
             const numB = parseInt(b.id.replace('Question_', ''), 10);
             return numA - numB;
           });
-
+  
         this.initializeForm();
         this.loading = false;
       },
@@ -143,7 +156,6 @@ export class AppComponent implements OnInit {
 
     answerControl?.valueChanges.subscribe((answer: 'yes' | 'no') => {
       this.questionsData[index].answer = answer;
-
       if (answer === 'no') {
         tutoringAnswers.controls.forEach(control => control.enable());
         userInputControl?.disable();
@@ -231,16 +243,28 @@ export class AppComponent implements OnInit {
 
   private submitQuestion(): void {
     this.isEvaluating = true;
-    const payload = this.currentQuestion.no.tutoring.questions.map((tutoringQuestion, index) => ({
+    const userInput = this.currentQuestion.no.tutoring.questions.map((tutoringQuestion, index) => ({
       question: this.currentQuestion.question,
-      prompt: tutoringQuestion.question,
       userInput: this.currentQuestion.tutoringAnswers![index]
     }));
 
+
+    const payload= {"userInput": userInput, "currentQuestionIndex": this.currentQuestionIndex}
     this.http.post('http://localhost:5007/evaluate_answers', payload).subscribe({
-      next: () => {
+      next: (response: any) => {
         this.isEvaluating = false;
-        this.moveToNextQuestion();
+        var index = 0;
+        for(var item of response.feedback){
+          console.log(item)
+          this.currentQuestion.no.tutoring.questions[index].feedback = item.response
+          this.currentQuestion.no.tutoring.questions[index].feedbackHTML = item.html
+          this.currentQuestion.no.tutoring.questions[index].successful = item.satisfactory_outcome
+
+          this.questionsData[this.currentQuestionIndex].no.tutoring.questions[index].feedback = item.response
+          this.questionsData[this.currentQuestionIndex].no.tutoring.questions[index].feedbackHTML = item.html
+          this.questionsData[this.currentQuestionIndex].no.tutoring.questions[index].successful = item.satisfactory_outcome
+          index +=1;
+        }
       },
       error: (error) => {
         console.error('Submission error:', error);
@@ -300,6 +324,9 @@ interface Question {
       questions: Array<{
         question: string;
         evaluationPrompt: string;
+        feedback: string;
+        feedbackHTML: string;
+        successful: boolean;
       }>;
     };
   };
