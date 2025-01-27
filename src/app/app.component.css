@@ -162,6 +162,7 @@ body{
   white-space: nowrap;
   flex-shrink: 0;
   margin-right: 16px;
+  cursor: pointer;
 }
 
 /* Steps container */

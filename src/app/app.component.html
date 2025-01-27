@@ -1,6 +1,6 @@
 <header class="header">
 <mat-toolbar color="red" class="toolbar">
-  <span class="title">{{ title }}</span>
+  <span class="title" (click)="moveToQuestion(-1)">{{ title }}</span>
   <div class="steps-container">
     <div class="questions-scroll">
       <button mat-button 

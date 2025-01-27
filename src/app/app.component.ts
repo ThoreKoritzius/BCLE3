@@ -227,6 +227,10 @@ export class AppComponent implements OnInit {
     }
   }
 
+  moveToQuestion(id: number): void {
+    this.currentQuestionIndex = id;
+  }
+
   goToPreviousQuestion(): void {
     if (this.currentQuestionIndex > 0) {
       this.currentQuestionIndex--;
