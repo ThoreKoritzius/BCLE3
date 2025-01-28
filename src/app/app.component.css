@@ -298,10 +298,6 @@ mat-spinner {
     margin-left: 0;
     padding: 16px;
   }
-  
-  .mat-sidenav {
-    display: none;
-  }
 }
 
 .dashboard-card {
